@@ -1,0 +1,296 @@
+/* general settings */
+
+.rsc-form-buttons {
+	display: flex;
+}
+
+.rsc-form-buttons p{
+	margin-right: 15px;
+}
+.rsc-table {
+	width: 100%;
+}
+.rsc-table .rsc-input-others {
+	display: none;
+}
+.rsc-table thead th {
+	text-align: center;
+}
+.rsc-table tbody th {
+	padding: 15px 30px 0 15px;
+}
+
+.rsc-table label:has(input:checked) + label.rsc-input-others {
+	display: inline;
+}
+
+.rsc-table input {
+	vertical-align: middle;
+}
+
+.rsc-table select[readonly],
+.rsc-table input[readonly]{
+	pointer-events:none;
+	background-color: #f0f0f1;
+}
+.rsc-table label:has([readonly]) {
+	pointer-events:none;
+}
+
+.rsc-table button {
+	border: none;
+	background: none;
+}
+
+/* edit post settings */
+.rsc-editting-settings {
+	margin: 50px 0;
+}
+
+.rsc-setting-lock {
+	height: 1em;
+	position: relative;
+}
+th .rsc-setting-lock {
+	float: right;
+}
+
+.rsc-table-event .rsc-check-locking {
+	min-width: 30px;
+	
+}
+.rsc-check-locking .rsc-lock-inputs {
+	font-size: 1px;
+}
+.rsc-lock-inputs input {
+	visibility: hidden;
+	position: absolute;
+}
+.rsc-is-locked, .rsc-is-unlocked {
+	position: absolute;
+	top: 0;
+	/* left: -100%; */
+}
+.rsc-lock-inputs ~ .rsc-is-locked {
+	display: none;
+}
+.rsc-lock-inputs ~ .rsc-is-locked {
+	display: none;
+}
+.rsc-lock-inputs ~ .rsc-is-unlocked {
+	display: inherit;
+}
+.rsc-lock-inputs:has(input:checked) ~ .rsc-is-locked {
+	display: inherit;
+}
+.rsc-lock-inputs:has(input:checked) ~ .rsc-is-unlocked {
+	display: none;
+}
+
+/* event settings */
+.rsc-table-event {
+	margin-top: 23px;
+	/* width: 100; */
+}
+.rsc-table-event .action {
+	white-space: nowrap;
+}
+.rsc-table-event .actions label {
+	margin-left: 1em;
+}
+.rsc-table-event .actions input,
+.rsc-table-event .actions select {
+	vertical-align: middle;
+}
+
+.rsc-table-event th {
+	width: auto;
+}
+.rsc-table-event tfoot td{
+	text-align: right;
+}
+.rsc-event-lock {
+	min-width: 35px;
+}
+
+.rsc-event-inputs:first-child {
+	padding-bottom: 10px;
+}
+
+.rsc-table-event tbody label {
+	display: inline-block;
+	min-width: 4em;
+	font-weight: bold;
+}
+
+
+.rsc-table-event input[type="text"],
+.rsc-table-event input[type="email"],
+.rsc-table-event input[type="phone"],
+.rsc-table-event input[type="date"],
+.rsc-table-event input[type="number"], {
+	width: 95%;
+}
+.rsc-event-date {
+	/* max-width: 200px; */
+}
+
+.rsc-table-event tbody .rsc-event-repeat-label {
+	font-weight: normal;
+}
+
+.rsc-table-event input.short-text {
+	max-width: 100px;
+}
+
+.rsc-event-text-color, .rsc-event-bg-color {
+	/* width: 80px; */
+}
+.rsc-event-acion {
+	width: 50px;
+}
+
+@media screen and (max-width: 782px) {
+	.rsc-table-event {
+		width: 100%;
+	}
+	.rsc-table-event td {
+		padding: 4px 1em;
+	}
+	.rsc-table-event .rsc-event-inputs {
+		margin: 8px 0;
+	}
+	
+	.rsc-table-event tbody td:first-child {
+		float: left;
+		height: 1em;
+	}
+	.rsc-table-event tbody td:nth-child(2) {
+		height: 1em;
+	}
+	.rsc-table-event tfoot tr {
+		display: flex;
+		width: 100%;
+	}
+	.rsc-table-event tfoot td{
+		width: 100%;
+	}
+}
+
+.rsc-table-each {
+	width: auto;
+}
+.rsc-table-each th {
+	width: auto;
+	min-width: 80px;
+}
+
+.rsc-table-each td {
+	text-align: center;
+}
+
+.rsc-shortcode-wrapper {
+	margin: 0 20px 0 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.rsc-shortcode-box {
+	margin-right: 30px;
+	position: relative;
+	width: 100%;
+	max-width: 500px;
+	min-width: 200px;
+	margin-bottom: 20px;
+}
+
+.rsc-shortcode-panel {
+	min-width: 300px;
+	margin-bottom: 20px;
+}
+
+.rsc-tooltip {
+		display:none;
+		position: absolute;
+		right: -100%;
+		top: -30px;
+		background: #eee;
+		border:1px solid #ddd;
+		padding:3px;
+		font-size:13px;
+		z-index: 10;
+		-moz-box-shadow: 2px 2px 11px #999;
+		-webkit-box-shadow: 2px 2px 11px #999;
+}
+
+.rsc-copy-button {
+	position: absolute;
+	z-index: 1;
+	right: 0px;
+	top: 0;
+	height: 100%;
+}
+
+.rsc-shortcode-attr {
+	display: none;
+}
+
+.rsc-preview {
+	border: 1px solid #c3c4c7;
+	border-radius: 10px;
+	padding: 10px;
+	background: #fff;
+}
+
+.rsc-widget-label {
+	margin-top: 8px;
+}
+
+.rsc-widget-label .rsc-is-locked {
+	font-size: small;
+}
+
+.rsc-widget-input {
+	display: flex;
+}
+
+.rsc-widget .rsc-widget-input .rsc-widget-item:nth-child(n+2){
+	display: none;
+}
+
+.rsc-widget .rsc-widget-input select.rsc-widget-item {
+	width: 30%;
+}
+
+.rsc-widget .rsc-widget-input label.rsc-widget-item input.small-text {
+	width: 65px;
+	display: inline-block;
+}
+
+.rsc-unit {
+	display: none;
+}
+
+#rsc-widget-type:has(option[value="day"]:checked) ~ #rsc-widget-type-align,
+#rsc-widget-from:has(option[value="previous"]:checked) ~ #rsc-widget-from-previous,
+#rsc-widget-from:has(option[value="date"]:checked) ~ #rsc-widget-from-date,
+#rsc-widget-period:has(option[value="last"]:checked) ~ #rsc-widget-period-last,
+#rsc-widget-period:has(option[value="date"]:checked) ~ #rsc-widget-period-date {
+	display: block;
+}
+
+.rsc-widget-input:has(option[value="day"]:checked) ~ .rsc-widget-input #rsc-widget-start_of_week{
+	pointer-events:none;
+	background-color: #f0f0f1 !important;
+}
+
+.rsc-widget-input:has(option[value="month"]:checked) ~ .rsc-widget-input .rsc-unit-month {
+	display: inline;
+}
+.rsc-widget select:disabled {
+	pointer-events:none;
+	background-color: #f0f0f1 !important;
+}
+.rsc-widget .dashicons {
+	padding-top: 8px
+}

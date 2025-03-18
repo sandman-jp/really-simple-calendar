@@ -1,0 +1,122 @@
+
+.rsc-calendar * {
+	/* box-sizing: border-box; */
+}
+.rsc-calendar {
+	font-size: 16px;
+	width: 100%;
+	margin: 0 0 1.75em;
+	border: 1px solid #d1d1d1;
+	border-width: 1px 0 0 1px;
+	border-collapse: collapse;
+}
+
+.rsc-calendar caption {
+	background: #9c9caf;
+	text-align: left;
+	color: #ececef;
+	font-weight: bold;
+	padding: 0 15px;
+	line-height: 1.75;
+}
+
+.rsc-calendar .cfc-caption-year {
+	float: right;
+	opacity: .5;
+}
+
+.rsc-calendar th {
+	background: #ececef;
+	padding: 5px;
+	font-size: small;
+	/* font-weight: normal; */
+	line-height: 2rem;
+	border: 1px solid #d1d1d1;
+	border-width: 0 1px 1px 0;
+	text-align: center;
+}
+
+.rsc-calendar-monthly th,
+.rsc-calendar-weekly th {
+	width: calc(100% / 7);
+}
+
+.rsc-calendar th span {
+	
+}
+
+.rsc-calendar th.rsc-sat {
+	background: #eaeaff;
+}
+
+.rsc-calendar th.rsc-sun {
+	background: #ffeaea;
+}
+.rsc-calendar th.rsc-today {
+	background: rgba(200,0,0,.2);
+}
+
+.rsc-calendar td {
+	background: #fafafa;
+	padding: 5px;
+	vertical-align: top;
+	border: 1px solid #d1d1d1;
+	border-width: 0 1px 1px 0;
+	height: 3em;
+}
+.rsc-calendar td time{
+	display: inline-block;
+	text-align: center;
+	width: 28px;
+	height: 28px;
+	line-height: 28px;
+}
+
+.rsc-calendar td.rsc-sat {
+	background: #f5f5ff;
+	padding: 5px;
+}
+.rsc-calendar td.rsc-sun {
+	background: #fff5f5;
+	padding: 5px;
+}
+.rsc-calendar-weekly td.rsc-today {
+	background: rgba(200,0,0,.2);
+}
+.rsc-calendar td.rsc-today time{
+	background: rgba(200,0,0,.4);
+	border-radius: 50%;
+	color: #fff;
+}
+
+.rsc-calendar-daily-vertical th{
+	width: 110px;
+}
+
+.rsc-calendar-event-wrapper {
+	display: block;
+	position: relative;
+	height: 1.6em;
+	width: 100%;
+}
+.rsc-calendar-event {
+	position: absolute;
+	display: block;
+	width: calc(100% - 10px);
+	text-align: center;
+	border-radius: 1em;
+	font-size: small;
+	padding: 0 4px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.6em;
+	min-width: 1.6em;
+}
+.rsc-calendar-event-wrapper {
+	margin-top: 3px;
+}
+
+.sidebar .rsc-calendar th {
+	font-size: 12px;
+}
