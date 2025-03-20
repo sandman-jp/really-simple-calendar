@@ -121,8 +121,7 @@
 .rsc-table-event-wrapper {
 	position: relative;
 	max-height: 750px;
-	overflow-y: auto;
-	overflow-x: hidden;
+	overflow: auto;
 }
 
 .rsc-event-upper {

@@ -113,7 +113,7 @@ class admin{
 	function admin_menu(){
 		
 		add_menu_page(
-			__( 'Really Simple Calendar General Settings', RSC_TEXTDOMAIN), 
+			__( 'Really Simple Calendar - General Settings', RSC_TEXTDOMAIN), 
 			__( 'Really Simple Calendar', RSC_TEXTDOMAIN),
 			$this->_capability,
       RSC_GENERAL_SETTINGS_PAGE,
