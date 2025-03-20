@@ -196,6 +196,13 @@ jQuery(function($){
 			$tr.attr('data-time', name);
 		})
 		$tr.after($new_tr);
+		
+		
+		let $list = $(this).parents('.rsc-table-list');
+		//番号振り直し
+		$list.find('tr').each(function(i){
+			$(this).find('.rsc-col-index').text(i);
+		});
 	})
 	
 	/* Short code */
