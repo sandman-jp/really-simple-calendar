@@ -8,9 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 if(!class_exists('RSC\Admin\panel')):
 	
 abstract class panel{
-	public $name = '';
-	public $label = '';
-	public $info = '';
+	public $name;
+	public $label;
+	public $info;
 	
 	public $fields = array();
 	public $lock_fields = array();
@@ -18,10 +18,6 @@ abstract class panel{
 	
 	function get_name(){
 		return $this->name;
-	}
-	
-	function get_label(){
-		return __($this->label, RSC_TEXTDOMAIN);
 	}
 	
 	function get_info(){
@@ -38,6 +34,7 @@ abstract class panel{
 	}
 	
 	
+	abstract protected function get_label();
 	abstract protected function echo($settings);
 }
 

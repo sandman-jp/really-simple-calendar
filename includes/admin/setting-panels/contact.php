@@ -10,12 +10,14 @@ if(!class_exists('RSC\Admin\contact')):
 class contact extends panel{
 	
 	public $name = 'contact';
-	public $label = 'Contact';
-	// public $info = 'Admin Only';
 	
 	public $fields = array();
 	
 	public $lock_fields = array();
+	
+	function get_label(){
+		return __('Contact', RSC_TEXTDOMAIN);
+	}
 	
 	function echo($settings){
 ?>

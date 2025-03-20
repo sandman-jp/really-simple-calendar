@@ -135,7 +135,7 @@ class calendar {
 			//表示期間内かどうか
 			$is_in_term = ($time_id >= $args['from'] && $time_id <= $args['until']);
 			
-			$td_classes = array('rsc-cell', 'week-'.$dw, 'rsc-'.$weekday);
+			$td_classes = array('rsc-cell', 'week-'.$dw, 'rsc-'.$weekday, 'rsc-'.$time_id, 'rsc-'.wp_date('Ymd', $time_id));
 			
 			$today = new \DateTime('today', wp_timezone());
 			if($time_id == $today->format('U')){
@@ -292,7 +292,7 @@ class calendar {
 			//表示期間内かどうか
 			$is_in_term = ($time_id >= $args['from'] && $time_id <= $args['until']);
 			
-			$td_classes = array('rsc-cell', 'week-'.$dw, 'rsc-'.$weekday);
+			$td_classes = array('rsc-cell', 'week-'.$dw, 'rsc-'.$weekday, 'rsc-'.$time_id, 'rsc-'.wp_date('Ymd', $time_id));
 			
 			$today = new \DateTime('today', wp_timezone());
 			if($time_id == $today->format('U')){
@@ -463,7 +463,7 @@ class calendar {
 			$is_in_term = ($time_id >= $args['from'] && $time_id <= $args['until']);
 			
 			
-			$td_classes = array('rsc-cell', 'week-'.$dw, 'rsc-'.$weekday);
+			$td_classes = array('rsc-cell', 'week-'.$dw, 'rsc-'.$weekday, 'rsc-'.$time_id, 'rsc-'.wp_date('Ymd', $time_id));
 			
 			$today = new \DateTime('today', wp_timezone());
 			if($time_id == $today->format('U')){

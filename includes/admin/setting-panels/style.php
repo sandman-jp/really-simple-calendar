@@ -10,7 +10,6 @@ if(!class_exists('RSC\Admin\style')):
 class style extends panel{
 	
 	public $name = 'style';
-	public $label = 'Style  Setting';
 	
 	public $fields = array(
 		'calendar_style',
@@ -20,6 +19,10 @@ class style extends panel{
 		'calendar_style_lock',
 	);
 	
+	function get_label(){
+		return __('Style Sheet', RSC_TEXTDOMAIN);
+	}
+	
 	function echo($settings){
 		$class = $this->name;
 	?>
@@ -28,7 +31,7 @@ class style extends panel{
 	
 	<?php include RSC_ADMIN_DIR_INCLUDES.'/setting-panels/part-header.php'; ?>
 	
-	<?php do_action('rsc_before_bulk_settings'); ?>
+	<?php do_action('rsc_before_view_settings'); ?>
 	<table class="form-table rsc-table">
 		
 		<?php $is_locked_style = isset($settings['calendar_style_lock']) ? $settings['calendar_style_lock'] : 0; ?>

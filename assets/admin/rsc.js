@@ -5,76 +5,80 @@ jQuery(function($){
 		e.preventDefault();
 	});
 	
+	function reloadCalendar(){
+				
+		let old_form = $('.rsc-calendar-form').serializeArray();
+		let new_form = [];
+		
+		let value_arr = {};
+		
+		for(let i=0; i<=old_form.length; i++){
+			let input = old_form[i];
+			
+			if(typeof input != 'undefined'){
+				if(input['name'].match(/\[\]$/)){
+					let new_name = input['name'].replace(/\[\]$/, '');
+					//配列のデータのするのは分けておく
+					if(typeof value_arr[new_name] == 'undefined'){
+						value_arr[new_name] = [];
+					}
+					value_arr[new_name].push(input['value']);
+					
+				}else{
+					new_form.push(input);
+				}
+			}
+		}
+		
+		for(let o in value_arr){
+			new_form.push({name: o, value: value_arr[o]});
+		}
+				
+		$('#rsc-calendar-wrap').css('opacity', .5);
+		$('#rsc-calendar-message').html('');
+		setTimeout(function(){
+				$.ajax({
+					url: ajaxurl,
+					data: {
+						action: 'rsc_get_calendar',
+						rsc_data: new_form,
+					},
+					dataType: 'json',
+					type: 'post',
+				}).then(function(res){
+					$('#rsc-calendar-message').html('<div class="updated"><p>'+RSC.CALENDAR_LOAD_SUCCESS+'</p></div>');
+					$('#rsc-calendar-wrap').html(res.data);
+					$('#rsc-calendar-wrap').css('opacity', 1);
+				}, function(error){
+					$('#rsc-calendar-message').html('<div class="error"><p>'+RSC.CALENDAR_LOAD_FAILED+'</p></div>');
+					// console.log(error);
+				});
+		}, 100);
+	
+		
+	}
 	if($('.rsc-ajax-update').length){
 		
 		var form_val = $('.rsc-ajax-update').serialize();
 		var $form = $('.rsc-ajax-update');
 		
-		$form.bind('update',function(){
+		$form.bind('update',function(e){
 			if($(this).serialize() != form_val){
 				//if changed
 				form_val = $(this).serialize();
-				
-				let old_form = $('.rsc-calendar-form').serializeArray();
-				let new_form = [];
-				
-				let value_arr = {};
-				
-				for(let i=0; i<=old_form.length; i++){
-					let input = old_form[i];
-					
-					if(typeof input != 'undefined'){
-						if(input['name'].match(/\[\]$/)){
-							let new_name = input['name'].replace(/\[\]$/, '');
-							//配列のデータのするのは分けておく
-							if(typeof value_arr[new_name] == 'undefined'){
-								value_arr[new_name] = [];
-							}
-							value_arr[new_name].push(input['value']);
-							
-						}else{
-							new_form.push(input);
-						}
-					}
-				}
-				
-				for(let o in value_arr){
-					new_form.push({name: o, value: value_arr[o]});
-				}
-				
-				$('#rsc-calendar-wrap').css('opacity', .5);
-				$('#rsc-calendar-message').html('');
-				setTimeout(function(){
-						$.ajax({
-							url: ajaxurl,
-							data: {
-								action: 'rsc_get_calendar',
-								rsc_data: new_form,
-							},
-							dataType: 'json',
-							type: 'post',
-						}).then(function(res){
-							$('#rsc-calendar-message').html('<div class="updated"><p>'+RSC.CALENDAR_LOAD_SUCCESS+'</p></div>');
-							$('#rsc-calendar-wrap').html(res.data);
-							$('#rsc-calendar-wrap').css('opacity', 1);
-						}, function(error){
-							$('#rsc-calendar-message').html('<div class="error"><p>'+RSC.CALENDAR_LOAD_FAILED+'</p></div>');
-							// console.log(error);
-						});
-				}, 100);
+				reloadCalendar(e);
 			}
 		});
 		
-		$form.click(function(){
-			$(this).trigger('update')
+		$('input, select', $form).change(function(){
+			$(this).trigger('update');
 		});
 		
-		$('select', $form).change(function(){
-			$(this).trigger('update')
-		});
 		$('input', $form).blur(function(){
-			$(this).trigger('update')
+			$(this).trigger('update');
 		});
+		
+		$('.rsc-reload-button').click(reloadCalendar);
 	}
 	
 	function toggleReadonly(e){
@@ -111,7 +115,7 @@ jQuery(function($){
 	//common
 	$('.rsc-lock-inputs input').change(toggleReadonly);
 	
-	//bulk settings
+	//view settings
 	$('.rsc-calendar-form').submit(function(e){
 		$('input:hidden:not(type="hidden")').each(function(i){
 			$(this).val('');
@@ -175,7 +179,24 @@ jQuery(function($){
 		$('.rsc-lock-inputs input', $copy).change(toggleReadonly);
 		$('.rsc-col-delete', $copy).click(removeEventColumn);
 		
+		$('.rsc-table-event-wrapper').animate({scrollTop: $('.rsc-table-event').height()});
 	});
+	
+	$('.rsc-col-copy').click(function(e){
+		e.preventDefault();
+		let $tr = $(this).parents('tr');
+		let time = $tr.attr('data-time');
+		
+		let $new_tr = $tr.clone(true);
+		let now = Date.now();
+		
+		$new_tr.find('[name]').each(function(i){
+			let name = $(this).attr('name').replace(time, now);
+			$(this).attr('name', name);
+			$tr.attr('data-time', name);
+		})
+		$tr.after($new_tr);
+	})
 	
 	/* Short code */
 	$('#rsc-shortcode').bind('update', function(e){
@@ -192,7 +213,7 @@ jQuery(function($){
 			dataType: 'json',
 			type: 'post',
 		}).then(function(res){
-			$('#rsc-calendar-message').html('<div class="updated"><p>'+RSC.CALENDAR_LOAD_SUCCESS+'</p></div>');
+			$('#rsc-calendar-message').html('<div class="updated"><p>'+RSC.CALENDAR_LOAD_SUCCESS_SHORTCODE+'</p></div>');
 			$('#rsc-calendar-wrap').html(res.data);
 			$('#rsc-calendar-wrap').css('opacity', 1);
 		}, function(error){
