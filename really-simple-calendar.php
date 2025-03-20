@@ -3,10 +3,10 @@
 Plugin Name: Really Simple Calendar
 Plugin URI: 
 Description: Very Simple Calendar for personal.
-Version: 0.1
+Version: 0.1.3
 Author: sandman.jp
 Author URI: 
-Text Domain: rs_calendar
+Text Domain: really-simple-calendar
 Domain Path: /lang
 License: GPLv2 or later
 */
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if (!class_exists('RSC')){
 
-define('RSC_VIRSION', '0.1');
+define('RSC_VIRSION', '0.1.3');
 
 //post type
 define('RS_CALENDAR', 'rs-calendar');
@@ -28,7 +28,7 @@ define('RSC_DIR_INCLUDES', RSC_DIR.'/includes');
 define('RSC_DIR_ASSETS', RSC_DIR.'/assets');
 define('RSC_DIR_TEMPLATES', RSC_DIR.'/templates');
 define('RSC_DIR_LANG', RSC_DIR.'/lang');
-define('RSC_TEXTDOMAIN', RS_CALENDAR);
+define('RSC_TEXTDOMAIN', 'really-simple-calendar');
 define('RSC_URL', plugins_url('/', __FILE__));
 define('RSC_ASSETS_URL', RSC_URL.'assets');
 

@@ -10,7 +10,6 @@ if(!class_exists('RSC\Admin\capability')):
 class capability extends panel{
 	
 	public $name = 'capability';
-	public $label = 'Manage Capability';
 	public $info = 'Admin Only';
 	
 	public $fields = array(
@@ -27,16 +26,9 @@ class capability extends panel{
 		$this->_default_capability = rsc_get_default_capabilities();
 	}
 	
-	/*
-	function get_user_capability($cap){
-		
-		$cap = $this->_default_capability;
-		if(get_option('calendar_capability')){
-			$cap = array_merge($this->_default_capability, get_option('calendar_capability'));
-		}
-		return $cap;
+	function get_label(){
+		return __('Manage Capability', RSC_TEXTDOMAIN);
 	}
-	*/
 	
 	function echo($settings){
 		

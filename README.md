@@ -1,1 +1,1 @@
-# Really Simple Calendar
+# really-simple-calendar

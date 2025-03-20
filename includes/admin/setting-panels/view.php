@@ -5,12 +5,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if(!class_exists('RSC\Admin\bulk')):
+if(!class_exists('RSC\Admin\view')):
 	
-class bulk extends panel{
+class view extends panel{
 	
-	public $name = 'bulk';
-	public $label = 'Bulk Settings';
+	public $name = 'view';
 	
 	public $fields = array(
 		'calendar_type', 
@@ -32,14 +31,16 @@ class bulk extends panel{
 		'calendar_start_of_week_lock',
 	);
 	
+	function get_label(){
+		return __('View Settings', RSC_TEXTDOMAIN);
+	}
+	
 	function echo($settings){
 		$class = $this->name;
 ?>
-<form method="post" action="" class="rsc-calendar-form rsc-ajax-update">
-	<?php wp_nonce_field('rsc_'.$class, 'rsc_save_settings_nonce'); ?>
-	<input type="hidden" name="rsc_setting" value="<?php echo $class; ?>">
+<?php include RSC_ADMIN_DIR_INCLUDES.'/setting-panels/part-header.php'; ?>
 	
-	<?php do_action('rsc_before_bulk_settings'); ?>
+	<?php do_action('rsc_before_view_settings'); ?>
 	<table class="form-table rsc-table">
 		
 		<?php $is_locked_type = $settings['calendar_type_lock']; ?>
@@ -54,9 +55,9 @@ class bulk extends panel{
 			<td>
 				<?php $calendar_type = $settings['calendar_type']; ?>
 				<select id="rsc-calendar-type" name="calendar_type" <?php wp_readonly($is_locked_type); ?>>
-					<option value="month" <?php selected( $calendar_type, 'month'); ?>><?php _e('Monthly Calendar', RSC_TEXTDOMAIN) ?></option>
-					<option value="week" <?php selected( $calendar_type, 'week'); ?>><?php _e('Weekly Calendar', RSC_TEXTDOMAIN) ?></option>
-					<option value="day" <?php selected( $calendar_type, 'day'); ?>><?php _e('Daily Calendar', RSC_TEXTDOMAIN) ?></option>
+					<option value="month" <?php selected( $calendar_type, 'month'); ?>><?php _e('Monthly', RSC_TEXTDOMAIN) ?></option>
+					<option value="week" <?php selected( $calendar_type, 'week'); ?>><?php _e('Weekly', RSC_TEXTDOMAIN) ?></option>
+					<option value="day" <?php selected( $calendar_type, 'day'); ?>><?php _e('Daily', RSC_TEXTDOMAIN) ?></option>
 				</select>
 			</td>
 		</tr>
@@ -86,7 +87,7 @@ class bulk extends panel{
 							}
 							?>
 							<input type="number" name="calendar_previous_from" value="<?php echo $calendar_previous_from; ?>" class="small-text" max="-1" <?php wp_readonly($is_locked_from); ?>>
-							<span class="rsc-period-month rsc-period-unit" <?php echo $calendar_type == 'month' ? '' : 'style="display:none"';?>><?php echo _x('Month', 'relative', RSC_TEXTDOMAIN); ?></span><span class="rsc-period-week rsc-period-unit" <?php echo $calendar_type == 'week' ? '' : 'style="display:none"';?>><?php echo _x('Week', 'relative', RSC_TEXTDOMAIN); ?></span><span class="rsc-period-day rsc-period-unit" <?php echo $calendar_type == 'day' ? '' : 'style="display:none"';?>><?php echo _x('Day', 'relative', RSC_TEXTDOMAIN); ?></span>
+							<span class="rsc-period-month rsc-period-unit" <?php echo $calendar_type == 'month' ? '' : 'style="display:none"';?>><?php echo _x('Month(s)', 'unit', RSC_TEXTDOMAIN); ?></span><span class="rsc-period-week rsc-period-unit" <?php echo $calendar_type == 'week' ? '' : 'style="display:none"';?>><?php echo _x('Week(s)', 'unit', RSC_TEXTDOMAIN); ?></span><span class="rsc-period-day rsc-period-unit" <?php echo $calendar_type == 'day' ? '' : 'style="display:none"';?>><?php echo _x('Day(s)', 'unit', RSC_TEXTDOMAIN); ?></span>
 						</label>
 						
 					</p>
@@ -150,7 +151,7 @@ class bulk extends panel{
 							}
 							?>
 							<input type="number" id="calendar_period_last" name="calendar_period_last" value="<?php echo $calendar_period_last; ?>" class="small-text" min="0" <?php wp_readonly($is_locked_period); ?>>
-							<span class="rsc-period-month rsc-period-unit" <?php echo $calendar_type == 'month' ? '' : 'style="display:none"';?>><?php echo _x('Month', 'relative', RSC_TEXTDOMAIN); ?></span><span class="rsc-period-week rsc-period-unit" <?php echo $calendar_type == 'week' ? '' : 'style="display:none"';?>><?php echo _x('Week', 'relative', RSC_TEXTDOMAIN); ?></span><span class="rsc-period-day rsc-period-unit" <?php echo $calendar_type == 'day' ? '' : 'style="display:none"';?>><?php echo _x('Day', 'relative', RSC_TEXTDOMAIN); ?></span>
+							<span class="rsc-period-month rsc-period-unit" <?php echo $calendar_type == 'month' ? '' : 'style="display:none"';?>><?php echo _x('Month(s)', 'unit', RSC_TEXTDOMAIN); ?></span><span class="rsc-period-week rsc-period-unit" <?php echo $calendar_type == 'week' ? '' : 'style="display:none"';?>><?php echo _x('Week(s)', 'unit', RSC_TEXTDOMAIN); ?></span><span class="rsc-period-day rsc-period-unit" <?php echo $calendar_type == 'day' ? '' : 'style="display:none"';?>><?php echo _x('Day(s)', 'unit', RSC_TEXTDOMAIN); ?></span>
 						</label>
 					</p>
 					<p>
@@ -199,7 +200,7 @@ class bulk extends panel{
 		<!-- daily -->
 		<tr class="rsc-period-day rsc-period-unit">
 			<th scope="row">
-				<?php _e('Align for Cells', RSC_TEXTDOMAIN); ?>
+				<?php _e('Align for cells', RSC_TEXTDOMAIN); ?>
 			</th>
 			<td>
 				<fieldset>
@@ -211,12 +212,12 @@ class bulk extends panel{
 					?>
 					<p>
 					<label>
-						<input type="radio" name="calendar_align" value="0" <?php checked( $calendar_align, 0); ?>> <?php _e('Horizontal'); ?>
+						<input type="radio" name="calendar_align" value="0" <?php checked( $calendar_align, 0); ?>> <?php _e('Horizontal', RSC_TEXTDOMAIN); ?>
 					</label>
 					</p>
 					<p>
 					<label>
-						<input type="radio" name="calendar_align" value="1" <?php checked( $calendar_align, 1); ?>> <?php _e('Vertical'); ?>
+						<input type="radio" name="calendar_align" value="1" <?php checked( $calendar_align, 1); ?>> <?php _e('Vertical', RSC_TEXTDOMAIN); ?>
 					</label>
 					</p>
 				</fieldset>
@@ -224,9 +225,8 @@ class bulk extends panel{
 		</tr>
 		
 	</table>
-	<?php do_action('rsc_after_bulk_settings'); ?>
-	<?php submit_button(); ?>
-</form>
+	
+	<?php include RSC_ADMIN_DIR_INCLUDES.'/setting-panels/part-footer.php'; ?>
 
 <?php
 	}

@@ -51,7 +51,7 @@
 	height: 1em;
 	position: relative;
 }
-th .rsc-setting-lock {
+.rsc-setting-lock {
 	float: right;
 }
 
@@ -89,7 +89,8 @@ th .rsc-setting-lock {
 
 /* event settings */
 .rsc-table-event {
-	margin-top: 23px;
+	margin: 23px 15px 0 0;
+	width: calc(100% - 15px);
 	/* width: 100; */
 }
 .rsc-table-event .action {
@@ -106,13 +107,46 @@ th .rsc-setting-lock {
 .rsc-table-event th {
 	width: auto;
 }
+.rsc-table-event tfoot {
+	position: sticky;
+	bottom: 0;
+	left: 0;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+}
 .rsc-table-event tfoot td{
 	text-align: right;
+}
+
+.rsc-table-event-wrapper {
+	position: relative;
+	max-height: 750px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.rsc-event-upper {
+	width: 100%;
+	position: relative;
+}
+.rsc-event-lower {
+	position: relative;
+	display: flex;
+	width: 100%;
+}
+
+.rsc-event-unit {
+	padding-right: 1em;
+	white-space: nowrap;
 }
 .rsc-event-lock {
 	min-width: 35px;
 }
 
+.rsc-event-inputs {
+	display: flex;
+	align-items: center;
+}
 .rsc-event-inputs:first-child {
 	padding-bottom: 10px;
 }
@@ -121,18 +155,21 @@ th .rsc-setting-lock {
 	display: inline-block;
 	min-width: 4em;
 	font-weight: bold;
+	padding-right: 5px;
+	white-space: nowrap;
 }
 
-
+/*
 .rsc-table-event input[type="text"],
 .rsc-table-event input[type="email"],
 .rsc-table-event input[type="phone"],
 .rsc-table-event input[type="date"],
-.rsc-table-event input[type="number"], {
+.rsc-table-event input[type="number"] {
 	width: 95%;
 }
-.rsc-event-date {
-	/* max-width: 200px; */
+*/
+.rsc-event-label input {
+	max-width: calc(100% - 8em);
 }
 
 .rsc-table-event tbody .rsc-event-repeat-label {
@@ -150,7 +187,15 @@ th .rsc-setting-lock {
 	width: 50px;
 }
 
+.rsv-event-action {
+	padding: 10px 0;
+}
+
 @media screen and (max-width: 782px) {
+	
+	.rsc-event-lower {
+		display: block;
+	}
 	.rsc-table-event {
 		width: 100%;
 	}
@@ -159,6 +204,8 @@ th .rsc-setting-lock {
 	}
 	.rsc-table-event .rsc-event-inputs {
 		margin: 8px 0;
+		line-height: 2em;
+		display: block;
 	}
 	
 	.rsc-table-event tbody td:first-child {
@@ -168,6 +215,19 @@ th .rsc-setting-lock {
 	.rsc-table-event tbody td:nth-child(2) {
 		height: 1em;
 	}
+	.rsc-table-event tbody label {
+		display: block;
+		white-space: inherit;
+	}
+	/*
+	.rsc-table-event tbody label:has(>[type="radio"], >[type="checkbox"]) {
+		display: inline-block;
+	}
+	*/
+	.rsv-event-action {
+		display: inline-block;
+	}
+	
 	.rsc-table-event tfoot tr {
 		display: flex;
 		width: 100%;
@@ -175,6 +235,7 @@ th .rsc-setting-lock {
 	.rsc-table-event tfoot td{
 		width: 100%;
 	}
+	
 }
 
 .rsc-table-each {
@@ -192,7 +253,6 @@ th .rsc-setting-lock {
 .rsc-shortcode-wrapper {
 	margin: 0 20px 0 0;
 	display: flex;
-	flex-wrap: wrap;
 }
 
 .rsc-shortcode-box {
@@ -205,8 +265,8 @@ th .rsc-setting-lock {
 }
 
 .rsc-shortcode-panel {
-	min-width: 300px;
 	margin-bottom: 20px;
+	white-space: nowrap;
 }
 
 .rsc-tooltip {
@@ -233,6 +293,12 @@ th .rsc-setting-lock {
 
 .rsc-shortcode-attr {
 	display: none;
+}
+
+@media screen and (max-width: 782px) {
+	.rsc-shortcode-wrapper {
+		flex-wrap: wrap;
+	}
 }
 
 .rsc-preview {
@@ -271,15 +337,15 @@ th .rsc-setting-lock {
 	display: none;
 }
 
-#rsc-widget-type:has(option[value="day"]:checked) ~ #rsc-widget-type-align,
-#rsc-widget-from:has(option[value="previous"]:checked) ~ #rsc-widget-from-previous,
-#rsc-widget-from:has(option[value="date"]:checked) ~ #rsc-widget-from-date,
-#rsc-widget-period:has(option[value="last"]:checked) ~ #rsc-widget-period-last,
-#rsc-widget-period:has(option[value="date"]:checked) ~ #rsc-widget-period-date {
+#rsc-calendar-type:has(option[value="day"]:checked) ~ #rsc-calendar-type-align,
+#rsc-calendar-from:has(option[value="previous"]:checked) ~ #rsc-calendar-from-previous,
+#rsc-calendar-from:has(option[value="date"]:checked) ~ #rsc-calendar-from-date,
+#rsc-calendar-period:has(option[value="last"]:checked) ~ #rsc-calendar-period-last,
+#rsc-calendar-period:has(option[value="date"]:checked) ~ #rsc-calendar-period-date {
 	display: block;
 }
 
-.rsc-widget-input:has(option[value="day"]:checked) ~ .rsc-widget-input #rsc-widget-start_of_week{
+.rsc-widget-input:has(option[value="day"]:checked) ~ .rsc-widget-input #rsc-calendar-start_of_week{
 	pointer-events:none;
 	background-color: #f0f0f1 !important;
 }

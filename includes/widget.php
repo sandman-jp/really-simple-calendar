@@ -29,7 +29,7 @@ class widget extends \WP_Widget{
 		
 		add_action( 'widgets_init', array($this, 'register_widget'));
 		
-		$panel = new \RSC\Admin\Panel\bulk();
+		$panel = new \RSC\Admin\Panel\view();
 		$this->_fields = $panel->get_fields();
 		$lock_fields = $panel->get_lock_fields();
 		$this->_locked = array();
@@ -90,7 +90,7 @@ class widget extends \WP_Widget{
 					<label for="rsc-widget-type"><?php _e('Calendar Type', RSC_TEXTDOMAIN); ?> <?php rsc_get_lock($is_locked_type); ?></label>
 				</div>
 				<div class="components-placeholder__fieldset rsc-widget-input">
-					<select id="rsc-widget-type" name="<?php echo $this->get_field_name('calendar_type'); ?>" class="rsc-widget-item" <?php disabled($is_locked_type); ?> style="background-image:" >
+					<select id="rsc-calendar-type" name="<?php echo $this->get_field_name('calendar_type'); ?>" class="rsc-widget-item" <?php disabled($is_locked_type); ?> style="background-image:" >
 						<option value=""><?php _e('Default', RSC_TEXTDOMAIN); ?></option>
 						<?php if(!$is_locked_type): ?>
 						<option value="month" <?php selected($instance['calendar_type'], 'month'); ?>><?php _e('Monthly', RSC_TEXTDOMAIN); ?></option>
@@ -100,12 +100,12 @@ class widget extends \WP_Widget{
 					</select>
 					
 				<?php if(!$is_locked_type): ?>
-					<select id="rsc-widget-type-align" name="<?php echo $this->get_field_name('calendar_align'); ?>" class="rsc-widget-item" required>
+					<select id="rsc-calendar-type-align" name="<?php echo $this->get_field_name('calendar_align'); ?>" class="rsc-widget-item" required>
 						<option value=""><?php _e('Default', RSC_TEXTDOMAIN); ?></option>
 						<option value="0" <?php selected($instance['calendar_align'], '0'); ?>><?php _e('Horizontal', RSC_TEXTDOMAIN); ?></option>
 						<option value="1" <?php selected($instance['calendar_align'], '1'); ?>><?php _e('Vertical', RSC_TEXTDOMAIN); ?></option>
 					</select>
-					<span class="rsc-unit-month rsc-unit" style="display:none"><?php echo _x('Month', 'relative', RSC_TEXTDOMAIN); ?></span><span class="rsc-unit-week rsc-unit" style="display:none"><?php echo _x('Week', 'relative', RSC_TEXTDOMAIN); ?></span><span class="rsc-unit-day rsc-unit"  style="display:none"><?php echo _x('Day', 'relative', RSC_TEXTDOMAIN); ?></span>
+					<span class="rsc-unit-month rsc-unit" style="display:none"><?php echo _x('Month(s)', 'unit', RSC_TEXTDOMAIN); ?></span><span class="rsc-unit-week rsc-unit" style="display:none"><?php echo _x('Week(s)', 'unit', RSC_TEXTDOMAIN); ?></span><span class="rsc-unit-day rsc-unit"  style="display:none"><?php echo _x('Day(s)', 'unit', RSC_TEXTDOMAIN); ?></span>
 				<?php endif; ?>
 				</div>
 				
@@ -114,7 +114,7 @@ class widget extends \WP_Widget{
 					<label for="rsc-widget-from"><?php _e('Start From', RSC_TEXTDOMAIN); ?> <?php rsc_get_lock($is_locked_from); ?></label>
 				</div>
 				<div class="components-placeholder__fieldset rsc-widget-input">
-					<select id="rsc-widget-from" name="<?php echo $this->get_field_name('calendar_from'); ?>" class="rsc-widget-item" <?php disabled($is_locked_from); ?>>
+					<select id="rsc-calendar-from" name="<?php echo $this->get_field_name('calendar_from'); ?>" class="rsc-widget-item" <?php disabled($is_locked_from); ?>>
 						<option value=""><?php _e('Default', RSC_TEXTDOMAIN); ?></option>
 						<?php if(!$is_locked_from): ?>
 						<option value="previous" <?php selected($instance['calendar_from'], 'previous'); ?>><?php _e('Previous', RSC_TEXTDOMAIN); ?></option>
@@ -126,13 +126,13 @@ class widget extends \WP_Widget{
 					</select>
 					
 				<?php if(!$is_locked_from): ?>
-					<label id="rsc-widget-from-previous" class="rsc-widget-item">
+					<label id="rsc-calendar-from-previous" class="rsc-widget-item">
 						<input name="<?php echo $this->get_field_name('calendar_previous_from'); ?>" type="number" max="-1" value="<?php echo (int)$instance['calendar_previous_from'] ?>" class="small-text" required>
-						<span class="rsc-unit-month rsc-unit"><?php echo _x('Month', 'relative', RSC_TEXTDOMAIN); ?></span><span class="rsc-unit-week rsc-unit"><?php echo _x('Week', 'relative', RSC_TEXTDOMAIN); ?></span><span class="rsc-unit-day rsc-unit"><?php echo _x('Day', 'relative', RSC_TEXTDOMAIN); ?></span>
+						<span class="rsc-unit-month rsc-unit"><?php echo _x('Month(s)', 'unit', RSC_TEXTDOMAIN); ?></span><span class="rsc-unit-week rsc-unit"><?php echo _x('Week(s)', 'unit', RSC_TEXTDOMAIN); ?></span><span class="rsc-unit-day rsc-unit"><?php echo _x('Day(s)', 'unit', RSC_TEXTDOMAIN); ?></span>
 						<span class="dashicons dashicons-info" title="<?php _e('Should be less than 0', RSC_TEXTDOMAIN); ?>"></span>
 					</label>
 					
-					<label id="rsc-widget-from-date" class="rsc-widget-item">
+					<label id="rsc-calendar-from-date" class="rsc-widget-item">
 						<input type="date" name="<?php echo $this->get_field_name('calendar_from_date'); ?>" value="<?php echo $instance['calendar_from_date'] ?>" required>
 					</label>
 				<?php endif; ?>
@@ -143,7 +143,7 @@ class widget extends \WP_Widget{
 					<label for="rsc-widget-period"><?php _e('Display Period', RSC_TEXTDOMAIN); ?> <?php rsc_get_lock($is_locked_period); ?></label>
 				</div>
 				<div class="components-placeholder__fieldset rsc-widget-input">
-					<select id="rsc-widget-period" name="<?php echo $this->get_field_name('calendar_period'); ?>" class="rsc-widget-item" <?php disabled($is_locked_period); ?>>
+					<select id="rsc-calendar-period" name="<?php echo $this->get_field_name('calendar_period'); ?>" class="rsc-widget-item" <?php disabled($is_locked_period); ?>>
 						<option value=""><?php _e('Default', RSC_TEXTDOMAIN); ?></option>
 						<?php if(!$is_locked_period): ?>
 						<option value="last" <?php selected($instance['calendar_period'], 'last'); ?>><?php _e('Priod', RSC_TEXTDOMAIN); ?></option>
@@ -152,12 +152,12 @@ class widget extends \WP_Widget{
 					</select>
 					
 				<?php if(!$is_locked_period): ?>
-					<label id="rsc-widget-period-last" class="rsc-widget-item">
+					<label id="rsc-calendar-period-last" class="rsc-widget-item">
 						<input name="<?php echo $this->get_field_name('calendar_period_last'); ?>" type="number" min="0" value="<?php echo (int)$instance['calendar_period_last'] ?>" class="small-text" required>
-						<span class="rsc-unit-month rsc-unit"><?php echo _x('Month', 'relative', RSC_TEXTDOMAIN); ?></span><span class="rsc-unit-week rsc-unit"><?php echo _x('Week', 'relative', RSC_TEXTDOMAIN); ?></span><span class="rsc-unit-day rsc-unit"><?php echo _x('Day', 'relative', RSC_TEXTDOMAIN); ?></span>
+						<span class="rsc-unit-month rsc-unit"><?php echo _x('Month(s)', 'unit', RSC_TEXTDOMAIN); ?></span><span class="rsc-unit-week rsc-unit"><?php echo _x('Week(s)', 'unit', RSC_TEXTDOMAIN); ?></span><span class="rsc-unit-day rsc-unit"><?php echo _x('Day(s)', 'unit', RSC_TEXTDOMAIN); ?></span>
 						<span class="dashicons dashicons-info" title="<?php _e('Should be 0 or more.', RSC_TEXTDOMAIN); ?>"></span>
 					</label>
-					<label id="rsc-widget-period-date" class="rsc-widget-item">
+					<label id="rsc-calendar-period-date" class="rsc-widget-item">
 						<input name="<?php echo $this->get_field_name('calendar_period_date'); ?>" type="date" value="<?php echo (int)$instance['calendar_period_date'] ?>" required>
 					</label>
 				<?php endif; ?>
@@ -165,10 +165,10 @@ class widget extends \WP_Widget{
 				
 				<?php $is_locked_start_of_week = $this->_locked['calendar_start_of_week_lock']; ?>
 				<div class="components-placeholder__label rsc-widget-label">
-					<label for="rsc-widget-start_of_week"><?php _e('Start Day Of Week', RSC_TEXTDOMAIN); ?> <?php rsc_get_lock($is_locked_start_of_week); ?></label>
+					<label for="rsc-widget-start_of_week"><?php _e('Start day of week', RSC_TEXTDOMAIN); ?> <?php rsc_get_lock($is_locked_start_of_week); ?></label>
 				</div>
 				<div class="components-placeholder__fieldset rsc-widget-input">
-					<select id="rsc-widget-start_of_week" name="<?php echo $this->get_field_name('calendar_start_of_week'); ?>" class="rsc-widget-item" <?php disabled($is_locked_start_of_week); ?>>
+					<select id="rsc-calendar-start_of_week" name="<?php echo $this->get_field_name('calendar_start_of_week'); ?>" class="rsc-widget-item" <?php disabled($is_locked_start_of_week); ?>>
 						<option value=""><?php _e('Default', RSC_TEXTDOMAIN); ?></option>
 						<?php if(!$is_locked_start_of_week): ?>
 						<option value="today" <?php selected($instance['calendar_start_of_week'], 'today'); ?>><?php _e('Today'); ?></option>

@@ -5,13 +5,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-
 <?php
 if(isset($_GET['rsc'])){
 	$panel_name = $_GET['rsc'];
-	
 }else{
-	$panel_name = 'bulk';
+	$panel_name = 'view';
 }
 
 //get panels

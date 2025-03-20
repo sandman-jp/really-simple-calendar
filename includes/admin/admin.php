@@ -12,7 +12,7 @@ define('RSC_GENERAL_SETTINGS_PAGE', 'rsc-general-settings');
 define('RSC_ADMIN_DIR_INCLUDES', RSC_DIR_INCLUDES.'/admin');
 
 require_once RSC_ADMIN_DIR_INCLUDES.'/setting-panels/panel.php';
-require_once RSC_ADMIN_DIR_INCLUDES.'/setting-panels/bulk.php';
+require_once RSC_ADMIN_DIR_INCLUDES.'/setting-panels/view.php';
 require_once RSC_ADMIN_DIR_INCLUDES.'/setting-panels/event.php';
 require_once RSC_ADMIN_DIR_INCLUDES.'/setting-panels/style.php';
 require_once RSC_ADMIN_DIR_INCLUDES.'/setting-panels/capability.php';
@@ -25,7 +25,7 @@ class admin{
 	private $_ajax;
 	private $_post;
 	private $_panels = array();
-	private $_panel_classes = array('bulk', 'event', 'style', 'contact');
+	private $_panel_classes = array('view', 'event', 'style', 'contact');
 	
 	function __construct(){
 		
@@ -89,27 +89,25 @@ class admin{
 		//global $post;
 		$screen_id = get_current_screen()->id;
 		
-		// if($screen_id == RS_CALENDAR || $screen_id == 'toplevel_page_'.RSC_GENERAL_SETTINGS_PAGE){
-			
-			wp_register_style('jquery-ui', '//code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css');
-			wp_enqueue_style( 'jquery-ui' );
-			wp_enqueue_style('rsc-css', RSC_ASSETS_URL.'/rsc.css', array(), RSC_VIRSION);
-			wp_enqueue_style('rsc-admin', RSC_ASSETS_URL.'/admin/rsc.css', array(), RSC_VIRSION);
-			wp_enqueue_script('rsc-admin', RSC_ASSETS_URL.'/admin/rsc.js', array('jquery', 'jquery-ui-sortable'), RSC_VIRSION, true);
-			
-			wp_register_script('rsc-admin-header', false);
-			wp_enqueue_script('rsc-admin-header');
-			
-			//for localize text
-			wp_localize_script(
-				'rsc-admin-header',
-				'RSC',
-				array(
-					'CALENDAR_LOAD_FAILED' => __('Can\'t load the calendar. Please try it later.', RSC_TEXTDOMAIN),
-					'CALENDAR_LOAD_SUCCESS' => __('The calendar loaded. Press save this parameters or use this shortcode, if you\'d like to use this preview\'s calendar.', RSC_TEXTDOMAIN),
-				)
-			);
-		// }
+		wp_register_style('jquery-ui', '//code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css');
+		wp_enqueue_style( 'jquery-ui' );
+		wp_enqueue_style('rsc-css', RSC_ASSETS_URL.'/rsc.css', array(), RSC_VIRSION);
+		wp_enqueue_style('rsc-admin', RSC_ASSETS_URL.'/admin/rsc.css', array(), RSC_VIRSION);
+		wp_enqueue_script('rsc-admin', RSC_ASSETS_URL.'/admin/rsc.js', array('jquery', 'jquery-ui-sortable'), RSC_VIRSION, true);
+		
+		wp_register_script('rsc-admin-header', false);
+		wp_enqueue_script('rsc-admin-header');
+		
+		//for localize text
+		wp_localize_script(
+			'rsc-admin-header',
+			'RSC',
+			array(
+				'CALENDAR_LOAD_FAILED' => __('Can\'t load the calendar. Please try it later.', RSC_TEXTDOMAIN),
+				'CALENDAR_LOAD_SUCCESS' => __('The calendar updated. <strong>Save</strong> this parameters, if you\'d like to use this preview\'s calendar.', RSC_TEXTDOMAIN),
+				'CALENDAR_LOAD_SUCCESS_SHORTCODE' => __('The calendar updated. <strong>Copy shortcode</strong> and paste on a post, if you\'d like to use this preview\'s calendar.', RSC_TEXTDOMAIN),
+			)
+		);
 	}
 	
 	function admin_menu(){
@@ -156,7 +154,7 @@ class admin{
 	} ?>
 	
 	<!-- preview -->
-	<h2>Preview</h2>
+	<h2><?php _e('Preview', RSC_TEXTDOMAIN); ?></h2>
 	<div class="rsc-preview">
 	<div id="rsc-calendar-message"></div>
 	<section id="rsc-calendar-wrap">

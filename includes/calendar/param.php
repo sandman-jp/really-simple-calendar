@@ -23,11 +23,11 @@ class param extends setting {
 			}
 		}
 		
-		return $this->_get_bulk_settings();
+		return $this->_get_view_settings();
 		
 	}
 	
-	private function _get_bulk_settings(){
+	private function _get_view_settings(){
 		
 		if(!$this->_params){
 			$date = new \DateTime('today', wp_timezone());

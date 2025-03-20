@@ -10,7 +10,6 @@ if(!class_exists('RSC\Admin\event')):
 class event extends panel{
 	
 	public $name = 'event';
-	public $label = 'Event Settings';
 	
 	public $fields = array(
 		'calendar_event_number',
@@ -27,6 +26,9 @@ class event extends panel{
 		'calendar_event_lock',
 	);
 	
+	function get_label(){
+		return __('Event Settings', RSC_TEXTDOMAIN);
+	}
 	
 	function echo($settings){
 		$class = $this->name;
@@ -71,15 +73,15 @@ class event extends panel{
 		include RSC_ADMIN_DIR_INCLUDES.'/setting-panels/part-event.php';
 		?>
 	</script>
-	
+	<div class="rsc-table-event-wrapper">
 	<table class="form-table rsc-table rsc-table-event widefat striped">
 		<thead>
 			<tr>
-				<td colspan="9" class="rsc-event-acion">
+				<td colspan="4" class="rsc-event-acion">
 						<div class="actions alignright">
 							<?php
-							if(!empty($_POST['search_ftom']) && preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $_POST['search_ftom'])){
-								$search_from = $_POST['search_ftom'];
+							if(!empty($_POST['search_from']) && preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $_POST['search_from'])){
+								$search_from = $_POST['search_from'];
 							}else{
 								$search_from = '';
 							}
@@ -94,8 +96,8 @@ class event extends panel{
 							}
 							
 							?>
-							<label for="rsc-search-ftom"><?php _e('Term', RSC_TEXTDOMAIN); ?> : </label>
-							<input type="date" id="rsc-search-ftom" name="search_ftom" value="<?php echo $search_from; ?>">
+							<label for="rsc-search-ftom"><?php _e('Period', RSC_TEXTDOMAIN); ?> : </label>
+							<input type="date" id="rsc-search-ftom" name="search_from" value="<?php echo $search_from; ?>">
 							<span>~</span>
 							<input type="date" name="search_to" value="<?php echo $search_to; ?>">
 							<label for="rsc-search-order"><?php _e('Order', RSC_TEXTDOMAIN); ?> : </label>
@@ -146,13 +148,13 @@ class event extends panel{
 		</tbody>
 		<tfoot>
 			<tr>
-				<td colspan="9">
+				<td colspan="4">
 				<button class="rsc-add-button button"><?php _e('Add Event', RSC_TEXTDOMAIN); ?></button>
 				</td>
 			</tr>
 		</tfoot>
 	</table>
-		
+	</div>
 	
 	<?php include RSC_ADMIN_DIR_INCLUDES.'/setting-panels/part-footer.php'; ?>
 <?php
