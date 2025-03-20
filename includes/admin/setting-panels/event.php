@@ -30,6 +30,70 @@ class event extends panel{
 		return __('Event Settings', RSC_TEXTDOMAIN);
 	}
 	
+	function update($key, $post_data){
+		
+		if(is_array($post_data)){
+			
+			if(!is_array($this->settings[$key])){
+				$this->settings[$key] = array();
+			}
+			
+			//for array like events.
+			foreach($this->locked as $k=>$v){
+				
+				if(!empty($v)){
+					foreach($v as $kk=>$vv){
+						//if locked.
+						if($vv && isset($this->settings[$key][$kk])){
+							//unset($post_data[$kk]);
+							$post_data[$kk] = $this->settings[$key][$kk];
+						}
+						//
+					}
+				}
+				
+			};
+			
+			foreach($post_data as $k=>$v){
+				$this->settings[$key][$k] = $v; 
+			}
+			
+			foreach($this->settings[$key] as $k=>$v){
+				
+				if(!isset($post_data[$k])){
+					//var_dump($k);
+					unset($this->settings[$key][$k]);
+				}
+			}
+			
+			// array_merge($this->settings[$key], $post_data);
+			/*
+			if(!empty($post_data)){
+				//var_dump($post_data);
+				
+				unset($this->settings[$key]);
+				$this->settings[$key] = array();
+				//new event data.
+				foreach($post_data as $k=>$v){
+					$this->settings[$key][$k] = $v;
+				}
+			}
+			*/
+			//save array
+			update_option($key, $this->settings[$key]);
+			update_option('calendar_event_lock', $this->settings['calendar_event_lock']);
+			
+		}else{
+			//for single value.
+			if(!isset($this->locked[$key.'_lock']) || (isset($this->locked[$key.'_lock']) && !$this->locked[$key.'_lock'])){
+				$this->settings[$key] = $post_data;
+				update_option($key, $post_data);
+			}
+			
+		}
+		return $this->settings;
+	}
+	
 	function echo($settings){
 		$class = $this->name;
 		

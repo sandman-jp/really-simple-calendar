@@ -3,7 +3,7 @@
 Plugin Name: Really Simple Calendar
 Plugin URI: 
 Description: Very Simple Calendar for personal.
-Version: 0.1.3
+Version: 0.1.5
 Author: sandman.jp
 Author URI: 
 Text Domain: really-simple-calendar
