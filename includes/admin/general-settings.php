@@ -5,14 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <?php
-if(isset($_GET['rsc'])){
-	$panel_name = $_GET['rsc'];
-}else{
-	$panel_name = 'view';
-}
 
 $panel = '';
-
+$fields = array();
 //get panels
 foreach($this->_panels as $p){
 	if($panel_name == $p->get_name()){

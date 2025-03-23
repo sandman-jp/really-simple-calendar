@@ -2,8 +2,8 @@
 /*
 Plugin Name: Really Simple Calendar
 Plugin URI: 
-Description: Very Simple Calendar for personal.
-Version: 0.1.5
+Description: Very Simple Single Calendar.
+Version: 0.2.5
 Author: sandman.jp
 Author URI: 
 Text Domain: really-simple-calendar
@@ -15,12 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if (!class_exists('RSC')){
+if (!class_exists('CustomFieldsCalendar')){
 
-define('RSC_VIRSION', '0.1.3');
+define('RSC_VIRSION', '0.2.6');
 
-//post type
-define('RS_CALENDAR', 'rs-calendar');
+//basename
+define('RS_CALENDAR', 'rs_calendar');
 
 //general settings
 define('RSC_DIR', dirname(__FILE__));
@@ -59,29 +59,65 @@ class CustomFieldsCalendar {
 		
 		if(is_admin()){
 			$this->_admin = new RSC\Admin\admin;
-		}else{
 		}
+		
+		// import plugins
+		$plugins = get_option(RS_CALENDAR.'_plugins');
+		
+		$plugins = array();
+		$dirs = array();
+		if(file_exists(RSC_DIR.'/extentions/')){
+			$dirs = scandir(RSC_DIR.'/extentions/');
+		}
+		
+		foreach($dirs as $dir){
+			if(is_dir(RSC_DIR.'/extentions/'.$dir) && strpos($dir, '.') === false){
+				$plugins[] = $dir;
+			}
+		}
+		
+		foreach($plugins as $pl){
+			require_once RSC_DIR.'/extentions/'.$pl.'/'.$pl.'.php';
+		}
+		
+		//修正分
+		add_filter('pre_option', array($this, 'get_option'), 10, 3);
 	}
 	
-	public function get_calendar_post_type(){
+	function get_option($pre, $option, $default_value){
+		if($pre){
+			return $pre;
+		}else if(strpos($option, RS_CALENDAR.'_') === 0){
+			$search = str_replace(RS_CALENDAR.'_', 'calendar_', $option);
+			$old = get_option($search);
+			if($old){
+				delete_option($search);
+				update_option($option, $old);
+				return $old;
+			}
+		}
+		return $pre;
+	}
+	
+	function get_calendar_post_type(){
 		return $this->_post_type;
 	}
 	
-	public function get_calendar($args=array()){
+	function get_calendar($args=array()){
 		return $this->_calendar->render($args);
 	}
 	
-	public function render_calendar($args=array()){
+	function render_calendar($args=array()){
 		do_action('rsc_before_render_calendar', $args);
 		echo $this->get_calendar($args);
 		do_action('rsc_after_render_calendar');
 	}
 	
-	public function get_calendar_params(){
+	function get_calendar_params(){
 		return $this->_calendar->get_params();
 	}
 	
-	public function set_td($args){
+	function set_td($args){
 		$this->_cell_data['td'] = $args;
 	}
 	

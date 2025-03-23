@@ -20,3 +20,11 @@ function rsc_get_start_week($time, $start=0){
 	
 	return $w;
 }
+
+function rsc_get_default_style(){
+	ob_start();
+	include RSC_ADMIN_DIR_INCLUDES.'/panels/style-default.txt';
+	$style = ob_get_clean();
+	
+	return rsc_esc($style);
+}

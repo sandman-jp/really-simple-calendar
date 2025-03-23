@@ -30,6 +30,12 @@ class calendar {
 	
 	function enqueue_scripts() {
 		wp_enqueue_style('rsc-css', RSC_ASSETS_URL.'/rsc.css', array(), RSC_VIRSION);
+		$style = get_option(RS_CALENDAR.'_style');
+		if(empty($style)){
+			$style = rsc_get_default_style();
+		}
+		wp_add_inline_style('rsc-css', $style);
+		wp_enqueue_script('rsc-js', RSC_ASSETS_URL.'/rsc.js', array('jquery', 'jquery-ui-sortable'), RSC_VIRSION, true);
 	}
 	
 	function get_params($args=array()){
@@ -75,7 +81,7 @@ class calendar {
 		$args = apply_filters('rsc_before_render_calendar_tables', $args);
 		
 		//カレンダーの取得
-		$table_func = '_get_'.$args['calendar_type'].'_tables';
+		$table_func = '_get_'.$args[RS_CALENDAR.'_type'].'_tables';
 		
 		$calendar_tables = $this->{$table_func}($args);
 		
@@ -167,7 +173,7 @@ class calendar {
 				'values' => $values,
 			);
 			
-			if($args['calendar_type'] == 'week' || $args['calendar_type'] == 'month'){
+			if($args[RS_CALENDAR.'_type'] == 'week' || $args[RS_CALENDAR.'_type'] == 'month'){
 				$cell_args['start_of_week'] = $args['start_of_week'];
 			}
 			
@@ -175,7 +181,7 @@ class calendar {
 			ob_start(); //for td
 			$th = wp_date('D', $time_id);
 			
-			rsc_get_template_part('/'.$args['calendar_type'].'/table', 'header', array(
+			rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', 'header', array(
 				'th' => $th,
 				'time_id' => $time_id,
 				'is_in_term' => $is_in_term,
@@ -185,7 +191,7 @@ class calendar {
 			
 			//各セル
 			ob_start();
-			rsc_get_template_part('/'.$args['calendar_type'].'/table', 'cell', $cell_args);
+			rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', 'cell', $cell_args);
 			
 			$cell = ob_get_clean();
 			
@@ -209,7 +215,7 @@ class calendar {
 					$cal_cells = implode('', $cells);
 				}
 				
-				rsc_get_template_part('/'.$args['calendar_type'].'/'.$tablename, array(
+				rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/'.$tablename, array(
 					'th' => $tableheader,
 					'td' => $cal_cells,
 					'monthname' => $wp_locale->get_month($current_m),
@@ -327,7 +333,7 @@ class calendar {
 			$cell_args['start_of_week'] = $args['start_of_week'];
 			
 			ob_start();
-			rsc_get_template_part('/'.$args['calendar_type'].'/table', 'cell', $cell_args);
+			rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', 'cell', $cell_args);
 			
 			$cells[$dw] = ob_get_clean();
 			
@@ -336,7 +342,7 @@ class calendar {
 			ob_start(); //for td
 			$th = wp_date('D', $time_id);
 			
-			rsc_get_template_part('/'.$args['calendar_type'].'/table', 'header', array(
+			rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', 'header', array(
 				'th' => $th,
 				'time_id' => $time_id,
 				'is_in_term' => $is_in_term,
@@ -352,7 +358,7 @@ class calendar {
 			if($dw ==  6) {
 				$table_class = 'alignwide';
 				$month_cells[] = $column_header.implode('', $cells);
-				rsc_get_template_part('/'.$args['calendar_type'].'/table', array(
+				rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', array(
 					'th' => $tableheader,
 					'td' => $month_cells,
 					'monthname' => $wp_locale->get_month($current_m),
@@ -424,7 +430,7 @@ class calendar {
 				$weekday = 'sun';
 			}
 			
-			rsc_get_template_part('/'.$args['calendar_type'].'/table', 'header', array(
+			rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', 'header', array(
 				'day_index' => $day_index,
 				'th_class' => array('rsc-'.$weekday),
 			));
@@ -498,7 +504,7 @@ class calendar {
 			$cell_args['start_of_week'] = $args['start_of_week'];
 			
 			ob_start();
-			rsc_get_template_part('/'.$args['calendar_type'].'/table', 'cell', $cell_args);
+			rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', 'cell', $cell_args);
 			
 			$cells[$dw] = ob_get_clean();
 			// 
@@ -517,7 +523,7 @@ class calendar {
 					$month_cells[] = $column_header.$week_cells;
 				}
 				
-				rsc_get_template_part('/'.$args['calendar_type'].'/table', array(
+				rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', array(
 					'th' => $tableheader,
 					'td' => $month_cells,
 					'monthname' => $wp_locale->get_month($current_m),

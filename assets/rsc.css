@@ -1,6 +1,6 @@
 
 .rsc-calendar * {
-	/* box-sizing: border-box; */
+	box-sizing: border-box;
 }
 .rsc-calendar {
 	font-size: 16px;
@@ -98,21 +98,46 @@
 	position: relative;
 	height: 1.6em;
 	width: 100%;
+	max-width: 200px;
 }
+
+.rsc-calendar-daily-vertical .rsc-calendar-event-wrapper {
+	float: left;
+	margin: 0 5px;
+}
+
 .rsc-calendar-event {
+	cursor: pointer;
 	position: absolute;
 	display: block;
 	width: calc(100% - 10px);
 	text-align: center;
 	border-radius: 1em;
 	font-size: small;
-	padding: 0 4px;
+	padding: 0 10px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	height: 1.6em;
 	min-width: 1.6em;
+	width: 100%;
+	z-index: 0;
+	left: 0;
 }
+
+.rsc-calendar-event.is-active {
+	bottom: 1em;
+	height: auto;
+	width: 200px;
+	left: 50%;
+	padding: 10px;
+	margin-left: -100px;
+	white-space: normal;
+	z-index: 1;
+	transition: .2s;
+	font-size: medium;
+}
+
 .rsc-calendar-event-wrapper {
 	margin-top: 3px;
 }

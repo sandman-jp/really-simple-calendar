@@ -23,12 +23,12 @@ class style extends setting {
 			}
 		}
 		
-		add_action('rsc_after_render_calendar_tables', array($this, 'add_style'));
+		// add_filter('rsc_after_render_calendar_tables', array($this, 'add_style'));
 	}
 	
 	function add_style($html){
 		
-		$style = $this->get_option('calendar_style');
+		$style = $this->get_option(RS_CALENDAR.'_style');
 		
 		ob_start();
 	?>
