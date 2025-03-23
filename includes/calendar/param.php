@@ -31,17 +31,17 @@ class param extends setting {
 		
 		if(!$this->_params){
 			$date = new \DateTime('today', wp_timezone());
-			$type = $this->get_option('calendar_type');
+			$type = $this->get_option(RS_CALENDAR.'_type');
 			if(empty($type)){
 				$type = 'month';
 			}
 			
-			$from = $this->get_option('calendar_from');
+			$from = $this->get_option(RS_CALENDAR.'_from');
 			if(empty($from)){
 				$from = 'current';
 			}
 			
-			$start_of_week = $this->get_option('calendar_start_of_week');
+			$start_of_week = $this->get_option(RS_CALENDAR.'_start_of_week');
 			if($start_of_week == 'today'){
 				$start_of_week = wp_date('w');
 			}else if(empty($start_of_week)){
@@ -56,7 +56,7 @@ class param extends setting {
 			
 			switch($from){
 				case 'previous':
-					$previous_from = $this->get_option('calendar_previous_from');
+					$previous_from = $this->get_option(RS_CALENDAR.'_previous_from');
 					$date->modify($previous_from.' '.$type);
 					if($type == 'month'){
 						$from_time = $date->modify($date->format('Y-m').'-01')->format('U');
@@ -90,7 +90,7 @@ class param extends setting {
 					$from_time = $date->format('U');
 					break;
 				case 'date':
-					$date_from = $this->get_option('calendar_from_date');
+					$date_from = $this->get_option(RS_CALENDAR.'_from_date');
 					$d = \DateTime::createFromFormat('Y-m-d', $date_from);
 					
 					if($d && $d->format('Y-m-d') == $date_from){
@@ -103,13 +103,13 @@ class param extends setting {
 			
 			
 			//
-			$period = $this->get_option('calendar_period');
+			$period = $this->get_option(RS_CALENDAR.'_period');
 			if(empty($period)){
 				$period = 'last';
 			}
 			
 			if($period == 'last'){
-				$last_period = $this->get_option('calendar_period_last');
+				$last_period = $this->get_option(RS_CALENDAR.'_period_last');
 				
 				if(empty($last_period) && $last_period !== '0'){
 					$date->modify('+2 '.$type);
@@ -128,7 +128,7 @@ class param extends setting {
 					$until = $date->format('U');
 				}
 			}else{
-				$date_period = $this->get_option('calendar_period_date');
+				$date_period = $this->get_option(RS_CALENDAR.'_period_date');
 				$d = \DateTime::createFromFormat('Y-m-d', $date_period);
 				
 				if($d && $d->format('Y-m-d') == $date_period){
@@ -136,7 +136,7 @@ class param extends setting {
 				}else{
 					$until = $date->format('U');
 				}
-				//$until = $date->modify($this->get_option('calendar_period_date'))->format('U');
+				//$until = $date->modify($this->get_option(RS_CALENDAR.'_period_date'))->format('U');
 			}
 			
 			$this->_params = array(
@@ -146,15 +146,15 @@ class param extends setting {
 				'before_start' => $from_time,
 				'after_end' => $until,
 				
-				'calendar_type' => $type,
-				'calendar_from' => $from,
-				'calendar_period' => $period,
-				'calendar_start_of_week' => $start_of_week,
-				'calendar_align' => 0,
+				RS_CALENDAR.'_type' => $type,
+				RS_CALENDAR.'_from' => $from,
+				RS_CALENDAR.'_period' => $period,
+				RS_CALENDAR.'_start_of_week' => $start_of_week,
+				RS_CALENDAR.'_align' => 0,
 			);
 			
 			if($type == 'day'){
-				$this->_params['align'] = $this->get_option('calendar_align');
+				$this->_params['align'] = $this->get_option(RS_CALENDAR.'_align');
 			}
 		}
 		

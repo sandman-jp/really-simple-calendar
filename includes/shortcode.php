@@ -22,29 +22,29 @@ class shortcode{
 		
 		foreach($atts as $k=>$v){
 			// list($key, $val) = explode('=', $att);
-			if(!get_option('calendar_'.$k.'_lock')){
-				$atts['calendar_'.$k] = str_replace('"', '', $v);
+			if(!get_option(RS_CALENDAR.'_'.$k.'_lock')){
+				$atts[RS_CALENDAR.'_'.$k] = str_replace('"', '', $v);
 			}
 			
 		}
 		
-		if(isset($atts['calendar_from'])){
-			if(is_numeric($atts['calendar_from']) && (int)$atts['calendar_from'] < 0){
-				$atts['calendar_previous_from'] = $atts['calendar_from'];
-				$atts['calendar_from'] = 'previous';
-			}else if(preg_match("/^\d{4}\-\d{2}\-\d{2}$/", $atts['calendar_from'])){
-				$atts['calendar_from_date'] = $atts['calendar_from'];
-				$atts['calendar_from'] = 'date';
+		if(isset($atts[RS_CALENDAR.'_from'])){
+			if(is_numeric($atts[RS_CALENDAR.'_from']) && (int)$atts[RS_CALENDAR.'_from'] < 0){
+				$atts[RS_CALENDAR.'_previous_from'] = $atts[RS_CALENDAR.'_from'];
+				$atts[RS_CALENDAR.'_from'] = 'previous';
+			}else if(preg_match("/^\d{4}\-\d{2}\-\d{2}$/", $atts[RS_CALENDAR.'_from'])){
+				$atts[RS_CALENDAR.'_from_date'] = $atts[RS_CALENDAR.'_from'];
+				$atts[RS_CALENDAR.'_from'] = 'date';
 			}
 		}
 		
-		if(isset($atts['calendar_period'])){
-			if(is_numeric($atts['calendar_period']) && (int)$atts['calendar_period'] >= 0){
-				$atts['calendar_period_last'] = $atts['calendar_period'];
-				$atts['calendar_period'] = 'last';
-			}else if(preg_match("/^\d{4}\-\d{2}\-\d{2}$/", $atts['calendar_period'])){
-				$atts['calendar_period_date'] = $atts['calendar_period'];
-				$atts['calendar_period'] = 'date';
+		if(isset($atts[RS_CALENDAR.'_period'])){
+			if(is_numeric($atts[RS_CALENDAR.'_period']) && (int)$atts[RS_CALENDAR.'_period'] >= 0){
+				$atts[RS_CALENDAR.'_period_last'] = $atts[RS_CALENDAR.'_period'];
+				$atts[RS_CALENDAR.'_period'] = 'last';
+			}else if(preg_match("/^\d{4}\-\d{2}\-\d{2}$/", $atts[RS_CALENDAR.'_period'])){
+				$atts[RS_CALENDAR.'_period_date'] = $atts[RS_CALENDAR.'_period'];
+				$atts[RS_CALENDAR.'_period'] = 'date';
 			}
 		}
 		

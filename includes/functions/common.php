@@ -26,7 +26,7 @@ function rsc_current_user_can($cap){
 		return true;
 	}
 	
-	$caps = get_option('calendar_capability', rsc_get_default_capabilities());
+	$caps = get_option(RS_CALENDAR.'_capability', rsc_get_default_capabilities());
 	$capabilities = array(
 		'full' => array('full', 'manage', 'edit', 'read'),
 		'manage' => array('manage', 'edit', 'read'),

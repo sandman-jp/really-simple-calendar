@@ -18,6 +18,7 @@ class event extends setting{
 	private $_dates;
 	private $_lasts;
 	private $_repeats;
+	private $_excludes;
 	private $_text_colors;
 	private $_bg_colors;
 	
@@ -35,20 +36,23 @@ class event extends setting{
 		$this->_weeks = array_fill(0, 7, array());
 		
 		if(empty($this->_nums)){
-			$this->_nums = $this->get_option('calendar_event_number');
+			$this->_nums = $this->get_option(RS_CALENDAR.'_event_number');
 			if(!$this->_nums){
 				return;
 			}
 		}
 		
 		if(empty($this->_dates)){
-				$this->_dates = $this->get_option('calendar_event_date');
+				$this->_dates = $this->get_option(RS_CALENDAR.'_event_date');
 		}
 		if(empty($this->_lasts)){
-			$this->_lasts = $this->get_option('calendar_event_last');
+			$this->_lasts = $this->get_option(RS_CALENDAR.'_event_last');
 		}
 		if(empty($this->_repeats)){
-			$this->_repeats = $this->get_option('calendar_event_repeat');
+			$this->_repeats = $this->get_option(RS_CALENDAR.'_event_repeat');
+		}
+		if(empty($this->_excludes)){
+			$this->_excludes = $this->get_option(RS_CALENDAR.'_event_exclude');
 		}
 		
 		
@@ -119,12 +123,17 @@ class event extends setting{
 				continue;
 			};
 			
+			if(!empty($this->_excludes[$k]) && in_array(wp_date('Y-m-d', $time_id), $this->_excludes[$k])){
+				//繰り返しの除外終了日
+				continue;
+			};
+			
 			if(empty($this->_labels)){
-				$this->_labels = $this->get_option('calendar_event_label');
+				$this->_labels = $this->get_option(RS_CALENDAR.'_event_label');
 			}
 			$label = rsc_esc($this->_labels[$k]);
 			if(empty($this->_classes)){
-				$this->_classes = $this->get_option('calendar_event_class');
+				$this->_classes = $this->get_option(RS_CALENDAR.'_event_class');
 			}
 			
 			//クラスか色指定か
@@ -132,12 +141,12 @@ class event extends setting{
 			$class = '';
 			if(empty($this->_classes[$k])){
 				if(empty($_text_colors)){
-					$this->_text_colors = $this->get_option('calendar_event_text_color');
+					$this->_text_colors = $this->get_option(RS_CALENDAR.'_event_text_color');
 				}
 				$text_color = rsc_esc($this->_text_colors[$k]);
 				
 				if(empty($_bg_colors)){
-					$this->_bg_colors = $this->get_option('calendar_event_bg_color');
+					$this->_bg_colors = $this->get_option(RS_CALENDAR.'_event_bg_color');
 				}
 				$bg_color = rsc_esc($this->_bg_colors[$k]);
 				

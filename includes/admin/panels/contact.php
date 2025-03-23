@@ -15,6 +15,8 @@ class contact extends panel{
 	
 	public $lock_fields = array();
 	
+	public $use_preview = false;
+	
 	function get_label(){
 		return __('Contact', RSC_TEXTDOMAIN);
 	}

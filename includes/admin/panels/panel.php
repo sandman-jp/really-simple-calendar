@@ -18,6 +18,9 @@ abstract class panel{
 	public $settings = array();
 	public $locked = array();
 	
+	public $is_update = true;
+	public $use_preview = true;
+	
 	function get_name(){
 		return $this->name;
 	}

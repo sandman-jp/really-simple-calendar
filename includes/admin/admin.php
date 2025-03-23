@@ -11,12 +11,12 @@ if(!class_exists('RSC\Admin\admin')):
 define('RSC_GENERAL_SETTINGS_PAGE', 'rsc-general-settings');
 define('RSC_ADMIN_DIR_INCLUDES', RSC_DIR_INCLUDES.'/admin');
 
-require_once RSC_ADMIN_DIR_INCLUDES.'/setting-panels/panel.php';
-require_once RSC_ADMIN_DIR_INCLUDES.'/setting-panels/view.php';
-require_once RSC_ADMIN_DIR_INCLUDES.'/setting-panels/event.php';
-require_once RSC_ADMIN_DIR_INCLUDES.'/setting-panels/style.php';
-require_once RSC_ADMIN_DIR_INCLUDES.'/setting-panels/capability.php';
-require_once RSC_ADMIN_DIR_INCLUDES.'/setting-panels/contact.php';
+require_once RSC_ADMIN_DIR_INCLUDES.'/panels/panel.php';
+require_once RSC_ADMIN_DIR_INCLUDES.'/panels/view.php';
+require_once RSC_ADMIN_DIR_INCLUDES.'/panels/event.php';
+require_once RSC_ADMIN_DIR_INCLUDES.'/panels/style.php';
+require_once RSC_ADMIN_DIR_INCLUDES.'/panels/config.php';
+require_once RSC_ADMIN_DIR_INCLUDES.'/panels/contact.php';
 require_once RSC_ADMIN_DIR_INCLUDES.'/ajax.php';
 
 class admin{
@@ -25,7 +25,7 @@ class admin{
 	private $_ajax;
 	private $_post;
 	private $_panels = array();
-	private $_panel_classes = array('view', 'event', 'style', 'contact');
+	private $_panel_classes = array('view', 'event', 'style');
 	
 	function __construct(){
 		
@@ -52,19 +52,23 @@ class admin{
 			$this->_panel_classes = apply_filters('rsc_get_admin_manage_panel', $this->_panel_classes);
 			
 			if(in_array('administrator', $current_user->roles)){
-				$this->_panel_classes[] = 'capability';
-			}else if(isset($_GET['rsc']) && $_GET['rsc'] == 'capability'){
+				$this->_panel_classes[] = 'config';
+			}else if(isset($_GET['rsc']) && $_GET['rsc'] == 'config'){
 				wp_die( __( 'Sorry, you are not allowed to access this page.' ), 403 );
 			}
+			$this->_panel_classes[] = 'contact';
 		}
 		
 	}
 	
 	function add_setting_panel($class){
 		
-		$class = 'RSC\Admin\\Panel\\'.$class;
-		
-		$this->_panels[] = new $class;
+		$class = 'RSC\Admin\Panel\\'.$class;
+		if(class_exists($class)){
+			$this->_panels[] = new $class;
+		}else{
+			unset($this->_panel_classes[$class]);
+		}
 	}
 	
 	function admin_head(){
@@ -134,10 +138,18 @@ class admin{
 	<?php
 	$options = array();
 	$panel = null;
+	$panel_name = 'view';
+	
+	if(isset($_GET['rsc']) && !in_array($_GET['rsc'], $this->_panel_classes)){
+		echo '<section><div class="error"><p>Can\'t to find your requested panel.</p></div></section>';
+		exit;
+	}else if(isset($_GET['rsc'])){
+		$panel_name = $_GET['rsc'];
+	}
 	
 	//get panels
 	if(empty($this->_panels)){
-		echo '<section>Can\'t to find any panels.</section>';
+		echo '<section><div class="error"><p>Can\'t to find any panels.</p></div></section>';
 		exit;
 	}
 	?>
@@ -148,20 +160,27 @@ class admin{
 	};
 	?>
 	
+	<?php
+	if($panel->use_preview):
+	?>
+	
 	<!-- shortcode -->
 	<?php if(rsc_current_user_can('edit')){
-		include_once RSC_ADMIN_DIR_INCLUDES.'/setting-panels/part-shortcode.php';
+		include_once RSC_ADMIN_DIR_INCLUDES.'/panels/part-shortcode.php';
 	} ?>
 	
 	<!-- preview -->
 	<h2><?php _e('Preview', RSC_TEXTDOMAIN); ?></h2>
 	<div class="rsc-preview">
-	<div id="rsc-calendar-message"></div>
-	<section id="rsc-calendar-wrap">
-		<?php rsc_get_calendar(); ?>
-	</section>
+		<div id="rsc-calendar-message"></div>
+		<section id="rsc-calendar-wrap">
+			<style>
+				<?php include RSC_ADMIN_DIR_INCLUDES.'/panels/style-default.txt';?>
+			</style>
+			<?php rsc_get_calendar(); ?>
+		</section>
 	</div>
-
+	<?php endif; ?>
 	
 	</div>
 	</div>

@@ -48,281 +48,281 @@ msgstr ""
 msgid "Loading a calendar failed."
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:50
-#: includes/admin/setting-panels/part-shortcode.php:21 includes/widget.php:90
+#: includes/admin/panels/view.php:50
+#: includes/admin/panels/part-shortcode.php:21 includes/widget.php:90
 msgid "Calendar Type"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:55
+#: includes/admin/panels/view.php:55
 msgid "Monthly Calendar"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:56
+#: includes/admin/panels/view.php:56
 msgid "Weekly Calendar"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:57
+#: includes/admin/panels/view.php:57
 msgid "Daily Calendar"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:69 includes/widget.php:114
+#: includes/admin/panels/view.php:69 includes/widget.php:114
 msgid "Start From"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:77
-#: includes/admin/setting-panels/part-shortcode.php:37 includes/widget.php:120
+#: includes/admin/panels/view.php:77
+#: includes/admin/panels/part-shortcode.php:37 includes/widget.php:120
 msgid "Previous"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:87
-#: includes/admin/setting-panels/view.php:151 includes/widget.php:108
+#: includes/admin/panels/view.php:87
+#: includes/admin/panels/view.php:151 includes/widget.php:108
 #: includes/widget.php:131 includes/widget.php:157
 msgctxt "unit"
 msgid "Month(s)"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:87
-#: includes/admin/setting-panels/view.php:151 includes/widget.php:108
+#: includes/admin/panels/view.php:87
+#: includes/admin/panels/view.php:151 includes/widget.php:108
 #: includes/widget.php:131 includes/widget.php:157
 msgctxt "unit"
 msgid "Week(s)"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:87
-#: includes/admin/setting-panels/view.php:151 includes/widget.php:108
+#: includes/admin/panels/view.php:87
+#: includes/admin/panels/view.php:151 includes/widget.php:108
 #: includes/widget.php:131 includes/widget.php:157
 msgctxt "unit"
 msgid "Day(s)"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:93
-#: includes/admin/setting-panels/part-shortcode.php:38 includes/widget.php:121
+#: includes/admin/panels/view.php:93
+#: includes/admin/panels/part-shortcode.php:38 includes/widget.php:121
 msgid "Current"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:94
-#: includes/admin/setting-panels/view.php:100
+#: includes/admin/panels/view.php:94
+#: includes/admin/panels/view.php:100
 msgid "Month"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:94
-#: includes/admin/setting-panels/view.php:100
+#: includes/admin/panels/view.php:94
+#: includes/admin/panels/view.php:100
 msgid "Week"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:94
-#: includes/admin/setting-panels/view.php:100
+#: includes/admin/panels/view.php:94
+#: includes/admin/panels/view.php:100
 msgid "Day"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:99
-#: includes/admin/setting-panels/part-shortcode.php:39 includes/widget.php:122
+#: includes/admin/panels/view.php:99
+#: includes/admin/panels/part-shortcode.php:39 includes/widget.php:122
 msgid "Next"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:105
-#: includes/admin/setting-panels/view.php:185
-#: includes/admin/setting-panels/part-shortcode.php:40
-#: includes/admin/setting-panels/part-shortcode.php:70 includes/widget.php:123
+#: includes/admin/panels/view.php:105
+#: includes/admin/panels/view.php:185
+#: includes/admin/panels/part-shortcode.php:40
+#: includes/admin/panels/part-shortcode.php:70 includes/widget.php:123
 #: includes/widget.php:174
 msgid "Today"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:110
-#: includes/admin/setting-panels/view.php:156
-#: includes/admin/setting-panels/part-event.php:28
-#: includes/admin/setting-panels/part-shortcode.php:41
-#: includes/admin/setting-panels/part-shortcode.php:47 includes/widget.php:124
+#: includes/admin/panels/view.php:110
+#: includes/admin/panels/view.php:156
+#: includes/admin/panels/part-event.php:28
+#: includes/admin/panels/part-shortcode.php:41
+#: includes/admin/panels/part-shortcode.php:47 includes/widget.php:124
 #: includes/widget.php:150
 msgid "Date"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:134
-#: includes/admin/setting-panels/part-shortcode.php:23 includes/widget.php:143
+#: includes/admin/panels/view.php:134
+#: includes/admin/panels/part-shortcode.php:23 includes/widget.php:143
 msgid "Display Period"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:141
-#: includes/admin/setting-panels/event.php:97
+#: includes/admin/panels/view.php:141
+#: includes/admin/panels/event.php:97
 msgid "Period"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:180
-#: includes/admin/setting-panels/part-shortcode.php:24
+#: includes/admin/panels/view.php:180
+#: includes/admin/panels/part-shortcode.php:24
 msgid "Start day of week"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:186
-#: includes/admin/setting-panels/part-shortcode.php:71 includes/widget.php:175
+#: includes/admin/panels/view.php:186
+#: includes/admin/panels/part-shortcode.php:71 includes/widget.php:175
 msgid "Sunday"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:187
-#: includes/admin/setting-panels/part-shortcode.php:72 includes/widget.php:176
+#: includes/admin/panels/view.php:187
+#: includes/admin/panels/part-shortcode.php:72 includes/widget.php:176
 msgid "Monday"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:188
-#: includes/admin/setting-panels/part-shortcode.php:73 includes/widget.php:177
+#: includes/admin/panels/view.php:188
+#: includes/admin/panels/part-shortcode.php:73 includes/widget.php:177
 msgid "Tuesday"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:189
-#: includes/admin/setting-panels/part-shortcode.php:74 includes/widget.php:178
+#: includes/admin/panels/view.php:189
+#: includes/admin/panels/part-shortcode.php:74 includes/widget.php:178
 msgid "Wednesday"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:190
-#: includes/admin/setting-panels/part-shortcode.php:75 includes/widget.php:179
+#: includes/admin/panels/view.php:190
+#: includes/admin/panels/part-shortcode.php:75 includes/widget.php:179
 msgid "Thursday"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:191
-#: includes/admin/setting-panels/part-shortcode.php:76 includes/widget.php:180
+#: includes/admin/panels/view.php:191
+#: includes/admin/panels/part-shortcode.php:76 includes/widget.php:180
 msgid "Friday"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:192
-#: includes/admin/setting-panels/part-shortcode.php:77 includes/widget.php:181
+#: includes/admin/panels/view.php:192
+#: includes/admin/panels/part-shortcode.php:77 includes/widget.php:181
 msgid "Saturday"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:200
+#: includes/admin/panels/view.php:200
 msgid "Align for Cells"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:212
-#: includes/admin/setting-panels/part-shortcode.php:53 includes/widget.php:105
+#: includes/admin/panels/view.php:212
+#: includes/admin/panels/part-shortcode.php:53 includes/widget.php:105
 msgid "Horizontal"
 msgstr ""
 
-#: includes/admin/setting-panels/view.php:217
-#: includes/admin/setting-panels/part-shortcode.php:54 includes/widget.php:106
+#: includes/admin/panels/view.php:217
+#: includes/admin/panels/part-shortcode.php:54 includes/widget.php:106
 msgid "Vertical"
 msgstr ""
 
-#: includes/admin/setting-panels/capability.php:63
+#: includes/admin/panels/capability.php:63
 msgid "Full"
 msgstr ""
 
-#: includes/admin/setting-panels/capability.php:64
+#: includes/admin/panels/capability.php:64
 msgid "Manage"
 msgstr ""
 
-#: includes/admin/setting-panels/capability.php:65
+#: includes/admin/panels/capability.php:65
 msgid "Edit"
 msgstr ""
 
-#: includes/admin/setting-panels/capability.php:66
+#: includes/admin/panels/capability.php:66
 msgid "Read"
 msgstr ""
 
-#: includes/admin/setting-panels/event.php:101
+#: includes/admin/panels/event.php:101
 msgid "Order"
 msgstr ""
 
-#: includes/admin/setting-panels/event.php:103
+#: includes/admin/panels/event.php:103
 msgid "Saving"
 msgstr ""
 
-#: includes/admin/setting-panels/event.php:104
+#: includes/admin/panels/event.php:104
 msgid "Ascending"
 msgstr ""
 
-#: includes/admin/setting-panels/event.php:105
+#: includes/admin/panels/event.php:105
 msgid "Descending"
 msgstr ""
 
-#: includes/admin/setting-panels/event.php:107
+#: includes/admin/panels/event.php:107
 msgid "Filter"
 msgstr ""
 
-#: includes/admin/setting-panels/event.php:150
+#: includes/admin/panels/event.php:150
 msgid "Add Event"
 msgstr ""
 
-#: includes/admin/setting-panels/part-event.php:15
+#: includes/admin/panels/part-event.php:15
 msgid "Label"
 msgstr ""
 
-#: includes/admin/setting-panels/part-event.php:15
+#: includes/admin/panels/part-event.php:15
 msgid "This is the name which will appear on pages."
 msgstr ""
 
-#: includes/admin/setting-panels/part-event.php:19
+#: includes/admin/panels/part-event.php:19
 msgid "Class"
 msgstr ""
 
-#: includes/admin/setting-panels/part-event.php:19
+#: includes/admin/panels/part-event.php:19
 msgid ""
 "If this field is empty, the calendar will use text color\t and bg color."
 msgstr ""
 
-#: includes/admin/setting-panels/part-event.php:35
+#: includes/admin/panels/part-event.php:35
 msgid "Repeat"
 msgstr ""
 
-#: includes/admin/setting-panels/part-event.php:46
+#: includes/admin/panels/part-event.php:46
 msgid "Text"
 msgstr ""
 
-#: includes/admin/setting-panels/part-event.php:51
+#: includes/admin/panels/part-event.php:51
 msgid "BG"
 msgstr ""
 
-#: includes/admin/setting-panels/part-footer.php:3
+#: includes/admin/panels/part-footer.php:3
 msgid "Reload preview"
 msgstr ""
 
-#: includes/admin/setting-panels/part-shortcode.php:18
+#: includes/admin/panels/part-shortcode.php:18
 msgid "Attribute"
 msgstr ""
 
-#: includes/admin/setting-panels/part-shortcode.php:20
+#: includes/admin/panels/part-shortcode.php:20
 msgid "Select Attribute"
 msgstr ""
 
-#: includes/admin/setting-panels/part-shortcode.php:22
+#: includes/admin/panels/part-shortcode.php:22
 msgid "Start from"
 msgstr ""
 
-#: includes/admin/setting-panels/part-shortcode.php:29
+#: includes/admin/panels/part-shortcode.php:29
 msgid "Select Calendar Type"
 msgstr ""
 
-#: includes/admin/setting-panels/part-shortcode.php:30 includes/widget.php:96
+#: includes/admin/panels/part-shortcode.php:30 includes/widget.php:96
 msgid "Monthly"
 msgstr ""
 
-#: includes/admin/setting-panels/part-shortcode.php:31 includes/widget.php:97
+#: includes/admin/panels/part-shortcode.php:31 includes/widget.php:97
 msgid "Weekly"
 msgstr ""
 
-#: includes/admin/setting-panels/part-shortcode.php:32 includes/widget.php:98
+#: includes/admin/panels/part-shortcode.php:32 includes/widget.php:98
 msgid "Daily"
 msgstr ""
 
-#: includes/admin/setting-panels/part-shortcode.php:36
+#: includes/admin/panels/part-shortcode.php:36
 msgid "Select Start From"
 msgstr ""
 
-#: includes/admin/setting-panels/part-shortcode.php:45
+#: includes/admin/panels/part-shortcode.php:45
 msgid "Select Display Period"
 msgstr ""
 
-#: includes/admin/setting-panels/part-shortcode.php:46 includes/widget.php:149
+#: includes/admin/panels/part-shortcode.php:46 includes/widget.php:149
 msgid "Priod"
 msgstr ""
 
-#: includes/admin/setting-panels/part-shortcode.php:52
+#: includes/admin/panels/part-shortcode.php:52
 msgid "Select Calendar Align"
 msgstr ""
 
-#: includes/admin/setting-panels/part-shortcode.php:80
+#: includes/admin/panels/part-shortcode.php:80
 msgid "Add an attribute."
 msgstr ""
 
-#: includes/admin/setting-panels/style.php:41
+#: includes/admin/panels/style.php:41
 msgid "Class Style"
 msgstr ""
 

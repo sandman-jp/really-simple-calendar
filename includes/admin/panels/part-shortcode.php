@@ -18,10 +18,10 @@ foreach($lock_fields as $key){
 			<label><?php _e('Attribute', RSC_TEXTDOMAIN); ?>
 				<select id="rsc-shortcode-attr">
 					<option value=""><?php _e('Select', RSC_TEXTDOMAIN); ?></option>
-					<option value="type" data-locked="<?php echo $locked['calendar_type_lock'] ?>" <?php disabled($locked['calendar_type_lock']); ?>><?php _e('Calendar Type', RSC_TEXTDOMAIN); ?></option>
-					<option value="from" data-locked="<?php echo $locked['calendar_from_lock'] ?>" <?php disabled($locked['calendar_from_lock']); ?>><?php _e('Start From', RSC_TEXTDOMAIN); ?></option>
-					<option value="period" data-locked="<?php echo $locked['calendar_period_lock'] ?>" <?php disabled($locked['calendar_period_lock']); ?>><?php _e('Display Period', RSC_TEXTDOMAIN); ?></option>
-					<option value="start_of_week" data-locked="<?php echo $locked['calendar_start_of_week_lock'] ?>" <?php disabled($locked['calendar_start_of_week_lock']); ?>><?php _e('Start day of week', RSC_TEXTDOMAIN); ?></option>
+					<option value="type" data-locked="<?php echo $locked[RS_CALENDAR.'_type_lock'] ?>" <?php disabled($locked[RS_CALENDAR.'_type_lock']); ?>><?php _e('Calendar Type', RSC_TEXTDOMAIN); ?></option>
+					<option value="from" data-locked="<?php echo $locked[RS_CALENDAR.'_from_lock'] ?>" <?php disabled($locked[RS_CALENDAR.'_from_lock']); ?>><?php _e('Start From', RSC_TEXTDOMAIN); ?></option>
+					<option value="period" data-locked="<?php echo $locked[RS_CALENDAR.'_period_lock'] ?>" <?php disabled($locked[RS_CALENDAR.'_period_lock']); ?>><?php _e('Display Period', RSC_TEXTDOMAIN); ?></option>
+					<option value="start_of_week" data-locked="<?php echo $locked[RS_CALENDAR.'_start_of_week_lock'] ?>" <?php disabled($locked[RS_CALENDAR.'_start_of_week_lock']); ?>><?php _e('Start day of week', RSC_TEXTDOMAIN); ?></option>
 				</select>
 			</label>
 			
