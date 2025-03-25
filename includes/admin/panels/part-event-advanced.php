@@ -4,16 +4,17 @@
 		<label><?php _e('Class', RSC_TEXTDOMAIN); ?><span class="dashicons dashicons-editor-help" title="<?php _e('If this field is empty, the calendar will use text color	 and bg color.'); ?>"></span> : </label>
 		<input type="text" name="<?php echo RS_CALENDAR; ?>_event_class[<?php echo $n; ?>]" value="<?php echo rsc_esc($classes[$n]); ?>" class="short-text rsc-event-class" <?php wp_readonly($is_event_locked[$n]); ?>>
 	</div>
+	
 	<?php $text_colors[$n] = empty($text_colors[$n]) ? '#ffffff' : $text_colors[$n]; ?>
 	<div class="rsc-event-text-color rsc-event-inputs">
 		<label><?php _e('Text', RSC_TEXTDOMAIN); ?> : </label>
-		<input type="color" name="<?php echo RS_CALENDAR; ?>_event_text_color[<?php echo $n; ?>]" value="<?php echo rsc_esc($text_colors[$n]); ?>" <?php wp_readonly($is_event_locked[$n]); ?>>
+		<input type="color" name="<?php echo RS_CALENDAR; ?>_event_text_color[<?php echo $n; ?>]" value="<?php echo rsc_esc($text_colors[$n]); ?>" <?php wp_readonly($is_event_locked[$n]); ?> <?php disabled(!empty($classes[$n])); ?>>
 	</div>
 	
 	<?php $bg_colors[$n] = empty($bg_colors[$n]) ? '#999999' : $bg_colors[$n]; ?>
 	<div class="rsc-event-bg-color rsc-event-inputs">
 		<label><?php _e('BG', RSC_TEXTDOMAIN); ?> : </label>
-		<input type="color" name="<?php echo RS_CALENDAR; ?>_event_bg_color[<?php echo $n; ?>]" value="<?php echo rsc_esc($bg_colors[$n]); ?>" <?php wp_readonly($is_event_locked[$n]); ?>>
+		<input type="color" name="<?php echo RS_CALENDAR; ?>_event_bg_color[<?php echo $n; ?>]" value="<?php echo rsc_esc($bg_colors[$n]); ?>" <?php wp_readonly($is_event_locked[$n]); ?> <?php disabled(!empty($classes[$n])); ?>>
 	</div>
 </div>
 

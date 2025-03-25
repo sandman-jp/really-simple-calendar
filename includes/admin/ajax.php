@@ -23,10 +23,12 @@ class ajax{
 		
 		$post_data = wp_unslash($_POST['rsc_data']);
 		
+		RSC()->set_style(1);
 		
 		ob_start();
 		echo do_shortcode($post_data);
 		$cal = ob_get_clean();
+		
 		
 		if($cal){
 			wp_send_json_success($cal);
@@ -53,6 +55,7 @@ class ajax{
 			if(isset($params['rsc_save_settings_nonce']) && isset($params['rsc_setting'])
 					&& wp_verify_nonce( $params['rsc_save_settings_nonce'], 'rsc_'.$params['rsc_setting'])){
 				
+				$params['has_style'] = 1;
 				$cal = RSC()->get_calendar($params);
 				
 				if($cal){

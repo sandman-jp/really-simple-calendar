@@ -17,6 +17,7 @@ require_once RSC_DIR_INCLUDES.'/calendar/style.php';
 class calendar {
 	
 	private $_params;
+	public $has_style = false;
 	
 	function __construct(){
 		add_filter('rsc_get_month_th_value', array($this, 'get_month_th_value'), 10, 2);
@@ -49,6 +50,8 @@ class calendar {
 	}
 	
 	function set_style($args){
+		$args['has_style'] = $this->has_style;
+		
 		$event = new style();
 		$event->set_style($args);
 	}
