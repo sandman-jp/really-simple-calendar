@@ -175,7 +175,7 @@ class admin{
 		<div id="rsc-calendar-message"></div>
 		<section id="rsc-calendar-wrap">
 			<style>
-				<?php include RSC_ADMIN_DIR_INCLUDES.'/panels/style-default.txt';?>
+				<?php echo rsc_get_style();?>
 			</style>
 			<?php rsc_get_calendar(); ?>
 		</section>

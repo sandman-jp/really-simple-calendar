@@ -22,8 +22,9 @@ class style extends setting {
 				$this->options[$k] = $v;
 			}
 		}
-		
-		// add_filter('rsc_after_render_calendar_tables', array($this, 'add_style'));
+		if(isset($args['has_style'])){
+			add_filter('rsc_after_render_calendar_tables', array($this, 'add_style'));
+		}
 	}
 	
 	function add_style($html){
@@ -32,7 +33,7 @@ class style extends setting {
 		
 		ob_start();
 	?>
-	<style><?php echo rsc_esc($style); ?></style>
+	<style><?php echo rsc_get_style($style); ?></style>
 	<?php
 		$html = ob_get_clean().$html;
 		
