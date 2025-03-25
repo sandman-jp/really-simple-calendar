@@ -33,7 +33,8 @@
 		<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_repeat[<?php echo $n; ?>][]" value="">
 		
 		<?php for($h=0; $h<7; $h++): ?>
-		<label class="rsc-event-repeat-label"><input type="checkbox" name="<?php echo RS_CALENDAR; ?>_event_repeat[<?php echo $n; ?>][]" value="<?php echo $h ?>" <?php checked(in_array($h, $repeats[$n])); ?> <?php wp_readonly($is_event_locked[$n]); ?>><?php _e($wp_locale->get_weekday_abbrev($wp_locale->get_weekday($h))); ?></label>
+		<label class="rsc-event-repeat-label"><input type="checkbox" name="<?php echo RS_CALENDAR; ?>_event_repeat[<?php echo $n; ?>][]" value="<?php echo $h ?>" <?php checked(in_array((string)$h, $repeats[$n], true)); ?> <?php wp_readonly($is_event_locked[$n]); ?>><?php _e($wp_locale->get_weekday_abbrev($wp_locale->get_weekday($h))); ?></label>
+
 		<?php endfor; ?>
 	</div>
 	
