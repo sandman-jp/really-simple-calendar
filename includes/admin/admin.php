@@ -24,8 +24,9 @@ class admin{
 	private $_capability = 'read';
 	private $_ajax;
 	private $_post;
-	private $_panels = array();
 	private $_panel_classes = array('view', 'event', 'style');
+	
+	public $panels = array();
 	
 	function __construct(){
 		
@@ -65,7 +66,7 @@ class admin{
 		
 		$class = 'RSC\Admin\Panel\\'.$class;
 		if(class_exists($class)){
-			$this->_panels[] = new $class;
+			$this->panels[] = new $class;
 		}else{
 			unset($this->_panel_classes[$class]);
 		}
@@ -148,7 +149,7 @@ class admin{
 	}
 	
 	//get panels
-	if(empty($this->_panels)){
+	if(empty($this->panels)){
 		echo '<section><div class="error"><p>Can\'t to find any panels.</p></div></section>';
 		exit;
 	}
@@ -156,7 +157,8 @@ class admin{
 	
 	<?php 
 	if(rsc_current_user_can('manage')){
-		include_once RSC_ADMIN_DIR_INCLUDES.'/general-settings.php';
+		
+		include_once RSC_ADMIN_DIR_INCLUDES.'/settings.php';
 	};
 	?>
 	
