@@ -67,14 +67,14 @@ class event extends panel{
 				}
 			}
 			//save array
-			update_option($key, $this->settings[$key]);
-			update_option(RS_CALENDAR.'_event_lock', $this->settings[RS_CALENDAR.'_event_lock']);
+			$this->updated[$key] = rsc_update_option($key, $this->settings[$key]);
+			$this->updated[RS_CALENDAR.'_event_lock'] = rsc_update_option(RS_CALENDAR.'_event_lock', $this->settings[RS_CALENDAR.'_event_lock']);
 			
 		}else{
 			//for single value.
 			if(!isset($this->locked[$key.'_lock']) || (isset($this->locked[$key.'_lock']) && !$this->locked[$key.'_lock'])){
 				$this->settings[$key] = $post_data;
-				update_option($key, $post_data);
+				$this->updated[$key] = rsc_update_option($key, $post_data);
 			}
 			
 		}

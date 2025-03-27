@@ -19,6 +19,7 @@ abstract class panel{
 	public $locked = array();
 	
 	public $is_update = true;
+	public $updated = array();
 	public $use_preview = true;
 	
 	function get_name(){
@@ -40,7 +41,7 @@ abstract class panel{
 	
 	function update($key, $post_data){
 		$this->settings[$key] = $post_data;
-		update_option($key, $post_data);
+		return rsc_update_option($key, $post_data);
 		
 	}
 	
@@ -72,11 +73,11 @@ abstract class panel{
 			if(empty($this->locked)){
 				//administrator or full
 				$this->settings[$key] = $post_data;
-				update_option($key, $post_data);
+				$this->updated[$key] = rsc_update_option($key, $post_data);
 				
 			}else if(!isset($this->locked[$key.'_lock']) || (isset($this->locked[$key.'_lock']) && !$this->locked[$key.'_lock'])){
 				
-				$this->update($key, $post_data);
+				$this->updated[$key] = $this->update($key, $post_data);
 				
 			}
 			

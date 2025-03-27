@@ -24,7 +24,7 @@ class config extends panel{
 	public $use_preview = false;
 	
 	function __construct(){
-		
+	
 		$this->_default_capability = rsc_get_default_capabilities();
 	}
 	
@@ -51,6 +51,9 @@ class config extends panel{
 				<input type="checkbox" name="<?php echo RS_CALENDAR; ?>_event_fields" value="advanced" <?php checked(get_option(RS_CALENDAR.'_event_fields'), 'advanced'); ?>>
 			</td>
 		</tr>
+		<?php
+		$extentions = get_option(RS_CALENDAR.'_extentions');
+		?>
 	</table>
 	
 	<h2><?php _e('Manage Capability', RSC_TEXTDOMAIN); ?></h2>

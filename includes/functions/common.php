@@ -10,6 +10,17 @@ function RSC(){
 	return $RSC;
 }
 
+function RSC_ADMIN(){
+	global $RSC;
+	if(is_admin()){
+		if(!$RSC){
+			$RSC = new CustomFieldsCalendar();
+		}
+		return $RSC->get_admin();
+	}
+	return null;
+}
+
 function rsc_get_default_capabilities(){
 	return array(
 		'editor' => 'manage',
@@ -80,4 +91,14 @@ function rsc_esc($str){
 	$txt = htmlspecialchars($txt, ENT_QUOTES);
 	
 	return $txt;
+}
+
+function rsc_update_option($key, $data){
+	$post_id = get_the_ID();
+	if($post_id){
+		return update_post_meta($post_id, $key, $data);
+	}else{
+		return update_option($key, $data);
+	}
+	
 }

@@ -3,7 +3,7 @@
 Plugin Name: Really Simple Calendar
 Plugin URI: 
 Description: Very Simple Single Calendar.
-Version: 0.2.12
+Version: 0.2.14
 Author: sandman.jp
 Author URI: 
 Text Domain: really-simple-calendar
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if (!class_exists('CustomFieldsCalendar')){
 
-define('RSC_VIRSION', '0.2.12');
+define('RSC_VIRSION', '0.2.14');
 
 //basename
 define('RS_CALENDAR', 'rs_calendar');
@@ -65,6 +65,7 @@ class CustomFieldsCalendar {
 		$plugins = get_option(RS_CALENDAR.'_plugins');
 		
 		$plugins = array();
+		
 		$dirs = array();
 		if(file_exists(RSC_DIR.'/extentions/')){
 			$dirs = scandir(RSC_DIR.'/extentions/');
@@ -84,6 +85,10 @@ class CustomFieldsCalendar {
 		add_filter('pre_option', array($this, 'get_option'), 10, 3);
 	}
 	
+	function get_admin(){
+		return $this->_admin;
+	}
+	
 	function get_option($pre, $option, $default_value){
 		if($pre){
 			return $pre;
@@ -92,7 +97,7 @@ class CustomFieldsCalendar {
 			$old = get_option($search);
 			if($old){
 				delete_option($search);
-				update_option($option, $old);
+				rsc_update_option($option, $old);
 				return $old;
 			}
 		}
