@@ -17,9 +17,11 @@ class setting {
 	
 	function get_option($key){
 		$opt = isset($this->options[$key]) ? $this->options[$key] : get_option($key);
-		$opt = apply_filters('rsv_get_option_'.$key, $opt);
+		$opt = apply_filters('rsc_get_option', $opt, $key);
+		$opt = apply_filters('rsc_get_option_'.$key, $opt);
 		return $opt;
 	}
+	
 }
 
 endif;

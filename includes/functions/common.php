@@ -54,51 +54,49 @@ function rsc_current_user_can($cap){
 	return false;
 }
 
-function rsc_get_lock($is_locked=false){
-	if($is_locked):
-	?>
-	<span class="rsc-is-locked dashicons dashicons-lock" title="<?php _e('Locked'); ?>"></span>
-	<?php
-	endif;
-}
-
-function rsc_param_lock($name, $is_locked=false){
-	if(rsc_current_user_can('full')):
-	?>
-	<div class="rsc-setting-lock">
-		<label class="rsc-check-locking">
-			<span class="rsc-lock-inputs">
-				<input type="hidden" name="<?php echo $name ?>" value="0">
-				<input type="checkbox" name="<?php echo $name; ?>" value="1" <?php checked($is_locked); ?>><?php _e('Lock this.', RSC_TEXTDOMAIN); ?>
-			</span>
-			<span class="rsc-is-locked dashicons dashicons-lock" title="<?php _e('Locked'); ?>"></span>
-			<span class="rsc-is-unlocked dashicons dashicons-unlock" title="<?php _e('Unlocked'); ?>"></span>
-		</label>
-	</div>
-	<?php elseif(rsc_current_user_can('manage') && $is_locked): ?>
-	<div class="rsc-setting-lock">
-		<label class="rsc-check-locking">
-		<span class="rsc-is-locked dashicons dashicons-lock" title="<?php _e('Locked'); ?>"></span>
-		</label>
-	</div>
-	<?php 
-	endif;
-}
-
-function rsc_esc($str){
-	$txt = wp_unslash($str);
-	$txt = strip_tags($txt);
-	$txt = htmlspecialchars($txt, ENT_QUOTES);
-	
-	return $txt;
-}
-
 function rsc_update_option($key, $data){
 	$post_id = get_the_ID();
+	
 	if($post_id){
 		return update_post_meta($post_id, $key, $data);
 	}else{
 		return update_option($key, $data);
 	}
 	
+}
+
+function rsc_merge_params($params, $lock_fields=array()){
+	$metas = array();
+	$post_id = get_the_ID();
+	
+	if($post_id){
+		
+		foreach($params as $k=>$v){
+			$meta = get_post_meta($post_id, $k, true);
+			
+			if($meta != ''){
+				if(is_array($v)){
+					$params[$k] = $v + $meta;
+				}else{
+					//check bulk lock
+					$locked = false;
+					// $lock_fields = $lock_fields;
+					$base = preg_replace('/^('.RS_CALENDAR.'_[a-z]+)?_*.*/', '$1', $k);
+					
+					foreach($lock_fields as $field){
+						if(strpos($field, $base) === 0){
+							$locked = get_option($field);
+						}
+					}
+					if(!$locked && $v != $meta){
+						$params[$k] = $meta;
+					}else{
+						// var_dump($k.' = '.$params[$k].';');
+					}
+				}
+			}
+		}
+	}
+	
+	return $params;
 }

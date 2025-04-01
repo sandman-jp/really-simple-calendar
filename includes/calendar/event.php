@@ -28,9 +28,9 @@ class event extends setting{
 	function set_events($args){
 		global $wp_locale;
 		
-			foreach($args as $k=>$v){
-				$this->options[$k] = $v;
-			}
+		foreach($args as $k=>$v){
+			$this->options[$k] = $v;
+		}
 		
 		
 		$this->_weeks = array_fill(0, 7, array());

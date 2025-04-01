@@ -40,7 +40,6 @@ class config extends panel{
 		
 		$roles = get_editable_roles();
 	?>
-	<?php include RSC_ADMIN_DIR_INCLUDES.'/panels/part-header.php'; ?>
 	
 	<h2><?php _e('Extentions Setting', RSC_TEXTDOMAIN); ?></h2>
 	<table class="form-table rsc-table">
@@ -61,9 +60,14 @@ class config extends panel{
 
 			<?php 
 			$capabolity = apply_filters('rsc_get_user_capability', $capabolity);
+			
 			foreach($roles as $k=>$v){
 				if('administrator' != $k){
-					$cap = $capabolity[$k];
+					if(isset($capabolity[$k])){
+						$cap = $capabolity[$k];
+					}else{
+						$cap = 'edit';
+					}
 			?>
 				<tr>
 					<th><?php echo translate_user_role($v['name']); ?></th>
@@ -82,9 +86,7 @@ class config extends panel{
 			?>
 			
 	</table>
-	
-	<?php submit_button(); ?>	
-</form>
+
 	<?php
 	}
 }

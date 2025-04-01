@@ -70,7 +70,7 @@ jQuery(function($){
 				reloadCalendar(e);
 			}
 		});
-		
+		/*
 		$('input, select', $form).change(function(){
 			$(this).trigger('update');
 		});
@@ -78,7 +78,7 @@ jQuery(function($){
 		$('input', $form).blur(function(){
 			$(this).trigger('update');
 		});
-		
+		*/
 		$('.rsc-reload-button').click(reloadCalendar);
 	}
 	

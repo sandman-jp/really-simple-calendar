@@ -24,12 +24,9 @@ class style extends panel{
 	}
 	
 	function echo($settings){
+		$lock_mode = 0;
 		$class = $this->name;
 	?>
-	
-	
-	
-	<?php include RSC_ADMIN_DIR_INCLUDES.'/panels/part-header.php'; ?>
 	
 	<?php do_action('rsc_before_view_settings'); ?>
 	<table class="form-table rsc-table">
@@ -37,14 +34,12 @@ class style extends panel{
 		<?php $is_locked_style = isset($settings[RS_CALENDAR.'_style_lock']) ? $settings[RS_CALENDAR.'_style_lock'] : 0; ?>
 		<tr>
 			<th scope="row">
-				<div class="rsc-setting-lock">
-					<?php rsc_param_lock(RS_CALENDAR.'_style_lock', $is_locked_style); ?>
-				</div>
+				<?php rsc_param_lock(RS_CALENDAR.'_style_lock', $is_locked_style); ?>
 				
 				<label for="rsc-calendar-style"><?php _e('Class Style', RSC_TEXTDOMAIN); ?></label>
 			</th>
 			<td>
-				<textarea name="<?php echo RS_CALENDAR; ?>_style" class="large-text code" rows="10" <?php wp_readonly($is_locked_style); ?>>
+				<textarea name="<?php echo RS_CALENDAR; ?>_style" class="large-text code" rows="10" <?php rsc_disabled($is_locked_style, true, $lock_mode); ?>>
 <?php 
 if(!empty($settings[RS_CALENDAR.'_style'])){
 	echo rsc_esc($settings[RS_CALENDAR.'_style']); 
@@ -57,7 +52,6 @@ if(!empty($settings[RS_CALENDAR.'_style'])){
 		</tr>
 	</table>
 	
-	<?php include RSC_ADMIN_DIR_INCLUDES.'/panels/part-footer.php'; ?>
 	<?php
 	}
 	

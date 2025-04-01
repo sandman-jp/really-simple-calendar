@@ -16,7 +16,8 @@
 }
 
 .rsc-table .dashicons {
-	line-height: 30px;
+	line-height: 20px;
+	margin: 4px 0;
 }
 
 .rsc-table .rsc-input-others {
@@ -48,6 +49,11 @@
 	pointer-events:none;
 }
 
+.rsc-table :disabled {
+	opacity: .5; 
+	border-color: #fff !important;
+}
+
 .rsc-table button {
 	border: none;
 	background: none;
@@ -59,27 +65,34 @@
 }
 
 .rsc-setting-lock {
-	height: 1em;
+	height: 20px;
+	width: 20px;
 	position: relative;
 	float: right;
-	min-height: 30px;
+	/* border: 2px solid #c00; */
+	border-radius: 12px;
+	/* background: rgba(204, 0, 0, .2); */
 }
 
+.rsc-setting-lock.rsc-is-disabled {
+	color: #c00;
+}
+
+
 .rsc-table-list .rsc-check-locking {
-	min-width: 30px;
-	
+	min-width: 20px;
+	padding: 0;
 }
 .rsc-check-locking .rsc-lock-inputs {
 	font-size: 1px;
+	position: absolute;
 }
 .rsc-lock-inputs input {
 	visibility: hidden;
-	position: absolute;
 }
 .rsc-is-locked, .rsc-is-unlocked {
 	position: absolute;
-	top: 0;
-	/* left: -100%; */
+	
 }
 .rsc-lock-inputs ~ .rsc-is-locked {
 	display: none;
@@ -96,6 +109,7 @@
 .rsc-lock-inputs:has(input:checked) ~ .rsc-is-unlocked {
 	display: none;
 }
+
 
 /* event settings */
 .rsc-table-list-wrapper {
@@ -427,6 +441,6 @@
 	padding-top: 8px
 }
 
-.rsc-widget .rsc-is-locked, .rsc-is-unlocked {
+.rsc-widget .rsc-is-locked, .rsc-widget .rsc-is-unlocked {
 	position: static;
 }
