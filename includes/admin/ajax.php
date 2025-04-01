@@ -34,7 +34,7 @@ class ajax{
 			wp_send_json_success($cal);
 			die();
 		}
-		wp_send_json_error(__('Loading the calendar failed.', RSC_TEXTDOMAIN));
+		wp_send_json_error(__('Loading the calendar failed.', 'really-simple-calendar'));
 		die();
 	}
 	
@@ -65,7 +65,7 @@ class ajax{
 			}
 			
 		}
-		wp_send_json_error(__('Loading the calendar failed.', RSC_TEXTDOMAIN));
+		wp_send_json_error(__('Loading the calendar failed.', 'really-simple-calendar'));
 		die();
 	}
 }

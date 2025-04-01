@@ -136,7 +136,7 @@ class setting{
 	} ?>
 	
 	<!-- preview -->
-	<h2><?php _e('Preview', RSC_TEXTDOMAIN); ?></h2>
+	<h2><?php _e('Preview', 'really-simple-calendar'); ?></h2>
 	<div class="rsc-preview">
 		<div id="rsc-calendar-message"></div>
 		<section id="rsc-calendar-wrap">

@@ -20,7 +20,7 @@ class style extends panel{
 	);
 	
 	function get_label(){
-		return __('Style Sheet', RSC_TEXTDOMAIN);
+		return __('Style Sheet', 'really-simple-calendar');
 	}
 	
 	function echo($settings){
@@ -36,7 +36,7 @@ class style extends panel{
 			<th scope="row">
 				<?php rsc_param_lock(RS_CALENDAR.'_style_lock', $is_locked_style); ?>
 				
-				<label for="rsc-calendar-style"><?php _e('Class Style', RSC_TEXTDOMAIN); ?></label>
+				<label for="rsc-calendar-style"><?php _e('Class Style', 'really-simple-calendar'); ?></label>
 			</th>
 			<td>
 				<textarea name="<?php echo RS_CALENDAR; ?>_style" class="large-text code" rows="10" <?php rsc_disabled($is_locked_style, true, $lock_mode); ?>>

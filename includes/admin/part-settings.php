@@ -38,11 +38,11 @@ if(!empty($panel->updated)){
 	}
 	if($is_updated){
 		add_action('rsv_before_view_panel', function(){
-			echo '<div class="updated"><p>'.__('Parameters are saved.', RSC_TEXTDOMAIN).'</p></div>';
+			echo '<div class="updated"><p>'.__('Parameters are saved.', 'really-simple-calendar').'</p></div>';
 		});
 	}else{
 		add_action('rsv_before_view_panel', function(){
-			echo '<div class="error"><p>'.__('Parameters are\'nd saved.', RSC_TEXTDOMAIN).'</p></div>';
+			echo '<div class="error"><p>'.__('Parameters are\'nd saved.', 'really-simple-calendar').'</p></div>';
 		});
 	}
 }

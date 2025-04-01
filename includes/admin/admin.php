@@ -67,9 +67,9 @@ class admin{
 			'rsc-admin-header',
 			'RSC',
 			array(
-				'CALENDAR_LOAD_FAILED' => __('Can\'t load the calendar. Please try it later.', RSC_TEXTDOMAIN),
-				'CALENDAR_LOAD_SUCCESS' => __('The calendar updated. <strong>Save</strong> this parameters, if you\'d like to use this preview\'s calendar.', RSC_TEXTDOMAIN),
-				'CALENDAR_LOAD_SUCCESS_SHORTCODE' => __('The calendar updated. <strong>Copy shortcode</strong> and paste on a post, if you\'d like to use this preview\'s calendar.', RSC_TEXTDOMAIN),
+				'CALENDAR_LOAD_FAILED' => __('Can\'t load the calendar. Please try it later.', 'really-simple-calendar'),
+				'CALENDAR_LOAD_SUCCESS' => __('The calendar updated. <strong>Save</strong> this parameters, if you\'d like to use this preview\'s calendar.', 'really-simple-calendar'),
+				'CALENDAR_LOAD_SUCCESS_SHORTCODE' => __('The calendar updated. <strong>Copy shortcode</strong> and paste on a post, if you\'d like to use this preview\'s calendar.', 'really-simple-calendar'),
 			)
 		);
 	}
@@ -77,8 +77,8 @@ class admin{
 	function admin_menu(){
 		
 		add_menu_page(
-			__( 'Really Simple Calendar - General Settings', RSC_TEXTDOMAIN), 
-			__( 'Really Simple Calendar', RSC_TEXTDOMAIN),
+			__( 'Really Simple Calendar - General Settings', 'really-simple-calendar'), 
+			__( 'Really Simple Calendar', 'really-simple-calendar'),
 			$this->_capability,
       RSC_GENERAL_SETTINGS_PAGE,
       array($this->setting, 'echo'),

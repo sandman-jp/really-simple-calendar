@@ -18,7 +18,7 @@ class contact extends panel{
 	public $use_preview = false;
 	
 	function get_label(){
-		return __('Contact', RSC_TEXTDOMAIN);
+		return __('Contact', 'really-simple-calendar');
 	}
 	
 	function echo($settings){
