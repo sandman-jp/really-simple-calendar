@@ -1,7 +1,7 @@
 
 <div class="rsc-event-unit">
 	<div class="rsc-event-class rsc-event-inputs">
-		<label><?php esc_html_e('Class', 'really-simple-calendar'); ?><span class="dashicons dashicons-editor-help" title="<?php esc_html_e('If this field is empty, the calendar will use text color	 and bg color.'); ?>"></span> : </label>
+		<label><?php esc_html_e('Class', 'really-simple-calendar'); ?><span class="dashicons dashicons-editor-help" title="<?php esc_html_e('If this field is empty, the calendar will use text color and bg color.', 'really-simple-calendar'); ?>"></span> : </label>
 		<input type="text" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_class[<?php rsc_echo_esc($n); ?>]" value="<?php rsc_echo_esc($classes[$n]); ?>" class="short-text rsc-event-class" <?php rsc_echo_esc($attr); ?>>
 	</div>
 	
