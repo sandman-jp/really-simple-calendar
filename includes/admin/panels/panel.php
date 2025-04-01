@@ -61,24 +61,18 @@ abstract class panel{
 		
 		foreach($set_options as $key){
 			
-			$post_data = '';
-			if(isset($_POST[$key])){
-				$post_data = $_POST[$key]; 
-			}
+			$post_data = RSC_ADMIN()->get_setting()->get_post_data();
 			
-			if($post_data === ''){
-				continue;
-			}
-			
-			if(empty($this->locked)){
-				//administrator or full
-				$this->settings[$key] = $post_data;
-				$this->updated[$key] = rsc_update_option($key, $post_data);
-				
-			}else if(!isset($this->locked[$key.'_lock']) || (isset($this->locked[$key.'_lock']) && !$this->locked[$key.'_lock'])){
-				
-				$this->updated[$key] = $this->update($key, $post_data);
-				
+			if(isset($post_data[$key])){
+				if(empty($this->locked)){
+					//administrator or full
+					$this->updated[$key] = $this->update($key, $post_data[$key]);
+					
+				}else if(!isset($this->locked[$key.'_lock']) || (isset($this->locked[$key.'_lock']) && !$this->locked[$key.'_lock'])){
+					
+					$this->updated[$key] = $this->update($key, $post_data[$key]);
+					
+				}
 			}
 			
 		}

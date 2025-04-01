@@ -14,7 +14,6 @@ class event extends panel{
 	public $fields = array(
 		RS_CALENDAR.'_event_number',
 		RS_CALENDAR.'_event_label',
-		RS_CALENDAR.'_event_name',
 		RS_CALENDAR.'_event_repeat',
 		RS_CALENDAR.'_event_date',
 		RS_CALENDAR.'_event_last',
@@ -54,7 +53,6 @@ class event extends panel{
 				}
 				
 			};
-			
 			foreach($post_data as $k=>$v){
 				$this->settings[$key][$k] = $v; 
 			}
@@ -82,6 +80,7 @@ class event extends panel{
 	}
 	
 	function echo($settings){
+		$lock_mode = 0;
 		$class = $this->name;
 		
 		$now = time();
@@ -114,9 +113,6 @@ class event extends panel{
 		
 		?>
 		
-		
-		<?php include RSC_ADMIN_DIR_INCLUDES.'/panels/part-header.php'; ?>
-	
 	<!-- column template -->
 	<script id="event-column-template" type="text/html">
 		
@@ -138,11 +134,8 @@ class event extends panel{
 		endforeach; 
 		?>
 	</script>
-	<p class="search-box">
-		<label class="screen-reader-text" for="rsc-search-input">投稿を検索:</label>
-		<input type="search" id="rsc-search-input" name="s" value="">
-		<input type="submit" id="search-submit" class="button" value="投稿を検索">
-	</p>
+	
+	<?php if(!get_the_ID()): ?>
 	
 	<div class="tablenav top">
 		<div class="alignleft actions">
@@ -179,6 +172,8 @@ class event extends panel{
 		</div>
 		<br class="clear">
 	</div>
+	<?php endif; ?>
+	
 	
 	<div class="rsc-table-list-wrapper">
 		<table class="form-table rsc-table rsc-table-list widefat striped">
@@ -235,7 +230,6 @@ class event extends panel{
 		</table>
 	</div>
 	
-	<?php include RSC_ADMIN_DIR_INCLUDES.'/panels/part-footer.php'; ?>
 <?php
 	}
 }

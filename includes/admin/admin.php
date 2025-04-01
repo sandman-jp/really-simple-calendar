@@ -11,6 +11,7 @@ if(!class_exists('RSC\Admin\admin')):
 define('RSC_GENERAL_SETTINGS_PAGE', 'rsc-general-settings');
 define('RSC_ADMIN_DIR_INCLUDES', RSC_DIR_INCLUDES.'/admin');
 
+require_once RSC_ADMIN_DIR_INCLUDES.'/setting.php';
 require_once RSC_ADMIN_DIR_INCLUDES.'/panels/panel.php';
 require_once RSC_ADMIN_DIR_INCLUDES.'/panels/view.php';
 require_once RSC_ADMIN_DIR_INCLUDES.'/panels/event.php';
@@ -24,9 +25,9 @@ class admin{
 	private $_capability = 'read';
 	private $_ajax;
 	private $_post;
-	private $_panel_classes = array('view', 'event', 'style');
 	
-	public $panels = array();
+	
+	public $setting;
 	
 	function __construct(){
 		
@@ -34,62 +35,20 @@ class admin{
 			return ;
 		}
 		
-		add_action('admin_init', array($this, 'init'));
-		add_action('admin_head', array($this, 'admin_head'));
-						
+		$this->setting = new setting();
+		
 		add_action('admin_menu', array($this, 'admin_menu'), 11);
 		add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'), 11);
 		
 		$this->_ajax = new ajax();
 	}
 	
-	function init(){
-		
-		if(isset($_GET['page']) && $_GET['page'] == RSC_GENERAL_SETTINGS_PAGE){
-			
-			$current_user = wp_get_current_user();
-			
-			//get manage panels
-			$this->_panel_classes = apply_filters('rsc_get_admin_manage_panel', $this->_panel_classes);
-			
-			if(in_array('administrator', $current_user->roles)){
-				$this->_panel_classes[] = 'config';
-			}else if(isset($_GET['rsc']) && $_GET['rsc'] == 'config'){
-				wp_die( __( 'Sorry, you are not allowed to access this page.' ), 403 );
-			}
-			$this->_panel_classes[] = 'contact';
-		}
-		
-	}
 	
-	function add_setting_panel($class){
-		
-		$class = 'RSC\Admin\Panel\\'.$class;
-		if(class_exists($class)){
-			$this->panels[] = new $class;
-		}else{
-			unset($this->_panel_classes[$class]);
-		}
-	}
-	
-	function admin_head(){
-		
-		$screen = get_current_screen();
-		
-		if($screen->id == 'toplevel_page_'.RSC_GENERAL_SETTINGS_PAGE){
-			
-			$panels = apply_filters('rsc_get_setting_panels', $this->_panel_classes);
-			
-			foreach($panels as $panel){
-				$this->add_setting_panel($panel);
-			}
-		}
-	}
 	
 	function admin_enqueue_scripts() {
 		
 		
-		wp_enqueue_script( 'jquery-ui-tabs' );
+		// wp_enqueue_script( 'jquery-ui-tabs' );
 		
 		//global $post;
 		$screen_id = get_current_screen()->id;
@@ -98,7 +57,7 @@ class admin{
 		wp_enqueue_style( 'jquery-ui' );
 		wp_enqueue_style('rsc-css', RSC_ASSETS_URL.'/rsc.css', array(), RSC_VIRSION);
 		wp_enqueue_style('rsc-admin', RSC_ASSETS_URL.'/admin/rsc.css', array(), RSC_VIRSION);
-		wp_enqueue_script('rsc-admin', RSC_ASSETS_URL.'/admin/rsc.js', array('jquery', 'jquery-ui-sortable'), RSC_VIRSION, true);
+		wp_enqueue_script('rsc-admin', RSC_ASSETS_URL.'/admin/rsc.js', array('jquery'), RSC_VIRSION, true);
 		
 		wp_register_script('rsc-admin-header', false);
 		wp_enqueue_script('rsc-admin-header');
@@ -122,71 +81,29 @@ class admin{
 			__( 'Really Simple Calendar', RSC_TEXTDOMAIN),
 			$this->_capability,
       RSC_GENERAL_SETTINGS_PAGE,
-      array($this, 'general_settings_page'),
+      array($this->setting, 'echo'),
 			'dashicons-calendar-alt',
 		);
 		
 	}
 	
-	function general_settings_page(){
-		//show setting page
-	?>
-	<div class="wrap">
-	<h1 class="wp-heading-inline"><?php echo esc_html( get_admin_page_title() ); ?></h1>
-	
-	<div class="rsc-general-setting">
-	
-	<?php
-	$options = array();
-	$panel = null;
-	$panel_name = 'view';
-	
-	if(isset($_GET['rsc']) && !in_array($_GET['rsc'], $this->_panel_classes)){
-		echo '<section><div class="error"><p>Can\'t to find your requested panel.</p></div></section>';
-		exit;
-	}else if(isset($_GET['rsc'])){
-		$panel_name = $_GET['rsc'];
-	}
-	
-	//get panels
-	if(empty($this->panels)){
-		echo '<section><div class="error"><p>Can\'t to find any panels.</p></div></section>';
-		exit;
-	}
-	?>
-	
-	<?php 
-	if(rsc_current_user_can('manage')){
+	function get_panels(){
+		$panels = $this->setting->panels;
 		
-		include_once RSC_ADMIN_DIR_INCLUDES.'/settings.php';
-	};
-	?>
+		if(empty($panels)){
+			$panel_classes = RSC()->get_panels();
+			$panel_classes = apply_filters('rsc_get_setting_panels', $panel_classes);
+			
+			foreach($panel_classes as $panel){
+				$this->setting->add_setting_panel($panel);
+			}
+		}
+		
+		return $this->setting->panels;
+	}
 	
-	<?php
-	if($panel->use_preview):
-	?>
-	
-	<!-- shortcode -->
-	<?php if(rsc_current_user_can('edit')){
-		include_once RSC_ADMIN_DIR_INCLUDES.'/panels/part-shortcode.php';
-	} ?>
-	
-	<!-- preview -->
-	<h2><?php _e('Preview', RSC_TEXTDOMAIN); ?></h2>
-	<div class="rsc-preview">
-		<div id="rsc-calendar-message"></div>
-		<section id="rsc-calendar-wrap">
-			<style>
-				<?php echo rsc_get_style();?>
-			</style>
-			<?php rsc_get_calendar(); ?>
-		</section>
-	</div>
-	<?php endif; ?>
-	
-	</div>
-	</div>
-	<?php
+	function get_setting(){
+		return apply_filters('rsc_get_admin_setting', $this->setting);
 	}
 	
 }

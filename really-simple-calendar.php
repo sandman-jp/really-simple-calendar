@@ -3,7 +3,7 @@
 Plugin Name: Really Simple Calendar
 Plugin URI: 
 Description: Very Simple Single Calendar.
-Version: 0.2.14
+Version: 0.3.5
 Author: sandman.jp
 Author URI: 
 Text Domain: really-simple-calendar
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if (!class_exists('CustomFieldsCalendar')){
 
-define('RSC_VIRSION', '0.2.14');
+define('RSC_VIRSION', '0.3.5');
 
 //basename
 define('RS_CALENDAR', 'rs_calendar');
@@ -49,7 +49,7 @@ class CustomFieldsCalendar {
 	private $_widget;
 	private $_calendar;
 	private $_admin;
-	private $_cell_data = array();
+	private $_panels = array('view', 'event', 'style');
 	
 	function __construct() {
 		
@@ -89,6 +89,10 @@ class CustomFieldsCalendar {
 		return $this->_admin;
 	}
 	
+	function get_panels(){
+		return $this->_panels;
+	}
+	
 	function get_option($pre, $option, $default_value){
 		if($pre){
 			return $pre;
@@ -109,7 +113,19 @@ class CustomFieldsCalendar {
 	}
 	
 	function get_calendar($args=array()){
-		return $this->_calendar->render($args);
+		global $post;
+		$tmp = $post;
+		
+		if(!empty($args['id'])){
+			$post = get_post($args['id']);
+			setup_postdata($post);
+		}
+		$calendar = $this->_calendar->render($args);
+		if(!empty($args['id'])){
+			$post = $tmp;
+			wp_reset_postdata();
+		}
+		return $calendar;
 	}
 	
 	function render_calendar($args=array()){
