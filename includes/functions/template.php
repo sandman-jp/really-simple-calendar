@@ -99,5 +99,5 @@ function rsc_get_esc($str){
 }
 function rsc_echo_esc($str){
 	
-	echo rsc_get_esc($str);
+	echo rsc_get_esc($txt);
 }

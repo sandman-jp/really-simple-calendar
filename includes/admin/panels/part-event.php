@@ -29,7 +29,7 @@ $attr = ob_get_clean();
 		<div class="rsc-event-upper">
 			<?php do_action('rsc_pre_event_label'); ?>
 			<div class="rsc-event-label rsc-event-inputs">
-				<label><?php esc_html_e('Label', 'really-simple-calendar'); ?><span class="dashicons dashicons-editor-help" title="<?php esc_html_e('This is the name which will appear on pages.'); ?>"></span> : </label>
+				<label><?php esc_html_e('Label', 'really-simple-calendar'); ?><span class="dashicons dashicons-editor-help" title="<?php esc_html_e('This is the name which will appear on pages.', 'really-simple-calendar'); ?>"></span> : </label>
 				<input type="text" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_label[<?php rsc_echo_esc($n); ?>]" value="<?php rsc_echo_esc($labels[$n]); ?>" class="large-text" <?php rsc_echo_esc($attr); ?> required>
 			</div>
 			<?php do_action('rsc_after_event_label'); ?>
