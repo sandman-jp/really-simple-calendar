@@ -46,7 +46,7 @@ function rsc_get_template_part($path, $sub=null, $args=array()){
 function rsc_get_lock($is_locked=false){
 	if($is_locked):
 	?>
-	<span class="rsc-is-locked dashicons dashicons-lock" title="<?php _e('Locked', 'really-simple-calendar'); ?>"></span>
+	<span class="rsc-is-locked dashicons dashicons-lock" title="<?php esc_html_e('Locked', 'really-simple-calendar'); ?>"></span>
 	<?php
 	endif;
 }
@@ -61,16 +61,16 @@ function rsc_param_lock($name, $is_locked=false){
 		<label class="rsc-check-locking">
 			<span class="rsc-lock-inputs">
 				<input type="hidden" name="<?php echo $name ?>" value="0">
-				<input type="checkbox" name="<?php echo $name; ?>" value="1" <?php checked($is_locked); ?>><?php _e('Lock this.', 'really-simple-calendar'); ?>
+				<input type="checkbox" name="<?php echo $name; ?>" value="1" <?php checked($is_locked); ?>><?php esc_html_e('Lock this.', 'really-simple-calendar'); ?>
 			</span>
-			<span class="rsc-is-locked dashicons dashicons-lock" title="<?php _e('Locked', 'really-simple-calendar'); ?>"></span>
-			<span class="rsc-is-unlocked dashicons dashicons-unlock" title="<?php _e('Unlocked', 'really-simple-calendar'); ?>"></span>
+			<span class="rsc-is-locked dashicons dashicons-lock" title="<?php esc_html_e('Locked', 'really-simple-calendar'); ?>"></span>
+			<span class="rsc-is-unlocked dashicons dashicons-unlock" title="<?php esc_html_e('Unlocked', 'really-simple-calendar'); ?>"></span>
 		</label>
 	</div>
 	<?php elseif((rsc_current_user_can('manage') && $is_locked) || $is_disabled): ?>
 	<div class="rsc-setting-lock rsc-lock <?php echo $is_disabled ? 'rsc-is-disabled' : '' ?>">
 		<label class="rsc-check-locking">
-		<span class="rsc-is-locked dashicons dashicons-lock" title="<?php $is_disabled ? _e('Master Locked', 'really-simple-calendar') : _e('Locked', 'really-simple-calendar'); ?>"></span>
+		<span class="rsc-is-locked dashicons dashicons-lock" title="<?php $is_disabled ? esc_html_e('Master Locked', 'really-simple-calendar') : esc_html_e('Locked', 'really-simple-calendar'); ?>"></span>
 		</label>
 	</div>
 	<?php 
@@ -89,10 +89,15 @@ function rsc_disabled($compare=true, $current=true, $name=null){
 	
 }
 
-function rsc_esc($str){
+function rsc_get_esc($str){
+	
 	$txt = wp_unslash($str);
 	$txt = strip_tags($txt);
 	$txt = htmlspecialchars($txt, ENT_QUOTES);
 	
 	return $txt;
+}
+function rsc_echo_esc($str){
+	
+	echo rsc_get_esc($str);
 }

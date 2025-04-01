@@ -41,13 +41,13 @@ class config extends panel{
 		$roles = get_editable_roles();
 	?>
 	
-	<h2><?php _e('Extentions Setting', 'really-simple-calendar'); ?></h2>
+	<h2><?php esc_html_e('Extentions Setting', 'really-simple-calendar'); ?></h2>
 	<table class="form-table rsc-table">
 		<tr>
-			<th><?php _e('Advanced Event Field', 'really-simple-calendar'); ?></th>
+			<th><?php esc_html_e('Advanced Event Field', 'really-simple-calendar'); ?></th>
 			<td>
-				<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_fields" value="simple">
-				<input type="checkbox" name="<?php echo RS_CALENDAR; ?>_event_fields" value="advanced" <?php checked(get_option(RS_CALENDAR.'_event_fields'), 'advanced'); ?>>
+				<input type="hidden" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_fields" value="simple">
+				<input type="checkbox" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_fields" value="advanced" <?php checked(get_option(RS_CALENDAR.'_event_fields'), 'advanced'); ?>>
 			</td>
 		</tr>
 		<?php
@@ -55,7 +55,7 @@ class config extends panel{
 		?>
 	</table>
 	
-	<h2><?php _e('Manage Capability', 'really-simple-calendar'); ?></h2>
+	<h2><?php esc_html_e('Manage Capability', 'really-simple-calendar'); ?></h2>
 	<table class="form-table rsc-table">
 
 			<?php 
@@ -72,11 +72,11 @@ class config extends panel{
 				<tr>
 					<th><?php echo translate_user_role($v['name']); ?></th>
 					
-					<td><label><select name="<?php echo RS_CALENDAR; ?>_capability[<?php echo $k ?>]">
-						<option value="full" <?php selected('full', $cap); ?>><?php _e('Full', 'really-simple-calendar'); ?></option>
-						<option value="manage" <?php selected('manage', $cap); ?>><?php _e('Manage', 'really-simple-calendar'); ?></option>
-						<option value="edit" <?php selected('edit', $cap); ?>><?php _e('Edit', 'really-simple-calendar'); ?></option>
-						<option value="read" <?php selected('read', $cap); ?>><?php _e('Read', 'really-simple-calendar'); ?></option>
+					<td><label><select name="<?php rsc_echo_esc(RS_CALENDAR); ?>_capability[<?php rsc_echo_esc($k); ?>]">
+						<option value="full" <?php selected('full', $cap); ?>><?php esc_html_e('Full', 'really-simple-calendar'); ?></option>
+						<option value="manage" <?php selected('manage', $cap); ?>><?php esc_html_e('Manage', 'really-simple-calendar'); ?></option>
+						<option value="edit" <?php selected('edit', $cap); ?>><?php esc_html_e('Edit', 'really-simple-calendar'); ?></option>
+						<option value="read" <?php selected('read', $cap); ?>><?php esc_html_e('Read', 'really-simple-calendar'); ?></option>
 					</select></label></td>
 					
 				</tr>

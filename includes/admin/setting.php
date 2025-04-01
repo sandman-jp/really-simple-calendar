@@ -96,7 +96,7 @@ class setting{
 		//show setting page
 	?>
 	<div class="wrap">
-	<h1 class="wp-heading-inline"><?php echo esc_html( get_admin_page_title() ); ?></h1>
+	<h1 class="wp-heading-inline"><?php rsc_echo_esc( get_admin_page_title() ); ?></h1>
 	
 	<div class="rsc-general-setting">
 	
@@ -136,7 +136,7 @@ class setting{
 	} ?>
 	
 	<!-- preview -->
-	<h2><?php _e('Preview', 'really-simple-calendar'); ?></h2>
+	<h2><?php esc_html_e('Preview', 'really-simple-calendar'); ?></h2>
 	<div class="rsc-preview">
 		<div id="rsc-calendar-message"></div>
 		<section id="rsc-calendar-wrap">

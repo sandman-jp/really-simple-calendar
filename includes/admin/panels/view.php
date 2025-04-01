@@ -47,14 +47,14 @@ class view extends panel{
 			<th scope="row">
 				<?php rsc_param_lock(RS_CALENDAR.'_type_lock', $is_locked_type); ?>
 				
-				<label for="rsc-calendar-type"><?php _e('Calendar Type', 'really-simple-calendar'); ?></label>
+				<label for="rsc-calendar-type"><?php esc_html_e('Calendar Type', 'really-simple-calendar'); ?></label>
 			</th>
 			<td>
 				<?php $calendar_type = $settings[RS_CALENDAR.'_type']; ?>
-				<select id="rsc-calendar-type" name="<?php echo RS_CALENDAR; ?>_type" <?php rsc_disabled($is_locked_type, true, RS_CALENDAR.'_type_lock'); ?>>
-					<option value="month" <?php selected( $calendar_type, 'month'); ?>><?php _e('Monthly', 'really-simple-calendar') ?></option>
-					<option value="week" <?php selected( $calendar_type, 'week'); ?>><?php _e('Weekly', 'really-simple-calendar') ?></option>
-					<option value="day" <?php selected( $calendar_type, 'day'); ?>><?php _e('Daily', 'really-simple-calendar') ?></option>
+				<select id="rsc-calendar-type" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_type" <?php rsc_disabled($is_locked_type, true, RS_CALENDAR.'_type_lock'); ?>>
+					<option value="month" <?php selected( $calendar_type, 'month'); ?>><?php esc_html_e('Monthly', 'really-simple-calendar') ?></option>
+					<option value="week" <?php selected( $calendar_type, 'week'); ?>><?php esc_html_e('Weekly', 'really-simple-calendar') ?></option>
+					<option value="day" <?php selected( $calendar_type, 'day'); ?>><?php esc_html_e('Daily', 'really-simple-calendar') ?></option>
 				</select>
 			</td>
 		</tr>
@@ -64,7 +64,7 @@ class view extends panel{
 			<th scope="row">
 				<?php rsc_param_lock(RS_CALENDAR.'_from_lock', $is_locked_from); ?>
 				
-				<?php _e('Start From', 'really-simple-calendar'); ?>
+				<?php esc_html_e('Start From', 'really-simple-calendar'); ?>
 			</th>
 			<td>
 				<?php $calendar_start = $settings[RS_CALENDAR.'_from']; 
@@ -72,7 +72,7 @@ class view extends panel{
 				<fieldset>
 					<p>
 						<label>
-							<input type="radio" name="<?php echo RS_CALENDAR; ?>_from" value="previous" <?php checked( $calendar_start, 'previous'); ?> <?php rsc_disabled($is_locked_from, true, RS_CALENDAR.'_from_lock'); ?>><?php _e('Previous', 'really-simple-calendar') ?>
+							<input type="radio" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_from" value="previous" <?php checked( $calendar_start, 'previous'); ?> <?php rsc_disabled($is_locked_from, true, RS_CALENDAR.'_from_lock'); ?>><?php esc_html_e('Previous', 'really-simple-calendar') ?>
 						</label>
 						<label class="rsc-input-others">
 							<?php
@@ -81,31 +81,31 @@ class view extends panel{
 								$calendar_previous_from = -1;
 							}
 							?>
-							<input type="number" name="<?php echo RS_CALENDAR; ?>_previous_from" value="<?php echo $calendar_previous_from; ?>" class="small-text" max="-1" <?php rsc_disabled($is_locked_from, true, RS_CALENDAR.'_from_lock'); ?>>
+							<input type="number" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_previous_from" value="<?php echo $calendar_previous_from; ?>" class="small-text" max="-1" <?php rsc_disabled($is_locked_from, true, RS_CALENDAR.'_from_lock'); ?>>
 							<span class="rsc-period-month rsc-period-unit" <?php echo $calendar_type == 'month' ? '' : 'style="display:none"';?>><?php echo _x('Month(s)', 'unit', 'really-simple-calendar'); ?></span><span class="rsc-period-week rsc-period-unit" <?php echo $calendar_type == 'week' ? '' : 'style="display:none"';?>><?php echo _x('Week(s)', 'unit', 'really-simple-calendar'); ?></span><span class="rsc-period-day rsc-period-unit" <?php echo $calendar_type == 'day' ? '' : 'style="display:none"';?>><?php echo _x('Day(s)', 'unit', 'really-simple-calendar'); ?></span>
 						</label>
 						
 					</p>
 					<p>
 						<label>
-							<input type="radio" name="<?php echo RS_CALENDAR; ?>_from" value="current" <?php checked( $calendar_start, 'current'); ?> <?php rsc_disabled($is_locked_from, true, RS_CALENDAR.'_from_lock'); ?>><?php _e('Current', 'really-simple-calendar') ?>
+							<input type="radio" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_from" value="current" <?php checked( $calendar_start, 'current'); ?> <?php rsc_disabled($is_locked_from, true, RS_CALENDAR.'_from_lock'); ?>><?php esc_html_e('Current', 'really-simple-calendar') ?>
 							<span class="rsc-period-month rsc-period-unit" <?php echo $calendar_type == 'month' ? '' : 'style="display:none"';?>>(<?php echo __('Month', 'really-simple-calendar'); ?>)</span><span class="rsc-period-week rsc-period-unit" <?php echo $calendar_type == 'week' ? '' : 'style="display:none"';?>>(<?php echo __('Week', 'really-simple-calendar'); ?>)</span><span class="rsc-period-day rsc-period-unit" <?php echo $calendar_type == 'day' ? '' : 'style="display:none"';?>>(<?php echo __('Day', 'really-simple-calendar'); ?>)</span>
 						</label>
 					</p>
 					<p>
 						<label>
-							<input type="radio" name="<?php echo RS_CALENDAR; ?>_from" value="next" <?php checked( $calendar_start, 'next'); ?> <?php rsc_disabled($is_locked_from, true, RS_CALENDAR.'_from_lock'); ?>><?php _e('Next', 'really-simple-calendar') ?>
+							<input type="radio" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_from" value="next" <?php checked( $calendar_start, 'next'); ?> <?php rsc_disabled($is_locked_from, true, RS_CALENDAR.'_from_lock'); ?>><?php esc_html_e('Next', 'really-simple-calendar') ?>
 							<span class="rsc-period-month rsc-period-unit" <?php echo $calendar_type == 'month' ? '' : 'style="display:none"';?>>(<?php echo __('Month', 'really-simple-calendar'); ?>)</span><span class="rsc-period-week rsc-period-unit" <?php echo $calendar_type == 'week' ? '' : 'style="display:none"';?>>(<?php echo __('Week', 'really-simple-calendar'); ?>)</span><span class="rsc-period-day rsc-period-unit" <?php echo $calendar_type == 'day' ? '' : 'style="display:none"';?>>(<?php echo __('Day', 'really-simple-calendar'); ?>)</span>
 						</label>
 					</p>
 					<p>
 						<label>
-							<input type="radio" name="<?php echo RS_CALENDAR; ?>_from" value="today" <?php checked( $calendar_start, 'today'); ?> <?php rsc_disabled($is_locked_from, true, RS_CALENDAR.'_from_lock'); ?>><?php _e('Today', 'really-simple-calendar') ?>
+							<input type="radio" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_from" value="today" <?php checked( $calendar_start, 'today'); ?> <?php rsc_disabled($is_locked_from, true, RS_CALENDAR.'_from_lock'); ?>><?php esc_html_e('Today', 'really-simple-calendar') ?>
 						</label>
 					</p>
 					<p>
 						<label>
-							<input type="radio" name="<?php echo RS_CALENDAR; ?>_from" value="date" <?php checked( $calendar_start, 'date'); ?> <?php rsc_disabled($is_locked_from, true, RS_CALENDAR.'_from_lock'); ?>><?php _e('Date', 'really-simple-calendar') ?>
+							<input type="radio" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_from" value="date" <?php checked( $calendar_start, 'date'); ?> <?php rsc_disabled($is_locked_from, true, RS_CALENDAR.'_from_lock'); ?>><?php esc_html_e('Date', 'really-simple-calendar') ?>
 						</label>
 						<label class="rsc-input-others">
 							<?php 
@@ -114,7 +114,7 @@ class view extends panel{
 								$calendar_from_date = wp_date('Y-m-d');
 							}
 							?>
-							<input type="date" name="<?php echo RS_CALENDAR; ?>_from_date" value="<?php echo $calendar_from_date; ?>" <?php rsc_disabled($is_locked_from, true, RS_CALENDAR.'_from_lock'); ?>>
+							<input type="date" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_from_date" value="<?php echo $calendar_from_date; ?>" <?php rsc_disabled($is_locked_from, true, RS_CALENDAR.'_from_lock'); ?>>
 						</label>
 						
 					</p>
@@ -127,14 +127,14 @@ class view extends panel{
 			<th scope="row">
 				<?php rsc_param_lock(RS_CALENDAR.'_period_lock', $is_locked_period); ?>
 				
-				<?php _e('Display Period', 'really-simple-calendar'); ?>
+				<?php esc_html_e('Display Period', 'really-simple-calendar'); ?>
 			</th>
 			<td>
 				<fieldset>
 				<p>
 						<?php $calendar_period = $settings[RS_CALENDAR.'_period']; ?>
 						<label>
-							<input type="radio" name="<?php echo RS_CALENDAR; ?>_period" value="last" <?php checked( $calendar_period, 'last'); ?> <?php rsc_disabled($is_locked_period, true, RS_CALENDAR.'_period_lock'); ?>><?php _e('Period', 'really-simple-calendar') ?>
+							<input type="radio" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_period" value="last" <?php checked( $calendar_period, 'last'); ?> <?php rsc_disabled($is_locked_period, true, RS_CALENDAR.'_period_lock'); ?>><?php esc_html_e('Period', 'really-simple-calendar') ?>
 						</label>
 						<label class="rsc-input-others">
 							<?php
@@ -143,13 +143,13 @@ class view extends panel{
 								$calendar_period_last = 0;
 							}
 							?>
-							<input type="number" id="calendar_period_last" name="<?php echo RS_CALENDAR; ?>_period_last" value="<?php echo $calendar_period_last; ?>" class="small-text" min="0" <?php rsc_disabled($is_locked_period, true, RS_CALENDAR.'_period_lock'); ?>>
+							<input type="number" id="calendar_period_last" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_period_last" value="<?php echo $calendar_period_last; ?>" class="small-text" min="0" <?php rsc_disabled($is_locked_period, true, RS_CALENDAR.'_period_lock'); ?>>
 							<span class="rsc-period-month rsc-period-unit" <?php echo $calendar_type == 'month' ? '' : 'style="display:none"';?>><?php echo _x('Month(s)', 'unit', 'really-simple-calendar'); ?></span><span class="rsc-period-week rsc-period-unit" <?php echo $calendar_type == 'week' ? '' : 'style="display:none"';?>><?php echo _x('Week(s)', 'unit', 'really-simple-calendar'); ?></span><span class="rsc-period-day rsc-period-unit" <?php echo $calendar_type == 'day' ? '' : 'style="display:none"';?>><?php echo _x('Day(s)', 'unit', 'really-simple-calendar'); ?></span>
 						</label>
 					</p>
 					<p>
 						<label>
-							<input type="radio" name="<?php echo RS_CALENDAR; ?>_period" value="date" <?php checked( $calendar_period, 'date'); ?> <?php rsc_disabled($is_locked_period, true, RS_CALENDAR.'_period_lock'); ?>><?php _e('Date', 'really-simple-calendar') ?>
+							<input type="radio" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_period" value="date" <?php checked( $calendar_period, 'date'); ?> <?php rsc_disabled($is_locked_period, true, RS_CALENDAR.'_period_lock'); ?>><?php esc_html_e('Date', 'really-simple-calendar') ?>
 						</label>
 						<label class="rsc-input-others">
 							<?php
@@ -158,7 +158,7 @@ class view extends panel{
 								$calendar_period_date = wp_date('Y-m-d');
 							}
 							?>
-							<input type="date" name="<?php echo RS_CALENDAR; ?>_period_date" value="<?php echo $calendar_period_date; ?>" <?php rsc_disabled($is_locked_period, true, RS_CALENDAR.'_period_lock'); ?>>
+							<input type="date" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_period_date" value="<?php echo $calendar_period_date; ?>" <?php rsc_disabled($is_locked_period, true, RS_CALENDAR.'_period_lock'); ?>>
 						</label>
 					</p>
 				</fieldset>
@@ -171,19 +171,19 @@ class view extends panel{
 			<th scope="row">
 				<?php rsc_param_lock(RS_CALENDAR.'_start_of_week_lock', $is_locked_start_of_week); ?>
 				
-				<label for="calendar-start-of-week"><?php _e('Start day of week', 'really-simple-calendar'); ?></label>
+				<label for="calendar-start-of-week"><?php esc_html_e('Start day of week', 'really-simple-calendar'); ?></label>
 			</th>
 			<td>
 				<?php $calendar_start_of_week = $settings[RS_CALENDAR.'_start_of_week']; ?>
-				<select name="<?php echo RS_CALENDAR; ?>_start_of_week" id="calendar-start-of-week" <?php rsc_disabled($is_locked_start_of_week, true, RS_CALENDAR.'_start_of_week_lock'); ?>>
-					<option value="today" <?php selected( $calendar_start_of_week, 'today'); ?>><?php _e('Today', 'really-simple-calendar'); ?></option>
-					<option value="0" <?php selected( $calendar_start_of_week, '0'); ?>><?php _e('Sunday', 'really-simple-calendar'); ?></option>
-					<option value="1" <?php selected( $calendar_start_of_week, '1'); ?>><?php _e('Monday', 'really-simple-calendar'); ?></option>
-					<option value="2" <?php selected( $calendar_start_of_week, '2'); ?>><?php _e('Tuesday', 'really-simple-calendar'); ?></option>
-					<option value="3" <?php selected( $calendar_start_of_week, '3'); ?>><?php _e('Wednesday', 'really-simple-calendar'); ?></option>
-					<option value="4" <?php selected( $calendar_start_of_week, '4'); ?>><?php _e('Thursday', 'really-simple-calendar'); ?></option>
-					<option value="5" <?php selected( $calendar_start_of_week, '5'); ?>><?php _e('Friday', 'really-simple-calendar'); ?></option>
-					<option value="6" <?php selected( $calendar_start_of_week, '6'); ?>><?php _e('Saturday', 'really-simple-calendar'); ?></option>
+				<select name="<?php rsc_echo_esc(RS_CALENDAR); ?>_start_of_week" id="calendar-start-of-week" <?php rsc_disabled($is_locked_start_of_week, true, RS_CALENDAR.'_start_of_week_lock'); ?>>
+					<option value="today" <?php selected( $calendar_start_of_week, 'today'); ?>><?php esc_html_e('Today', 'really-simple-calendar'); ?></option>
+					<option value="0" <?php selected( $calendar_start_of_week, '0'); ?>><?php esc_html_e('Sunday', 'really-simple-calendar'); ?></option>
+					<option value="1" <?php selected( $calendar_start_of_week, '1'); ?>><?php esc_html_e('Monday', 'really-simple-calendar'); ?></option>
+					<option value="2" <?php selected( $calendar_start_of_week, '2'); ?>><?php esc_html_e('Tuesday', 'really-simple-calendar'); ?></option>
+					<option value="3" <?php selected( $calendar_start_of_week, '3'); ?>><?php esc_html_e('Wednesday', 'really-simple-calendar'); ?></option>
+					<option value="4" <?php selected( $calendar_start_of_week, '4'); ?>><?php esc_html_e('Thursday', 'really-simple-calendar'); ?></option>
+					<option value="5" <?php selected( $calendar_start_of_week, '5'); ?>><?php esc_html_e('Friday', 'really-simple-calendar'); ?></option>
+					<option value="6" <?php selected( $calendar_start_of_week, '6'); ?>><?php esc_html_e('Saturday', 'really-simple-calendar'); ?></option>
 				</select>
 			</td>
 		</tr>
@@ -191,7 +191,7 @@ class view extends panel{
 		<!-- daily -->
 		<tr class="rsc-period-day rsc-period-unit">
 			<th scope="row">
-				<?php _e('Align for cells', 'really-simple-calendar'); ?>
+				<?php esc_html_e('Align for cells', 'really-simple-calendar'); ?>
 			</th>
 			<td>
 				<fieldset>
@@ -203,12 +203,12 @@ class view extends panel{
 					?>
 					<p>
 					<label>
-						<input type="radio" name="<?php echo RS_CALENDAR; ?>_align" value="0" <?php checked( $calendar_align, 0); ?>> <?php _e('Horizontal', 'really-simple-calendar'); ?>
+						<input type="radio" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_align" value="0" <?php checked( $calendar_align, 0); ?>> <?php esc_html_e('Horizontal', 'really-simple-calendar'); ?>
 					</label>
 					</p>
 					<p>
 					<label>
-						<input type="radio" name="<?php echo RS_CALENDAR; ?>_align" value="1" <?php checked( $calendar_align, 1); ?>> <?php _e('Vertical', 'really-simple-calendar'); ?>
+						<input type="radio" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_align" value="1" <?php checked( $calendar_align, 1); ?>> <?php esc_html_e('Vertical', 'really-simple-calendar'); ?>
 					</label>
 					</p>
 				</fieldset>

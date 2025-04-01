@@ -5,6 +5,6 @@
 			submit_button(); 
 		}
 		?>	
-		<p class="submit"><button class="button rsc-reload-button"><?php _e('Reload preview', 'really-simple-calendar'); ?></button></p>
+		<p class="submit"><button class="button rsc-reload-button"><?php esc_html_e('Reload preview', 'really-simple-calendar'); ?></button></p>
 	</div>
 </form>

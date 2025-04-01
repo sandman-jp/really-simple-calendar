@@ -128,7 +128,7 @@ class event extends panel{
 		foreach($num as $k=>$n):
 			if(isset($excludes[$k])):
 		?>
-		rsc_event_exclude_list[<?php echo $k ?>] = <?php echo json_encode($excludes[$k]);?>;
+		rsc_event_exclude_list[<?php rsc_echo_esc($k); ?>] = <?php echo json_encode($excludes[$k]);?>;
 		<?php 
 			endif;
 		endforeach; 
@@ -158,17 +158,17 @@ class event extends panel{
 			}
 			
 			?>
-			<label for="rsc-search-ftom"><?php _e('Period', 'really-simple-calendar'); ?> : </label>
+			<label for="rsc-search-ftom"><?php esc_html_e('Period', 'really-simple-calendar'); ?> : </label>
 			<input type="date" id="rsc-search-ftom" name="search_from" value="<?php echo $search_from; ?>">
 			<span>~</span>
-			<input type="date" name="search_to" value="<?php echo $search_to; ?>">
-			<label for="rsc-search-order"><?php _e('Order', 'really-simple-calendar'); ?> : </label>
+			<input type="date" name="search_to" value="<?php rsc_echo_esc($search_to); ?>">
+			<label for="rsc-search-order"><?php esc_html_e('Order', 'really-simple-calendar'); ?> : </label>
 			<select id="rsc-search-order" name="search_order">
-				<option value="" <?php selected($search_order, ''); ?>><?php _e('Saving', 'really-simple-calendar'); ?></option>
-				<option value="asc" <?php selected($search_order, 'asc'); ?>><?php _e('Ascending', 'really-simple-calendar'); ?></option>
-				<option value="desc" <?php selected($search_order, 'desc'); ?>><?php _e('Descending', 'really-simple-calendar'); ?></option>
+				<option value="" <?php selected($search_order, ''); ?>><?php esc_html_e('Saving', 'really-simple-calendar'); ?></option>
+				<option value="asc" <?php selected($search_order, 'asc'); ?>><?php esc_html_e('Ascending', 'really-simple-calendar'); ?></option>
+				<option value="desc" <?php selected($search_order, 'desc'); ?>><?php esc_html_e('Descending', 'really-simple-calendar'); ?></option>
 			</select>
-			<input type="submit" name="filter_action" class="button" value="<?php _e('Filter', 'really-simple-calendar'); ?>">
+			<input type="submit" name="filter_action" class="button" value="<?php esc_html_e('Filter', 'really-simple-calendar'); ?>">
 		</div>
 		<br class="clear">
 	</div>
@@ -223,7 +223,7 @@ class event extends panel{
 			<tfoot>
 				<tr>
 					<td colspan="4">
-					<button class="rsc-add-button button"><span class="dashicons dashicons-plus-alt2"></span> <?php _e('Add Event', 'really-simple-calendar'); ?></button>
+					<button class="rsc-add-button button"><span class="dashicons dashicons-plus-alt2"></span> <?php esc_html_e('Add Event', 'really-simple-calendar'); ?></button>
 					</td>
 				</tr>
 			</tfoot>
