@@ -131,7 +131,7 @@ class event extends setting{
 			if(empty($this->_labels)){
 				$this->_labels = $this->get_option(RS_CALENDAR.'_event_label');
 			}
-			$label = rsc_esc($this->_labels[$k]);
+			$label = rsc_get_esc($this->_labels[$k]);
 			if(empty($this->_classes)){
 				$this->_classes = $this->get_option(RS_CALENDAR.'_event_class');
 			}
@@ -143,16 +143,16 @@ class event extends setting{
 				if(empty($_text_colors)){
 					$this->_text_colors = $this->get_option(RS_CALENDAR.'_event_text_color');
 				}
-				$text_color = rsc_esc($this->_text_colors[$k]);
+				$text_color = rsc_get_esc($this->_text_colors[$k]);
 				
 				if(empty($_bg_colors)){
 					$this->_bg_colors = $this->get_option(RS_CALENDAR.'_event_bg_color');
 				}
-				$bg_color = rsc_esc($this->_bg_colors[$k]);
+				$bg_color = rsc_get_esc($this->_bg_colors[$k]);
 				
 				$style = 'style="color:'.$text_color.'; background-color:'.$bg_color.';"';
 			}else{
-				$class = rsc_esc($this->_classes[$k]);
+				$class = rsc_get_esc($this->_classes[$k]);
 			}
 			
 			ob_start();

@@ -28,12 +28,12 @@ function rsc_get_style($style=false){
 	if(empty($style)){
 		$style = rsc_get_default_style();
 	}
-	return rsc_esc($style);
+	return rsc_echo_esc($style);
 }
 function rsc_get_default_style(){
 	ob_start();
 	include RSC_ADMIN_DIR_INCLUDES.'/panels/style-default.txt';
 	$style = ob_get_clean();
 	
-	return rsc_esc($style);
+	return rsc_echo_esc($style);
 }
