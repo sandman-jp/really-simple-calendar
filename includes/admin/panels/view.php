@@ -176,14 +176,14 @@ class view extends panel{
 			<td>
 				<?php $calendar_start_of_week = $settings[RS_CALENDAR.'_start_of_week']; ?>
 				<select name="<?php echo RS_CALENDAR; ?>_start_of_week" id="calendar-start-of-week" <?php rsc_disabled($is_locked_start_of_week, true, RS_CALENDAR.'_start_of_week_lock'); ?>>
-					<option value="today" <?php selected( $calendar_start_of_week, 'today'); ?>><?php _e('Today'); ?></option>
-					<option value="0" <?php selected( $calendar_start_of_week, '0'); ?>><?php _e('Sunday'); ?></option>
-					<option value="1" <?php selected( $calendar_start_of_week, '1'); ?>><?php _e('Monday'); ?></option>
-					<option value="2" <?php selected( $calendar_start_of_week, '2'); ?>><?php _e('Tuesday'); ?></option>
-					<option value="3" <?php selected( $calendar_start_of_week, '3'); ?>><?php _e('Wednesday'); ?></option>
-					<option value="4" <?php selected( $calendar_start_of_week, '4'); ?>><?php _e('Thursday'); ?></option>
-					<option value="5" <?php selected( $calendar_start_of_week, '5'); ?>><?php _e('Friday'); ?></option>
-					<option value="6" <?php selected( $calendar_start_of_week, '6'); ?>><?php _e('Saturday'); ?></option>
+					<option value="today" <?php selected( $calendar_start_of_week, 'today'); ?>><?php _e('Today', 'really-simple-calendar'); ?></option>
+					<option value="0" <?php selected( $calendar_start_of_week, '0'); ?>><?php _e('Sunday', 'really-simple-calendar'); ?></option>
+					<option value="1" <?php selected( $calendar_start_of_week, '1'); ?>><?php _e('Monday', 'really-simple-calendar'); ?></option>
+					<option value="2" <?php selected( $calendar_start_of_week, '2'); ?>><?php _e('Tuesday', 'really-simple-calendar'); ?></option>
+					<option value="3" <?php selected( $calendar_start_of_week, '3'); ?>><?php _e('Wednesday', 'really-simple-calendar'); ?></option>
+					<option value="4" <?php selected( $calendar_start_of_week, '4'); ?>><?php _e('Thursday', 'really-simple-calendar'); ?></option>
+					<option value="5" <?php selected( $calendar_start_of_week, '5'); ?>><?php _e('Friday', 'really-simple-calendar'); ?></option>
+					<option value="6" <?php selected( $calendar_start_of_week, '6'); ?>><?php _e('Saturday', 'really-simple-calendar'); ?></option>
 				</select>
 			</td>
 		</tr>

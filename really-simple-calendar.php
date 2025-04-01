@@ -3,7 +3,7 @@
 Plugin Name: Really Simple Calendar
 Plugin URI: 
 Description: Very Simple Single Calendar.
-Version: 0.3.6
+Version: 0.3.7
 Author: sandman.jp
 Author URI: 
 Text Domain: really-simple-calendar
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if (!class_exists('CustomFieldsCalendar')){
 
-define('RSC_VIRSION', '0.3.6');
+define('RSC_VIRSION', '0.3.7');
 
 //basename
 define('RS_CALENDAR', 'rs_calendar');
