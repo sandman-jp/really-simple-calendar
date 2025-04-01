@@ -39,7 +39,7 @@ class style extends panel{
 				<label for="rsc-calendar-style"><?php esc_html_e('Class Style', 'really-simple-calendar'); ?></label>
 			</th>
 			<td>
-				<textarea name="<?php rsc_echo_esc(RS_CALENDAR); ?>_style" class="large-text code" rows="10" <?php rsc_disabled($is_locked_style, true, $lock_mode); ?>>
+				<textarea name="<?php echo RS_CALENDAR; ?>_style" class="large-text code" rows="10" <?php rsc_disabled($is_locked_style, true, $lock_mode); ?>>
 <?php 
 if(!empty($settings[RS_CALENDAR.'_style'])){
 	rsc_echo_esc($settings[RS_CALENDAR.'_style']); 

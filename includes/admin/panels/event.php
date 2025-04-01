@@ -128,7 +128,7 @@ class event extends panel{
 		foreach($num as $k=>$n):
 			if(isset($excludes[$k])):
 		?>
-		rsc_event_exclude_list[<?php rsc_echo_esc($k); ?>] = <?php echo json_encode($excludes[$k]);?>;
+		rsc_event_exclude_list[<?php echo $k; ?>] = <?php echo json_encode($excludes[$k]);?>;
 		<?php 
 			endif;
 		endforeach; 
@@ -138,7 +138,7 @@ class event extends panel{
 	<?php if(!get_the_ID()): ?>
 	
 	<div class="tablenav top">
-		<div class="alignleft actions">
+		<div class="alignright actions">
 			<?php
 			
 			if(!empty($_POST['search_from']) && preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $_POST['search_from'])){
@@ -161,7 +161,7 @@ class event extends panel{
 			<label for="rsc-search-ftom"><?php esc_html_e('Period', 'really-simple-calendar'); ?> : </label>
 			<input type="date" id="rsc-search-ftom" name="search_from" value="<?php echo $search_from; ?>">
 			<span>~</span>
-			<input type="date" name="search_to" value="<?php rsc_echo_esc($search_to); ?>">
+			<input type="date" name="search_to" value="<?php echo $search_to; ?>">
 			<label for="rsc-search-order"><?php esc_html_e('Order', 'really-simple-calendar'); ?> : </label>
 			<select id="rsc-search-order" name="search_order">
 				<option value="" <?php selected($search_order, ''); ?>><?php esc_html_e('Saving', 'really-simple-calendar'); ?></option>

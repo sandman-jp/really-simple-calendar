@@ -46,8 +46,8 @@ class config extends panel{
 		<tr>
 			<th><?php esc_html_e('Advanced Event Field', 'really-simple-calendar'); ?></th>
 			<td>
-				<input type="hidden" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_fields" value="simple">
-				<input type="checkbox" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_fields" value="advanced" <?php checked(get_option(RS_CALENDAR.'_event_fields'), 'advanced'); ?>>
+				<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_fields" value="simple">
+				<input type="checkbox" name="<?php echo RS_CALENDAR; ?>_event_fields" value="advanced" <?php checked(get_option(RS_CALENDAR.'_event_fields'), 'advanced'); ?>>
 			</td>
 		</tr>
 		<?php
@@ -72,7 +72,7 @@ class config extends panel{
 				<tr>
 					<th><?php echo translate_user_role($v['name']); ?></th>
 					
-					<td><label><select name="<?php rsc_echo_esc(RS_CALENDAR); ?>_capability[<?php rsc_echo_esc($k); ?>]">
+					<td><label><select name="<?php echo RS_CALENDAR; ?>_capability[<?php echo $k; ?>]">
 						<option value="full" <?php selected('full', $cap); ?>><?php esc_html_e('Full', 'really-simple-calendar'); ?></option>
 						<option value="manage" <?php selected('manage', $cap); ?>><?php esc_html_e('Manage', 'really-simple-calendar'); ?></option>
 						<option value="edit" <?php selected('edit', $cap); ?>><?php esc_html_e('Edit', 'really-simple-calendar'); ?></option>

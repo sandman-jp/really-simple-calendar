@@ -10,8 +10,7 @@
 		$val = apply_filters('rsc_get_td_value_'.$time_id, $val, $time_id);
 		$val = apply_filters('rsc_get_week_td_value', $val, $time_id);
 		if(!empty($val)):
-			echo $val;
-		?>
+			echo $val; ?>
 		<?php else: ?>
 			<?php do_action('rsc_get_no_td_value', $time_id); ?>
 		<?php endif; ?>
