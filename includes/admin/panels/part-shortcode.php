@@ -67,14 +67,14 @@ foreach($lock_fields as $key){
 			</label>
 			
 			<select id="rsc-shortcode-attr-start_of_week" class="rsc-shortcode-attr">
-				<option value="today"><?php _e('Today'); ?></option>
-				<option value="0"><?php _e('Sunday'); ?></option>
-				<option value="1"><?php _e('Monday'); ?></option>
-				<option value="2"><?php _e('Tuesday'); ?></option>
-				<option value="3"><?php _e('Wednesday'); ?></option>
-				<option value="4"><?php _e('Thursday'); ?></option>
-				<option value="5"><?php _e('Friday'); ?></option>
-				<option value="6"><?php _e('Saturday'); ?></option>
+				<option value="today"><?php _e('Today', 'really-simple-calendar'); ?></option>
+				<option value="0"><?php _e('Sunday', 'really-simple-calendar'); ?></option>
+				<option value="1"><?php _e('Monday', 'really-simple-calendar'); ?></option>
+				<option value="2"><?php _e('Tuesday', 'really-simple-calendar'); ?></option>
+				<option value="3"><?php _e('Wednesday', 'really-simple-calendar'); ?></option>
+				<option value="4"><?php _e('Thursday', 'really-simple-calendar'); ?></option>
+				<option value="5"><?php _e('Friday', 'really-simple-calendar'); ?></option>
+				<option value="6"><?php _e('Saturday', 'really-simple-calendar'); ?></option>
 			</select>
 			
 			<button id="rsc-add-attr-button" class="button"><?php _e('Add an attribute', 'really-simple-calendar'); ?></button>

@@ -168,7 +168,7 @@ class event extends panel{
 				<option value="asc" <?php selected($search_order, 'asc'); ?>><?php _e('Ascending', 'really-simple-calendar'); ?></option>
 				<option value="desc" <?php selected($search_order, 'desc'); ?>><?php _e('Descending', 'really-simple-calendar'); ?></option>
 			</select>
-			<input type="submit" name="filter_action" class="button" value="<?php _e('Filter'); ?>">
+			<input type="submit" name="filter_action" class="button" value="<?php _e('Filter', 'really-simple-calendar'); ?>">
 		</div>
 		<br class="clear">
 	</div>

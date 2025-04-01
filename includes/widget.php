@@ -171,14 +171,14 @@ class widget extends \WP_Widget{
 					<select id="rsc-calendar-start_of_week" name="<?php echo $this->get_field_name(RS_CALENDAR.'_start_of_week'); ?>" class="rsc-widget-item" <?php disabled($is_locked_start_of_week); ?>>
 						<option value=""><?php _e('Default', 'really-simple-calendar'); ?></option>
 						<?php if(!$is_locked_start_of_week): ?>
-						<option value="today" <?php selected($instance[RS_CALENDAR.'_start_of_week'], 'today'); ?>><?php _e('Today'); ?></option>
-						<option value="0" <?php selected($instance[RS_CALENDAR.'_start_of_week'], '0'); ?>><?php _e('Sunday'); ?></option>
-						<option value="1" <?php selected($instance[RS_CALENDAR.'_start_of_week'], '1'); ?>><?php _e('Monday'); ?></option>
-						<option value="2" <?php selected($instance[RS_CALENDAR.'_start_of_week'], '2'); ?>><?php _e('Tuesday'); ?></option>
-						<option value="3" <?php selected($instance[RS_CALENDAR.'_start_of_week'], '3'); ?>><?php _e('Wednesday'); ?></option>
-						<option value="4" <?php selected($instance[RS_CALENDAR.'_start_of_week'], '4'); ?>><?php _e('Thursday'); ?></option>
-						<option value="5" <?php selected($instance[RS_CALENDAR.'_start_of_week'], '5'); ?>><?php _e('Friday'); ?></option>
-						<option value="6" <?php selected($instance[RS_CALENDAR.'_start_of_week'], '6'); ?>><?php _e('Saturday'); ?></option>
+						<option value="today" <?php selected($instance[RS_CALENDAR.'_start_of_week'], 'today'); ?>><?php _e('Today', 'really-simple-calendar'); ?></option>
+						<option value="0" <?php selected($instance[RS_CALENDAR.'_start_of_week'], '0'); ?>><?php _e('Sunday', 'really-simple-calendar'); ?></option>
+						<option value="1" <?php selected($instance[RS_CALENDAR.'_start_of_week'], '1'); ?>><?php _e('Monday', 'really-simple-calendar'); ?></option>
+						<option value="2" <?php selected($instance[RS_CALENDAR.'_start_of_week'], '2'); ?>><?php _e('Tuesday', 'really-simple-calendar'); ?></option>
+						<option value="3" <?php selected($instance[RS_CALENDAR.'_start_of_week'], '3'); ?>><?php _e('Wednesday', 'really-simple-calendar'); ?></option>
+						<option value="4" <?php selected($instance[RS_CALENDAR.'_start_of_week'], '4'); ?>><?php _e('Thursday', 'really-simple-calendar'); ?></option>
+						<option value="5" <?php selected($instance[RS_CALENDAR.'_start_of_week'], '5'); ?>><?php _e('Friday', 'really-simple-calendar'); ?></option>
+						<option value="6" <?php selected($instance[RS_CALENDAR.'_start_of_week'], '6'); ?>><?php _e('Saturday', 'really-simple-calendar'); ?></option>
 						<?php endif; ?>
 					</select>
 				</div>
