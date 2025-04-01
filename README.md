@@ -1,10 +1,31 @@
-# Really Simple Calendar
+=== Really Simple Calendar ===
+Contributors: sandmanjp
+Donate link: https://paypal.me/sandmanjp
+Tags: calendar, rsc, rs calendar, really simple calendar, event calendar
+Requires at least: 6.7
+Tested up to: 6.7
+Stable tag: 0.3.5
+Requires PHP: 8.2
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-必要最小限と思われるシングルカレンダープラグイン。
-https://note.com/sandman_jp/n/nb1ba0379b93f
+The single calendar for multi purpos with multi users. Unlimited events and responsive display. 
 
-下記環境にて動作確認
+== Description ==
 
-- PHP 8.2
-- WordPress 6.7.2
-- 各ブラウザ最新版
+Really simple calendar is one of most easy managing calendar. This plugin provide mutil purpos view, unlimited events, customized css, simple managiment of users and more functions by extentions.
+
+= Links =
+* [Website](https://note.com/sandman_jp/m/m0657144dd8fb)
+
+== Installation ==
+
+1. Upload the entire `really-simple-calendar` folder to the `/wp-content/plugins/` directory.
+1. Activate the plugin through the **Plugins** screen (**Plugins > Installed Plugins**).
+
+== Changelog ==
+
+= 0.3.5 =
+Publish on wordpress.org
+
+== Upgrade Notice ==
