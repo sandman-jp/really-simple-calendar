@@ -1,4 +1,5 @@
 jQuery(function($){
+	
 	function expandEvent(e){
 		e.preventDefault();
 		$(this).toggleClass('is-active');

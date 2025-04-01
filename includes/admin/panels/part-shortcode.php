@@ -18,10 +18,10 @@ foreach($lock_fields as $key){
 			<label><?php esc_html_e('Attribute', 'really-simple-calendar'); ?>
 				<select id="rsc-shortcode-attr">
 					<option value=""><?php esc_html_e('Select', 'really-simple-calendar'); ?></option>
-					<option value="type" data-locked="<?php echo $locked[RS_CALENDAR.'_type_lock'] ?>" <?php disabled($locked[RS_CALENDAR.'_type_lock']); ?>><?php esc_html_e('Calendar Type', 'really-simple-calendar'); ?></option>
-					<option value="from" data-locked="<?php echo $locked[RS_CALENDAR.'_from_lock'] ?>" <?php disabled($locked[RS_CALENDAR.'_from_lock']); ?>><?php esc_html_e('Start From', 'really-simple-calendar'); ?></option>
-					<option value="period" data-locked="<?php echo $locked[RS_CALENDAR.'_period_lock'] ?>" <?php disabled($locked[RS_CALENDAR.'_period_lock']); ?>><?php esc_html_e('Display Period', 'really-simple-calendar'); ?></option>
-					<option value="start_of_week" data-locked="<?php echo $locked[RS_CALENDAR.'_start_of_week_lock'] ?>" <?php disabled($locked[RS_CALENDAR.'_start_of_week_lock']); ?>><?php esc_html_e('Start day of week', 'really-simple-calendar'); ?></option>
+					<option value="type" data-locked="<?php echo $locked[RS_CALENDAR.'_type_lock']; ?>" <?php disabled($locked[RS_CALENDAR.'_type_lock']); ?>><?php esc_html_e('Calendar Type', 'really-simple-calendar'); ?></option>
+					<option value="from" data-locked="<?php echo $locked[RS_CALENDAR.'_from_lock']; ?>" <?php disabled($locked[RS_CALENDAR.'_from_lock']); ?>><?php esc_html_e('Start From', 'really-simple-calendar'); ?></option>
+					<option value="period" data-locked="<?php echo $locked[RS_CALENDAR.'_period_lock']; ?>" <?php disabled($locked[RS_CALENDAR.'_period_lock']); ?>><?php esc_html_e('Display Period', 'really-simple-calendar'); ?></option>
+					<option value="start_of_week" data-locked="<?php echo $locked[RS_CALENDAR.'_start_of_week_lock']; ?>" <?php disabled($locked[RS_CALENDAR.'_start_of_week_lock']); ?>><?php esc_html_e('Start day of week', 'really-simple-calendar'); ?></option>
 				</select>
 			</label>
 			

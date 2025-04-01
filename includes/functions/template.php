@@ -60,7 +60,7 @@ function rsc_param_lock($name, $is_locked=false){
 	<div class="rsc-setting-lock">
 		<label class="rsc-check-locking">
 			<span class="rsc-lock-inputs">
-				<input type="hidden" name="<?php echo $name ?>" value="0">
+				<input type="hidden" name="<?php echo $name; ?>" value="0">
 				<input type="checkbox" name="<?php echo $name; ?>" value="1" <?php checked($is_locked); ?>><?php esc_html_e('Lock this.', 'really-simple-calendar'); ?>
 			</span>
 			<span class="rsc-is-locked dashicons dashicons-lock" title="<?php esc_html_e('Locked', 'really-simple-calendar'); ?>"></span>
@@ -99,5 +99,5 @@ function rsc_get_esc($str){
 }
 function rsc_echo_esc($str){
 	
-	echo rsc_get_esc($txt);
+	echo rsc_get_esc($str);
 }

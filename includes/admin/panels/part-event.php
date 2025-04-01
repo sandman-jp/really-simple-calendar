@@ -9,9 +9,9 @@ ob_start();
 rsc_disabled($is_event_locked[$n], $isnt_x, $lock_name);
 $attr = ob_get_clean();
 ?>
-<tr data-time="<?php rsc_echo_esc($n); ?>">
+<tr data-time="<?php echo $n; ?>">
 	<?php if($num[$n]): ?>
-	<td><input type="hidden" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_number[<?php rsc_echo_esc($n); ?>]" value="1" <?php rsc_echo_esc($attr); ?>><span class="rsc-col-index"><?php echo $i; ?></span></td>
+	<td><input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_number[<?php echo $n; ?>]" value="1" <?php echo $attr; ?>><span class="rsc-col-index"><?php echo $i; ?></span></td>
 	<td>
 		<?php 
 		if($isnt_x){
@@ -30,7 +30,7 @@ $attr = ob_get_clean();
 			<?php do_action('rsc_pre_event_label'); ?>
 			<div class="rsc-event-label rsc-event-inputs">
 				<label><?php esc_html_e('Label', 'really-simple-calendar'); ?><span class="dashicons dashicons-editor-help" title="<?php esc_html_e('This is the name which will appear on pages.', 'really-simple-calendar'); ?>"></span> : </label>
-				<input type="text" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_label[<?php rsc_echo_esc($n); ?>]" value="<?php rsc_echo_esc($labels[$n]); ?>" class="large-text" <?php rsc_echo_esc($attr); ?> required>
+				<input type="text" name="<?php echo RS_CALENDAR; ?>_event_label[<?php echo $n; ?>]" value="<?php echo $labels[$n]; ?>" class="large-text" <?php echo $attr; ?> required>
 			</div>
 			<?php do_action('rsc_after_event_label'); ?>
 		</div>
@@ -47,28 +47,28 @@ $attr = ob_get_clean();
 	</td>
 	<td>
 		<div class="rsv-event-action">
-			<button class="rsc-col-copy" <?php rsc_echo_esc($attr); ?>><span class="dashicons dashicons-admin-page"></span></button>
+			<button class="rsc-col-copy" <?php echo $attr; ?>><span class="dashicons dashicons-admin-page"></span></button>
 		</div>
 		
 		<div class="rsv-event-action">
-			<button class="rsc-col-delete" <?php rsc_echo_esc($attr); ?>><span class="dashicons dashicons-dismiss"></span></button>
+			<button class="rsc-col-delete" <?php echo $attr; ?>><span class="dashicons dashicons-dismiss"></span></button>
 		</div>
 	</td>
 	<?php else: ?>
 	
-	<input type="hidden" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_number[<?php rsc_echo_esc($n); ?>]" value="1" <?php rsc_echo_esc($attr); ?>>
-	<input type="hidden" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_lock[<?php rsc_echo_esc($n); ?>]" value="<?php echo $is_event_locked[$n]; ?>" <?php rsc_echo_esc($attr); ?>>
-	<input type="hidden" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_label[<?php rsc_echo_esc($n); ?>]" value="<?php rsc_echo_esc($labels[$n]); ?>" <?php rsc_echo_esc($attr); ?>>
-	<input type="hidden" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_class[<?php rsc_echo_esc($n); ?>]" value="<?php rsc_echo_esc($classes[$n]); ?>" <?php rsc_echo_esc($attr); ?>>
-	<input type="hidden" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_text_color[<?php rsc_echo_esc($n); ?>]" value="<?php rsc_echo_esc($text_colors[$n]); ?>" <?php rsc_echo_esc($attr); ?>>
-	<input type="hidden" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_bg_color[<?php rsc_echo_esc($n); ?>]" value="<?php rsc_echo_esc($bg_colors[$n]); ?>" <?php rsc_echo_esc($attr); ?>>
-	<input type="hidden" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_date[<?php rsc_echo_esc($n); ?>]" value="<?php rsc_echo_esc($dates[$n]); ?>" <?php rsc_echo_esc($attr); ?>>
-	<input type="hidden" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_last[<?php rsc_echo_esc($n); ?>]" value="<?php rsc_echo_esc($lasts[$n]); ?>" <?php rsc_echo_esc($attr); ?>>
+	<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_number[<?php echo $n; ?>]" value="1" <?php echo $attr; ?>>
+	<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_lock[<?php echo $n; ?>]" value="<?php echo $is_event_locked[$n]; ?>" <?php echo $attr; ?>>
+	<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_label[<?php echo $n; ?>]" value="<?php echo $labels[$n]; ?>" <?php echo $attr; ?>>
+	<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_class[<?php echo $n; ?>]" value="<?php echo $classes[$n]; ?>" <?php echo $attr; ?>>
+	<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_text_color[<?php echo $n; ?>]" value="<?php echo $text_colors[$n]; ?>" <?php echo $attr; ?>>
+	<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_bg_color[<?php echo $n; ?>]" value="<?php echo $bg_colors[$n]; ?>" <?php echo $attr; ?>>
+	<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_date[<?php echo $n; ?>]" value="<?php echo $dates[$n]; ?>" <?php echo $attr; ?>>
+	<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_last[<?php echo $n; ?>]" value="<?php echo $lasts[$n]; ?>" <?php echo $attr; ?>>
 	<?php 
 	if(!empty($repeats[$n])):
 		foreach($repeats[$n] as $rep): 
 	?>
-	<input type="hidden" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_repeat[<?php rsc_echo_esc($n); ?>][]" value="<?php echo $rep; ?>" <?php rsc_echo_esc($attr); ?>>
+	<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_repeat[<?php echo $n; ?>][]" value="<?php echo $rep; ?>" <?php echo $attr; ?>>
 	<?php 
 		endforeach; 
 	endif;
@@ -77,7 +77,7 @@ $attr = ob_get_clean();
 	if(!empty($excludes[$n])):
 		foreach($excludes[$n] as $ex): 
 	?>
-	<input type="hidden" name="<?php rsc_echo_esc(RS_CALENDAR); ?>_event_exclude[<?php rsc_echo_esc($n); ?>][]" value="<?php echo $ex ?>" <?php rsc_echo_esc($attr); ?>>
+	<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_exclude[<?php echo $n; ?>][]" value="<?php echo $ex; ?>" <?php echo $attr; ?>>
 	<?php 
 		endforeach; 
 	endif;
