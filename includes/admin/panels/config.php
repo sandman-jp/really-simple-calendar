@@ -29,7 +29,7 @@ class config extends panel{
 	}
 	
 	function get_label(){
-		return __('Configuration', RSC_TEXTDOMAIN);
+		return __('Configuration', 'really-simple-calendar');
 	}
 	
 	function echo($settings){
@@ -41,10 +41,10 @@ class config extends panel{
 		$roles = get_editable_roles();
 	?>
 	
-	<h2><?php _e('Extentions Setting', RSC_TEXTDOMAIN); ?></h2>
+	<h2><?php _e('Extentions Setting', 'really-simple-calendar'); ?></h2>
 	<table class="form-table rsc-table">
 		<tr>
-			<th><?php _e('Advanced Event Field', RSC_TEXTDOMAIN); ?></th>
+			<th><?php _e('Advanced Event Field', 'really-simple-calendar'); ?></th>
 			<td>
 				<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_fields" value="simple">
 				<input type="checkbox" name="<?php echo RS_CALENDAR; ?>_event_fields" value="advanced" <?php checked(get_option(RS_CALENDAR.'_event_fields'), 'advanced'); ?>>
@@ -55,7 +55,7 @@ class config extends panel{
 		?>
 	</table>
 	
-	<h2><?php _e('Manage Capability', RSC_TEXTDOMAIN); ?></h2>
+	<h2><?php _e('Manage Capability', 'really-simple-calendar'); ?></h2>
 	<table class="form-table rsc-table">
 
 			<?php 
@@ -73,10 +73,10 @@ class config extends panel{
 					<th><?php echo translate_user_role($v['name']); ?></th>
 					
 					<td><label><select name="<?php echo RS_CALENDAR; ?>_capability[<?php echo $k ?>]">
-						<option value="full" <?php selected('full', $cap); ?>><?php _e('Full', RSC_TEXTDOMAIN); ?></option>
-						<option value="manage" <?php selected('manage', $cap); ?>><?php _e('Manage', RSC_TEXTDOMAIN); ?></option>
-						<option value="edit" <?php selected('edit', $cap); ?>><?php _e('Edit', RSC_TEXTDOMAIN); ?></option>
-						<option value="read" <?php selected('read', $cap); ?>><?php _e('Read', RSC_TEXTDOMAIN); ?></option>
+						<option value="full" <?php selected('full', $cap); ?>><?php _e('Full', 'really-simple-calendar'); ?></option>
+						<option value="manage" <?php selected('manage', $cap); ?>><?php _e('Manage', 'really-simple-calendar'); ?></option>
+						<option value="edit" <?php selected('edit', $cap); ?>><?php _e('Edit', 'really-simple-calendar'); ?></option>
+						<option value="read" <?php selected('read', $cap); ?>><?php _e('Read', 'really-simple-calendar'); ?></option>
 					</select></label></td>
 					
 				</tr>

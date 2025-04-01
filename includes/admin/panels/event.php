@@ -27,7 +27,7 @@ class event extends panel{
 	);
 	
 	function get_label(){
-		return __('Event Settings', RSC_TEXTDOMAIN);
+		return __('Event Settings', 'really-simple-calendar');
 	}
 	
 	function update($key, $post_data){
@@ -158,15 +158,15 @@ class event extends panel{
 			}
 			
 			?>
-			<label for="rsc-search-ftom"><?php _e('Period', RSC_TEXTDOMAIN); ?> : </label>
+			<label for="rsc-search-ftom"><?php _e('Period', 'really-simple-calendar'); ?> : </label>
 			<input type="date" id="rsc-search-ftom" name="search_from" value="<?php echo $search_from; ?>">
 			<span>~</span>
 			<input type="date" name="search_to" value="<?php echo $search_to; ?>">
-			<label for="rsc-search-order"><?php _e('Order', RSC_TEXTDOMAIN); ?> : </label>
+			<label for="rsc-search-order"><?php _e('Order', 'really-simple-calendar'); ?> : </label>
 			<select id="rsc-search-order" name="search_order">
-				<option value="" <?php selected($search_order, ''); ?>><?php _e('Saving', RSC_TEXTDOMAIN); ?></option>
-				<option value="asc" <?php selected($search_order, 'asc'); ?>><?php _e('Ascending', RSC_TEXTDOMAIN); ?></option>
-				<option value="desc" <?php selected($search_order, 'desc'); ?>><?php _e('Descending', RSC_TEXTDOMAIN); ?></option>
+				<option value="" <?php selected($search_order, ''); ?>><?php _e('Saving', 'really-simple-calendar'); ?></option>
+				<option value="asc" <?php selected($search_order, 'asc'); ?>><?php _e('Ascending', 'really-simple-calendar'); ?></option>
+				<option value="desc" <?php selected($search_order, 'desc'); ?>><?php _e('Descending', 'really-simple-calendar'); ?></option>
 			</select>
 			<input type="submit" name="filter_action" class="button" value="<?php _e('Filter'); ?>">
 		</div>
@@ -223,7 +223,7 @@ class event extends panel{
 			<tfoot>
 				<tr>
 					<td colspan="4">
-					<button class="rsc-add-button button"><span class="dashicons dashicons-plus-alt2"></span> <?php _e('Add Event', RSC_TEXTDOMAIN); ?></button>
+					<button class="rsc-add-button button"><span class="dashicons dashicons-plus-alt2"></span> <?php _e('Add Event', 'really-simple-calendar'); ?></button>
 					</td>
 				</tr>
 			</tfoot>
