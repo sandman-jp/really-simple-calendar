@@ -6,8 +6,8 @@ function rsc_get_calendar($atts=array()){
 }
 
 //get calendar params
-function rsc_get_calendar_params(){
-	return RSC()->get_calendar_params();
+function rsc_get_calendar_view(){
+	return RSC()->get_calendar_view();
 }
 
 //get start week
@@ -28,13 +28,12 @@ function rsc_get_style($style=false){
 	if(empty($style)){
 		$style = rsc_get_default_style();
 	}
-	return rsc_get_esc($style);
+	return rsc_get_esc($style, false);
 }
 
 function rsc_get_default_style(){
-	ob_start();
-	include RSC_ADMIN_DIR_INCLUDES.'/panels/style-default.txt';
-	$style = ob_get_clean();
 	
-	return rsc_get_esc($style);
+	$content = file_get_contents(RSC_ADMIN_DIR_INCLUDES.'/panels/style-default.txt');
+	
+	return rsc_get_esc($content, false);
 }

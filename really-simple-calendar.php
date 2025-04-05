@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Really Simple Calendar
-Plugin URI: 
+Plugin URI: https://note.com/sandman_jp/m/m0657144dd8fb
 Description: Very Simple Single Calendar.
-Version: 0.3.8
+Version: 0.4.1-beta
 Author: sandman.jp
 Author URI: 
 Text Domain: really-simple-calendar
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if (!class_exists('ReallySimpleCalendar')){
+if (!class_exists('ReallySimpleCalendar')):
 
 define('RSC_VIRSION', '0.3.7');
 
@@ -53,6 +53,13 @@ class ReallySimpleCalendar {
 	
 	function __construct() {
 		
+		add_action('plugins_loaded', array($this, 'init'));
+		
+		//修正分
+		add_filter('pre_option', array($this, 'get_option'), 10, 3);
+	}
+	
+	function init(){
 		$this->_shortcode = new RSC\shortcode;
 		$this->_widget = new RSC\widget;
 		$this->_calendar = new RSC\Calendar\calendar;
@@ -66,23 +73,16 @@ class ReallySimpleCalendar {
 		
 		$plugins = array();
 		
-		$dirs = array();
-		if(file_exists(RSC_DIR.'/extentions/')){
-			$dirs = scandir(RSC_DIR.'/extentions/');
-		}
+		$extenstions = get_option(RS_CALENDAR.'_extentions');
 		
-		foreach($dirs as $dir){
-			if(is_dir(RSC_DIR.'/extentions/'.$dir) && strpos($dir, '.') === false){
-				$plugins[] = $dir;
+		if($extenstions){
+			foreach($extenstions as $k=>$v){
+				$file = RSC_DIR.'/extentions/'.$k.'/'.$k.'.php';
+				if(!empty($v) && file_exists($file)){
+					require_once $file;
+				}
 			}
 		}
-		
-		foreach($plugins as $pl){
-			require_once RSC_DIR.'/extentions/'.$pl.'/'.$pl.'.php';
-		}
-		
-		//修正分
-		add_filter('pre_option', array($this, 'get_option'), 10, 3);
 	}
 	
 	function get_admin(){
@@ -120,7 +120,9 @@ class ReallySimpleCalendar {
 			$post = get_post($args['id']);
 			setup_postdata($post);
 		}
+		
 		$calendar = $this->_calendar->render($args);
+		
 		if(!empty($args['id'])){
 			$post = $tmp;
 			wp_reset_postdata();
@@ -134,12 +136,12 @@ class ReallySimpleCalendar {
 		do_action('rsc_after_render_calendar');
 	}
 	
-	function get_calendar_params(){
-		return $this->_calendar->get_params();
+	function get_calendar_view(){
+		return $this->_calendar->get_view();
 	}
 	
 }
 
-$RSC = new ReallySimpleCalendar;
+RSC();
 
-}
+endif;

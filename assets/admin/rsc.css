@@ -228,9 +228,19 @@
 	color: #2c3338;
 }
 
-.rsc-table-list .rsc-event-exclude-list[readonly] {
+.rsc-table-list .rsc-event-exclude-list[readonly]{
 	opacity: .5;
 	pointer-events: none;
+}
+.rsc-table-list .rsc-event-exclude-list[disabled] {
+	opacity: .5;
+	pointer-events: none;
+	border-color: #fff;
+}
+
+.rsc-table-list .rsc-event-exclude-list[disabled] .rsc-event-exclude-date-item {
+	border-color: #fff;
+	color: rgba(44,51,56,.5);
 }
 
 .rsc-event-exclude-date-item {

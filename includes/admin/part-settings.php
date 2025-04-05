@@ -25,7 +25,7 @@ if(rsc_current_user_can('manage') && !isset($_POST['filter_action'])){
 	//save settings
 	if(isset($_POST['rsc_save_settings_nonce']) && wp_verify_nonce( $_POST['rsc_save_settings_nonce'], 'rsc_'.$panel_name)){
 		$this->post_data = $_POST;
-		$settings = $panel->save($settings);
+		$settings = $panel->save($settings, $this->post_data);
 		
 	}
 }

@@ -5,11 +5,13 @@ if(!isset($is_event_locked[$n])){
 }
 $lock_name = RS_CALENDAR.'_event_lock['.$n.']';
 $isnt_x = !($n=='x');
+
 ob_start();
 rsc_disabled($is_event_locked[$n], $isnt_x, $lock_name);
 $attr = ob_get_clean();
+
 ?>
-<tr data-time="<?php echo $n; ?>">
+<tr data-time="<?php echo $n; ?>" <?php echo $attr; ?>>
 	<?php if($num[$n]): ?>
 	<td><input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_number[<?php echo $n; ?>]" value="1" <?php echo $attr; ?>><span class="rsc-col-index"><?php echo $i; ?></span></td>
 	<td>

@@ -1,0 +1,4 @@
+
+.rsc-setting-panel:nth-of-type(n+2) {
+	display: none;
+}

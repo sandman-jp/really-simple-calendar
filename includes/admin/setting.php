@@ -75,7 +75,7 @@ class setting{
 	}
 	
 	function get_settings(){
-		$settings = rsc_get_calendar_params();
+		$settings = rsc_get_calendar_view();
 		
 		foreach($this->fields as $key){
 			if(!isset($settings[$key])){
@@ -140,9 +140,6 @@ class setting{
 	<div class="rsc-preview">
 		<div id="rsc-calendar-message"></div>
 		<section id="rsc-calendar-wrap">
-			<style>
-				<?php echo rsc_get_style();?>
-			</style>
 			<?php rsc_get_calendar(); ?>
 		</section>
 	</div>

@@ -16,9 +16,10 @@ class setting {
 	public $options;
 	
 	function get_option($key){
-		$opt = isset($this->options[$key]) ? $this->options[$key] : get_option($key);
+		$opt = get_option($key);
 		$opt = apply_filters('rsc_get_option', $opt, $key);
 		$opt = apply_filters('rsc_get_option_'.$key, $opt);
+		$opt = isset($this->options[$key]) ? $this->options[$key] : $opt;
 		return $opt;
 	}
 	
