@@ -89,11 +89,15 @@ function rsc_disabled($compare=true, $current=true, $name=null){
 	
 }
 
-function rsc_get_esc($str){
+function rsc_get_esc($str, $quotes = true){
 	
 	$txt = wp_unslash($str);
 	$txt = strip_tags($txt);
-	$txt = htmlspecialchars($txt, ENT_QUOTES);
+	if($quotes){
+		$txt = htmlspecialchars($txt, ENT_QUOTES);
+	}else{
+		$txt = htmlspecialchars($txt, ENT_NOQUOTES);
+	}
 	
 	return $txt;
 }

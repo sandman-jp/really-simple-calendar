@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Really Simple Calendar\n"
-"POT-Creation-Date: 2025-03-23 11:05+0900\n"
-"PO-Revision-Date: 2025-03-23 11:05+0900\n"
+"POT-Creation-Date: 2025-04-05 18:46+0900\n"
+"PO-Revision-Date: 2025-04-05 18:46+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -22,291 +22,332 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: extentions\n"
 
-#: includes/admin/admin.php:57
-msgid "Sorry, you are not allowed to access this page."
+#: _extentions/custom-label/admin/custom-label.php:27
+msgid "Custom Label"
+msgstr "カスタムラベル"
+
+#: _extentions/custom-label/admin/custom-label.php:87
+#: includes/admin/panels/event.php:229
+msgid "Add Event"
+msgstr "イベントの追加"
+
+#: _extentions/custom-label/admin/part-custom-label.php:19
+#: includes/admin/panels/part-event.php:34
+msgid "Label"
+msgstr "表示名"
+
+#: _extentions/custom-label/admin/part-custom-label.php:19
+msgid "This is the name for select on event setting's panel."
 msgstr ""
 
-#: includes/admin/admin.php:110
+#: _extentions/custom-label/admin/part-custom-label.php:28
+#: _extentions/custom-label/admin/part-custom-label.php:41
+msgid "Type"
+msgstr "タイプ"
+
+#: _extentions/custom-label/admin/part-custom-label.php:28
+#: _extentions/custom-label/admin/part-custom-label.php:41
+#: includes/admin/panels/part-event-advanced.php:4
+#: includes/admin/panels/part-event-simple.php:4
+msgid "If this field is empty, the calendar will use text color and bg color."
+msgstr "未設定の場合、テキストカラーと背景カラーが使用されます。"
+
+#: _extentions/custom-label/admin/part-custom-label.php:31
+msgid "Text Field"
+msgstr "テキスト"
+
+#: _extentions/custom-label/admin/part-custom-label.php:32
+msgid "Text Area"
+msgstr "テキストエリア"
+
+#: _extentions/custom-label/admin/part-custom-label.php:33
+msgid "Radio"
+msgstr "ラジオボタン"
+
+#: _extentions/custom-label/admin/part-custom-label.php:34
+msgid "Checkbox"
+msgstr "チェックボックス"
+
+#: _extentions/custom-label/admin/part-custom-label.php:35
+#: includes/admin/panels/part-shortcode.php:21
+msgid "Select"
+msgstr "選択"
+
+#: _extentions/custom-label/custom-label.php:42
+msgid "Field Type"
+msgstr "フィールドタイプ"
+
+#: _extentions/visual-editor/admin/visual-editor.php:15
+msgid "Visual Editor"
+msgstr "ビジュアルエディター"
+
+#: includes/admin/admin.php:70
 msgid "Can't load the calendar. Please try it later."
 msgstr "カレンダーを読み込めませんでした。後ほどお試しください。"
 
-#: includes/admin/admin.php:111
+#: includes/admin/admin.php:71
 msgid ""
 "The calendar updated. <strong>Save</strong> this parameters, if you'd like "
 "to use this preview's calendar."
 msgstr ""
-"カレンダーが更新されました。このプレビューのカレンダーをお使いになりたい場"
-"合は、<strong>設定を保存</strong>してください。"
+"カレンダーが更新されました。このプレビューのカレンダーをお使いになりたい場合"
+"は、<strong>設定を保存</strong>してください。"
 
-#: includes/admin/admin.php:112
+#: includes/admin/admin.php:72
 msgid ""
 "The calendar updated. <strong>Copy shortcode</strong> and paste on a post, "
 "if you'd like to use this preview's calendar."
 msgstr ""
-"カレンダーが更新されました。このプレビューのカレンダーをお使いになりたい場"
-"合は、<strong>ショートコードをコピー</strong>して記事にペーストしてくださ"
-"い。"
+"カレンダーが更新されました。このプレビューのカレンダーをお使いになりたい場合"
+"は、<strong>ショートコードをコピー</strong>して記事にペーストしてください。"
 
-#: includes/admin/admin.php:120
+#: includes/admin/admin.php:80
 msgid "Really Simple Calendar - General Settings"
 msgstr "Really Simple Calendar - 一般設定"
 
 #. Plugin Name of the plugin/theme
-#: includes/admin/admin.php:121
+#: includes/admin/admin.php:81
 msgid "Really Simple Calendar"
 msgstr "Really Simple Calendar"
 
-#: includes/admin/admin.php:169
-msgid "Preview"
-msgstr "プレビュー"
-
-#: includes/admin/ajax.php:35 includes/admin/ajax.php:65
+#: includes/admin/ajax.php:36 includes/admin/ajax.php:84
 msgid "Loading the calendar failed."
 msgstr "カレンダーの読み込みに失敗しました。"
 
-#: includes/admin/panels/config.php:31
+#: includes/admin/panels/config.php:33
 msgid "Configuration"
 msgstr "機能・権限設定"
 
-#: includes/admin/panels/config.php:44
+#: includes/admin/panels/config.php:45
 msgid "Extentions Setting"
 msgstr "拡張機能"
 
-#: includes/admin/panels/config.php:47
+#: includes/admin/panels/config.php:48
 msgid "Advanced Event Field"
 msgstr "高度なイベント設定"
 
 #: includes/admin/panels/config.php:55
+msgid "Multi Calendar"
+msgstr "マルチカレンダー"
+
+#: includes/admin/panels/config.php:55
+msgid "Donation"
+msgstr "ドネーション"
+
+#: includes/admin/panels/config.php:65
 msgid "Manage Capability"
 msgstr "権限管理"
 
-#: includes/admin/panels/config.php:68
+#: includes/admin/panels/config.php:83
 msgid "Full"
 msgstr "全て"
 
-#: includes/admin/panels/config.php:69
+#: includes/admin/panels/config.php:84
 msgid "Manage"
 msgstr "管理"
 
-#: includes/admin/panels/config.php:70
+#: includes/admin/panels/config.php:85
 msgid "Edit"
 msgstr "編集"
 
-#: includes/admin/panels/config.php:71
+#: includes/admin/panels/config.php:86
 msgid "Read"
 msgstr "表示"
 
-#: includes/admin/panels/contact.php:19
+#: includes/admin/panels/contact.php:21
 msgid "Contact"
 msgstr "コンタクト"
 
-#: includes/admin/panels/event.php:31
+#: includes/admin/panels/event.php:30
 msgid "Event Settings"
 msgstr "イベント設定"
 
-#: includes/admin/panels/event.php:166 includes/admin/panels/view.php:144
+#: includes/admin/panels/event.php:161
+#: includes/admin/panels/part-event-advanced.php:23
+#: includes/admin/panels/view.php:137
 msgid "Period"
 msgstr "期間"
 
-#: includes/admin/panels/event.php:170
+#: includes/admin/panels/event.php:165
 msgid "Order"
 msgstr "並び順"
 
-#: includes/admin/panels/event.php:172
+#: includes/admin/panels/event.php:167
 msgid "Saving"
 msgstr "保存順"
 
-#: includes/admin/panels/event.php:173
+#: includes/admin/panels/event.php:168
 msgid "Ascending"
 msgstr "昇順"
 
-#: includes/admin/panels/event.php:174
+#: includes/admin/panels/event.php:169
 msgid "Descending"
 msgstr "降順"
 
-#: includes/admin/panels/event.php:176
+#: includes/admin/panels/event.php:171
 msgid "Filter"
 msgstr "絞り込み"
-
-#: includes/admin/panels/event.php:228
-msgid "Add Event"
-msgstr "イベントの追加"
 
 #: includes/admin/panels/part-event-advanced.php:4
 #: includes/admin/panels/part-event-simple.php:4
 msgid "Class"
 msgstr "クラス"
 
-#: includes/admin/panels/part-event-advanced.php:4
-#: includes/admin/panels/part-event-simple.php:4
-msgid ""
-"If this field is empty, the calendar will use text color\t and bg color."
-msgstr "もし空なら、テキストカラーと背景カラーが使用されます。"
-
-#: includes/admin/panels/part-event-advanced.php:9
+#: includes/admin/panels/part-event-advanced.php:10
 msgid "Text"
 msgstr "文字"
 
-#: includes/admin/panels/part-event-advanced.php:15
+#: includes/admin/panels/part-event-advanced.php:16
 msgid "BG"
 msgstr "背景"
 
-#: includes/admin/panels/part-event-advanced.php:22
+#: includes/admin/panels/part-event-advanced.php:35
+msgid "Repeat"
+msgstr "繰り返し"
+
+#: includes/admin/panels/part-event-advanced.php:46
+msgid "Exclude"
+msgstr "除外"
+
 #: includes/admin/panels/part-event-simple.php:11
-#: includes/admin/panels/part-shortcode.php:41
-#: includes/admin/panels/part-shortcode.php:47
-#: includes/admin/panels/view.php:113 includes/admin/panels/view.php:159
+#: includes/admin/panels/part-shortcode.php:42
+#: includes/admin/panels/part-shortcode.php:48
+#: includes/admin/panels/view.php:108 includes/admin/panels/view.php:152
 #: includes/widget.php:124 includes/widget.php:150
 msgid "Date"
 msgstr "日付"
 
-#: includes/admin/panels/part-event-advanced.php:31
-msgid "Repeat"
-msgstr "繰り返し"
-
-#: includes/admin/panels/part-event-advanced.php:41
-msgid "Exclude"
-msgstr "除外"
-
-#: includes/admin/panels/part-event.php:20
-msgid "Label"
-msgstr "表示名"
-
-#: includes/admin/panels/part-event.php:20
+#: includes/admin/panels/part-event.php:34
 msgid "This is the name which will appear on pages."
 msgstr "これは、ページに表示される名前です。"
 
-#: includes/admin/panels/part-footer.php:3
+#: includes/admin/panels/part-footer.php:9
 msgid "Reload preview"
 msgstr "プレビューの更新"
 
-#: includes/admin/panels/part-shortcode.php:9
+#: includes/admin/panels/part-shortcode.php:10
 msgid "Shortcode"
 msgstr "ショートコード"
 
-#: includes/admin/panels/part-shortcode.php:18
+#: includes/admin/panels/part-shortcode.php:19
 msgid "Attribute"
 msgstr "属性"
 
-#: includes/admin/panels/part-shortcode.php:20
-msgid "Select"
-msgstr "選択"
-
-#: includes/admin/panels/part-shortcode.php:21
-#: includes/admin/panels/part-shortcode.php:29
-#: includes/admin/panels/view.php:53 includes/widget.php:90
+#: includes/admin/panels/part-shortcode.php:22
+#: includes/admin/panels/part-shortcode.php:30
+#: includes/admin/panels/view.php:50 includes/widget.php:90
 msgid "Calendar Type"
 msgstr "カレンダータイプ"
 
-#: includes/admin/panels/part-shortcode.php:22
-#: includes/admin/panels/part-shortcode.php:36
-#: includes/admin/panels/view.php:72 includes/widget.php:114
+#: includes/admin/panels/part-shortcode.php:23
+#: includes/admin/panels/part-shortcode.php:37
+#: includes/admin/panels/view.php:67 includes/widget.php:114
 msgid "Start From"
 msgstr "開始"
 
-#: includes/admin/panels/part-shortcode.php:23
-#: includes/admin/panels/part-shortcode.php:45
-#: includes/admin/panels/view.php:137 includes/widget.php:143
+#: includes/admin/panels/part-shortcode.php:24
+#: includes/admin/panels/part-shortcode.php:46
+#: includes/admin/panels/view.php:130 includes/widget.php:143
 msgid "Display Period"
 msgstr "表示期間"
 
-#: includes/admin/panels/part-shortcode.php:24
-#: includes/admin/panels/view.php:183 includes/widget.php:168
+#: includes/admin/panels/part-shortcode.php:25
+#: includes/admin/panels/view.php:174 includes/widget.php:168
 msgid "Start day of week"
 msgstr "週の始まり"
 
-#: includes/admin/panels/part-shortcode.php:30
-#: includes/admin/panels/view.php:58 includes/widget.php:96
+#: includes/admin/panels/part-shortcode.php:31
+#: includes/admin/panels/view.php:55 includes/widget.php:96
 msgid "Monthly"
 msgstr "月型"
 
-#: includes/admin/panels/part-shortcode.php:31
-#: includes/admin/panels/view.php:59 includes/widget.php:97
+#: includes/admin/panels/part-shortcode.php:32
+#: includes/admin/panels/view.php:56 includes/widget.php:97
 msgid "Weekly"
 msgstr "週型"
 
-#: includes/admin/panels/part-shortcode.php:32
-#: includes/admin/panels/view.php:60 includes/widget.php:98
+#: includes/admin/panels/part-shortcode.php:33
+#: includes/admin/panels/view.php:57 includes/widget.php:98
 msgid "Daily"
 msgstr "日型"
 
-#: includes/admin/panels/part-shortcode.php:37
-#: includes/admin/panels/view.php:80 includes/widget.php:120
+#: includes/admin/panels/part-shortcode.php:38
+#: includes/admin/panels/view.php:75 includes/widget.php:120
 msgid "Previous"
 msgstr "以前"
 
-#: includes/admin/panels/part-shortcode.php:38
-#: includes/admin/panels/view.php:96 includes/widget.php:121
+#: includes/admin/panels/part-shortcode.php:39
+#: includes/admin/panels/view.php:91 includes/widget.php:121
 msgid "Current"
 msgstr "現"
 
-#: includes/admin/panels/part-shortcode.php:39
-#: includes/admin/panels/view.php:102 includes/widget.php:122
+#: includes/admin/panels/part-shortcode.php:40
+#: includes/admin/panels/view.php:97 includes/widget.php:122
 msgid "Next"
 msgstr "翌"
 
-#: includes/admin/panels/part-shortcode.php:40
-#: includes/admin/panels/part-shortcode.php:70
-#: includes/admin/panels/view.php:108 includes/admin/panels/view.php:188
+#: includes/admin/panels/part-shortcode.php:41
+#: includes/admin/panels/part-shortcode.php:71
+#: includes/admin/panels/view.php:103 includes/admin/panels/view.php:179
 #: includes/widget.php:123 includes/widget.php:174
 msgid "Today"
 msgstr "当日"
 
-#: includes/admin/panels/part-shortcode.php:46 includes/widget.php:149
+#: includes/admin/panels/part-shortcode.php:47 includes/widget.php:149
 msgid "Priod"
 msgstr "期間"
 
-#: includes/admin/panels/part-shortcode.php:52
-#: includes/admin/panels/view.php:203
+#: includes/admin/panels/part-shortcode.php:53
+#: includes/admin/panels/view.php:194
 msgid "Align for cells"
 msgstr "カレンダーの向き"
 
-#: includes/admin/panels/part-shortcode.php:53
-#: includes/admin/panels/view.php:215 includes/widget.php:105
+#: includes/admin/panels/part-shortcode.php:54
+#: includes/admin/panels/view.php:206 includes/widget.php:105
 msgid "Horizontal"
 msgstr "横型"
 
-#: includes/admin/panels/part-shortcode.php:54
-#: includes/admin/panels/view.php:220 includes/widget.php:106
+#: includes/admin/panels/part-shortcode.php:55
+#: includes/admin/panels/view.php:211 includes/widget.php:106
 msgid "Vertical"
 msgstr "縦型"
 
-#: includes/admin/panels/part-shortcode.php:71
-#: includes/admin/panels/view.php:189 includes/widget.php:175
+#: includes/admin/panels/part-shortcode.php:72
+#: includes/admin/panels/view.php:180 includes/widget.php:175
 msgid "Sunday"
 msgstr ""
 
-#: includes/admin/panels/part-shortcode.php:72
-#: includes/admin/panels/view.php:190 includes/widget.php:176
+#: includes/admin/panels/part-shortcode.php:73
+#: includes/admin/panels/view.php:181 includes/widget.php:176
 msgid "Monday"
 msgstr ""
 
-#: includes/admin/panels/part-shortcode.php:73
-#: includes/admin/panels/view.php:191 includes/widget.php:177
+#: includes/admin/panels/part-shortcode.php:74
+#: includes/admin/panels/view.php:182 includes/widget.php:177
 msgid "Tuesday"
 msgstr ""
 
-#: includes/admin/panels/part-shortcode.php:74
-#: includes/admin/panels/view.php:192 includes/widget.php:178
+#: includes/admin/panels/part-shortcode.php:75
+#: includes/admin/panels/view.php:183 includes/widget.php:178
 msgid "Wednesday"
 msgstr ""
 
-#: includes/admin/panels/part-shortcode.php:75
-#: includes/admin/panels/view.php:193 includes/widget.php:179
+#: includes/admin/panels/part-shortcode.php:76
+#: includes/admin/panels/view.php:184 includes/widget.php:179
 msgid "Thursday"
 msgstr ""
 
-#: includes/admin/panels/part-shortcode.php:76
-#: includes/admin/panels/view.php:194 includes/widget.php:180
+#: includes/admin/panels/part-shortcode.php:77
+#: includes/admin/panels/view.php:185 includes/widget.php:180
 msgid "Friday"
 msgstr ""
 
-#: includes/admin/panels/part-shortcode.php:77
-#: includes/admin/panels/view.php:195 includes/widget.php:181
+#: includes/admin/panels/part-shortcode.php:78
+#: includes/admin/panels/view.php:186 includes/widget.php:181
 msgid "Saturday"
 msgstr ""
 
-#: includes/admin/panels/part-shortcode.php:80
+#: includes/admin/panels/part-shortcode.php:81
 msgid "Add an attribute"
 msgstr "属性を追加"
 
@@ -314,7 +355,7 @@ msgstr "属性を追加"
 msgid "Style Sheet"
 msgstr "スタイルシート"
 
-#: includes/admin/panels/style.php:44
+#: includes/admin/panels/style.php:39
 msgid "Class Style"
 msgstr "クラススタイル"
 
@@ -322,48 +363,72 @@ msgstr "クラススタイル"
 msgid "View Settings"
 msgstr "表示設定"
 
-#: includes/admin/panels/view.php:90 includes/admin/panels/view.php:154
+#: includes/admin/panels/view.php:85 includes/admin/panels/view.php:147
 #: includes/widget.php:108 includes/widget.php:131 includes/widget.php:157
 msgctxt "unit"
 msgid "Month(s)"
 msgstr "ヶ月"
 
-#: includes/admin/panels/view.php:90 includes/admin/panels/view.php:154
+#: includes/admin/panels/view.php:85 includes/admin/panels/view.php:147
 #: includes/widget.php:108 includes/widget.php:131 includes/widget.php:157
 msgctxt "unit"
 msgid "Week(s)"
 msgstr "ヶ週"
 
-#: includes/admin/panels/view.php:90 includes/admin/panels/view.php:154
+#: includes/admin/panels/view.php:85 includes/admin/panels/view.php:147
 #: includes/widget.php:108 includes/widget.php:131 includes/widget.php:157
 msgctxt "unit"
 msgid "Day(s)"
 msgstr "ヶ日"
 
-#: includes/admin/panels/view.php:97 includes/admin/panels/view.php:103
+#: includes/admin/panels/view.php:92 includes/admin/panels/view.php:98
 msgid "Month"
 msgstr "月"
 
-#: includes/admin/panels/view.php:97 includes/admin/panels/view.php:103
+#: includes/admin/panels/view.php:92 includes/admin/panels/view.php:98
 msgid "Week"
 msgstr "週"
 
-#: includes/admin/panels/view.php:97 includes/admin/panels/view.php:103
+#: includes/admin/panels/view.php:92 includes/admin/panels/view.php:98
 msgid "Day"
 msgstr "日"
 
-#: includes/functions/common.php:49 includes/functions/common.php:63
-#: includes/functions/common.php:70
+#: includes/admin/part-settings.php:41
+msgid "Parameters are saved."
+msgstr "保存されました。"
+
+#: includes/admin/part-settings.php:45
+msgid "Parameters are'nd saved."
+msgstr "保存されませんでした。"
+
+#: includes/admin/setting.php:72
+msgid "Sorry, you are not allowed to access this page."
+msgstr "このページにはアクセスできません。"
+
+#: includes/admin/setting.php:139
+msgid "Preview"
+msgstr "プレビュー"
+
+#: includes/functions/template.php:49 includes/functions/template.php:66
+#: includes/functions/template.php:73
 msgid "Locked"
 msgstr "ロック中"
 
-#: includes/functions/common.php:61
+#: includes/functions/template.php:64
 msgid "Lock this."
 msgstr "ロックする。"
 
-#: includes/functions/common.php:64
+#: includes/functions/template.php:67
 msgid "Unlocked"
 msgstr "ロック解除"
+
+#: includes/functions/template.php:73
+msgid "Master Locked"
+msgstr "マスターロック中"
+
+#: includes/widget.php:27
+msgid "Very Simple Single Calendar"
+msgstr "とてもシンプルなシングルカレンダー"
 
 #: includes/widget.php:68
 msgid "New title"
@@ -386,13 +451,20 @@ msgstr "0未満の値が必要です"
 msgid "Should be 0 or more."
 msgstr "0以上の値が必要です。"
 
+#. Plugin URI of the plugin/theme
+msgid "https://note.com/sandman_jp/m/m0657144dd8fb"
+msgstr ""
+
 #. Description of the plugin/theme
-msgid "Very Simple Calendar for personal."
-msgstr "必要最低限のカレンダーです。"
+msgid "Very Simple Single Calendar."
+msgstr "とてもシンプルなシングルカレンダー。"
 
 #. Author of the plugin/theme
 msgid "sandman.jp"
 msgstr ""
+
+#~ msgid "Very Simple Calendar for personal."
+#~ msgstr "必要最低限のカレンダーです。"
 
 #~ msgid "Align for Cells"
 #~ msgstr "カレンダーの向き"
@@ -411,9 +483,6 @@ msgstr ""
 
 #~ msgid "Select Display Period"
 #~ msgstr "表示期間を選択"
-
-#~ msgid "Monthly Calendar"
-#~ msgstr "月表示"
 
 #~ msgid "Weekly Calendar"
 #~ msgstr "週表示"

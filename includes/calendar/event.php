@@ -25,13 +25,43 @@ class event extends setting{
 	private $_days = array();
 	private $_weeks = array();
 	
+	function get_option($key){
+		$opt = get_option($key);
+		$opt = apply_filters('rsc_get_option', $opt, $key);
+		$opt = apply_filters('rsc_get_option_'.$key, $opt);
+		
+		if(isset($this->options[$key])){
+			
+			if(is_array($this->options[$key])){
+				foreach($this->options[$key] as $k=>$v){
+					$opt[$k] = $v;
+				}
+			}else{
+				$opt = $this->options[$key];
+			}
+		}
+		
+		return $opt;
+	}
+	
 	function set_events($args){
 		global $wp_locale;
+		$this->options = array();
+		$this->_nums = array();
+		$this->_labels = array();
+		$this->_classes = array();
+		$this->_dates = array();
+		$this->_lasts = array();
+		$this->_repeats = array();
+		$this->_excludes = array();
+		$this->_text_colors = array();
+		$this->_bg_colors = array();
+		$this->_weeks = array();
+		$this->_days = array();
 		
 		foreach($args as $k=>$v){
 			$this->options[$k] = $v;
 		}
-		
 		
 		$this->_weeks = array_fill(0, 7, array());
 		
@@ -43,7 +73,7 @@ class event extends setting{
 		}
 		
 		if(empty($this->_dates)){
-				$this->_dates = $this->get_option(RS_CALENDAR.'_event_date');
+			$this->_dates = $this->get_option(RS_CALENDAR.'_event_date');
 		}
 		if(empty($this->_lasts)){
 			$this->_lasts = $this->get_option(RS_CALENDAR.'_event_last');
@@ -132,6 +162,7 @@ class event extends setting{
 				$this->_labels = $this->get_option(RS_CALENDAR.'_event_label');
 			}
 			$label = rsc_get_esc($this->_labels[$k]);
+			
 			if(empty($this->_classes)){
 				$this->_classes = $this->get_option(RS_CALENDAR.'_event_class');
 			}
@@ -157,7 +188,7 @@ class event extends setting{
 			
 			ob_start();
 		?>
-		<span class="rsc-calendar-event-wrapper rsc-calendar-event-<?php echo $k; ?>"><span class="rsc-calendar-event <?php echo $class; ?>" title="<?php echo $label; ?>" <?php echo $style; ?>><?php echo $label; ?></span></span>
+		<span class="rsc-calendar-event-wrapper rsc-calendar-event-<?php echo $k; ?>"><span class="rsc-calendar-event <?php echo $class; ?>" title="<?php echo $label; ?>" <?php echo $style; ?>><?php echo $label; ?><span class="rsc-triangle"></span></span></span>
 		<?php
 			$html .= ob_get_clean();
 			

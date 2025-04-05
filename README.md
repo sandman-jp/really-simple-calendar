@@ -4,7 +4,7 @@ Donate link: https://paypal.me/sandmanjp
 Tags: calendar, rsc, rs calendar, really simple calendar, event calendar
 Requires at least: 6.7
 Tested up to: 6.7
-Stable tag: 0.3.6
+Stable tag: 0.3.7
 Requires PHP: 8.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -25,7 +25,13 @@ Really simple calendar is one of most easy managing calendar. This plugin provid
 
 == Changelog ==
 
-= 0.3.5 =
+= 0.4.1-beta =
+- Add extention "Multi Calendars".
+- Fix JS and CSS
+- Change classname.
+- Review of some codes.
+
+= 0.3.7 =
 Publish on wordpress.org
 
 == Upgrade Notice ==

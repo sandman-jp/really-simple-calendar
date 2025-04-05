@@ -14,6 +14,7 @@ class config extends panel{
 	
 	public $fields = array(
 		RS_CALENDAR.'_event_fields',
+		RS_CALENDAR.'_extentions',
 		RS_CALENDAR.'_capability',
 	);
 	
@@ -50,9 +51,16 @@ class config extends panel{
 				<input type="checkbox" name="<?php echo RS_CALENDAR; ?>_event_fields" value="advanced" <?php checked(get_option(RS_CALENDAR.'_event_fields'), 'advanced'); ?>>
 			</td>
 		</tr>
-		<?php
-		$extentions = get_option(RS_CALENDAR.'_extentions');
-		?>
+		<tr>
+			<th><?php esc_html_e('Multi Calendar', 'really-simple-calendar'); ?></th>
+			<td>
+				<?php $extenstions = get_option(RS_CALENDAR.'_extentions'); ?>
+				<input type="hidden" name="<?php echo RS_CALENDAR; ?>_extentions[multi-calendar]" value="">
+				<input type="checkbox" name="<?php echo RS_CALENDAR; ?>_extentions[multi-calendar]" value="1" <?php isset($extenstions['multi-calendar']) ? checked($extenstions['multi-calendar'], '1') : ''; ?>>
+				<small>(<a href="<?php echo get_admin_url().'admin.php?page='.RSC_GENERAL_SETTINGS_PAGE.'&rsc=contact'; ?>"><?php esc_html_e('Donation', 'really-simple-calendar'); ?></a>)</small>
+			</td>
+		</tr>
+		
 	</table>
 	
 	<h2><?php esc_html_e('Manage Capability', 'really-simple-calendar'); ?></h2>

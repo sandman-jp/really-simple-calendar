@@ -10,16 +10,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 if(!class_exists('RSC\Calendar\calender')):
 
 require_once RSC_DIR_INCLUDES.'/calendar/setting.php';
-require_once RSC_DIR_INCLUDES.'/calendar/param.php';
+require_once RSC_DIR_INCLUDES.'/calendar/view.php';
 require_once RSC_DIR_INCLUDES.'/calendar/event.php';
 require_once RSC_DIR_INCLUDES.'/calendar/style.php';
 
 class calendar {
 	
 	private $_params;
+	private $_view;
+	private $_event;
+	private $_style;
 	public $has_style = false;
 	
 	function __construct(){
+		$this->_view = new view();
+		$this->_event = new event();
+		$this->_style = new style();
+		
 		add_filter('rsc_get_month_th_value', array($this, 'get_month_th_value'), 10, 2);
 		
 		add_filter('rsc_get_week_th_value', array($this, 'get_th_value'), 10, 2);
@@ -39,21 +46,20 @@ class calendar {
 		wp_enqueue_script('rsc-js', RSC_ASSETS_URL.'/rsc.js', array('jquery', 'jquery-ui-sortable'), RSC_VIRSION, true);
 	}
 	
-	function get_params($args=array()){
-		$param = new param();
-		return $param->get_params($args);
+	function get_view($args=array()){
+		
+		return $this->_view->get_view($args);
 	}
 	
 	function set_events($args){
-		$event = new event();
-		$event->set_events($args);
+		$this->_event->set_events($args);
 	}
 	
 	function set_style($args){
 		$args['has_style'] = $this->has_style;
 		
-		$event = new style();
-		$event->set_style($args);
+		$args = apply_filters('rsc_pre_set_style', $args);
+		$this->_style->set_style($args);
 	}
 	
 	
@@ -80,7 +86,8 @@ class calendar {
 		$this->set_events($args);
 		$this->set_style($args);
 		
-		$args = $this->get_params($args);
+		$args = $this->get_view($args);
+		
 		$args = apply_filters('rsc_before_render_calendar_tables', $args);
 		
 		//カレンダーの取得

@@ -22,6 +22,7 @@ class style extends setting {
 				$this->options[$k] = $v;
 			}
 		}
+		
 		if(isset($args['has_style'])){
 			add_filter('rsc_after_render_calendar_tables', array($this, 'add_style'));
 		}

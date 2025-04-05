@@ -27,10 +27,13 @@
 		<input type="date" name="<?php echo RS_CALENDAR; ?>_event_last[<?php echo $n; ?>]" value="<?php echo $lasts[$n]; ?>" class="text" <?php echo $attr; ?>>
 	</div>
 	
-	<?php $repeats[$n] = empty($repeats[$n]) ? array() : $repeats[$n]; ?>
+	<?php 
+	$repeats[$n] = empty($repeats[$n]) ? array() : $repeats[$n]; 
+	$repeats[$n] = !is_array($repeats[$n]) ? array($repeats[$n]) : $repeats[$n];
+	?>
 	<div class="rsc-event-repeat rsc-event-inputs">
 		<label><?php esc_html_e('Repeat', 'really-simple-calendar'); ?> : </label>
-		<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_repeat[<?php echo $n; ?>][]" value="">
+		<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_repeat[<?php echo $n; ?>][]" value="" <?php echo $attr; ?>>
 		
 		<?php for($h=0; $h<7; $h++): ?>
 		<label class="rsc-event-repeat-label"><input type="checkbox" name="<?php echo RS_CALENDAR; ?>_event_repeat[<?php echo $n; ?>][]" value="<?php echo $h; ?>" <?php checked(in_array((string)$h, $repeats[$n], true)); ?> <?php echo $attr; ?>><?php esc_html_e($wp_locale->get_weekday_abbrev($wp_locale->get_weekday($h))); ?></label>
@@ -43,7 +46,10 @@
 			<label><?php esc_html_e('Exclude', 'really-simple-calendar'); ?> : </label>
 			<input type="date" class="rsc-event-exclude-date" data-time="<?php echo $n; ?>" <?php echo $attr; ?>>
 		</div>
-		<?php $excludes[$n] = empty($excludes[$n]) ? array() : $excludes[$n]; ?>
+		<?php 
+		$excludes[$n] = empty($excludes[$n]) ? array() : $excludes[$n]; 
+		$excludes[$n] = !is_array($excludes[$n]) ? array($excludes[$n]) : $excludes[$n];
+		?>
 		<div class="rsc-event-exclude-list" <?php echo $attr; ?>>
 			
 		</div>

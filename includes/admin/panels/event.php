@@ -45,7 +45,7 @@ class event extends panel{
 					foreach($v as $kk=>$vv){
 						//if locked.
 						if($vv && isset($this->settings[$key][$kk])){
-							//unset($post_data[$kk]);
+							//変更しない
 							$post_data[$kk] = $this->settings[$key][$kk];
 						}
 						//
@@ -53,6 +53,7 @@ class event extends panel{
 				}
 				
 			};
+			
 			foreach($post_data as $k=>$v){
 				$this->settings[$key][$k] = $v; 
 			}
@@ -135,8 +136,7 @@ class event extends panel{
 		?>
 	</script>
 	
-	<?php if(!get_the_ID()): ?>
-	
+	<?php ob_start(); ?>
 	<div class="tablenav top">
 		<div class="alignright actions">
 			<?php
@@ -172,7 +172,10 @@ class event extends panel{
 		</div>
 		<br class="clear">
 	</div>
-	<?php endif; ?>
+	<?php 
+	$event_serch = ob_get_clean();
+	echo apply_filters('rsc_get_event_serch', $event_serch);
+	?>
 	
 	
 	<div class="rsc-table-list-wrapper">

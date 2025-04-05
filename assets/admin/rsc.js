@@ -1,3 +1,58 @@
+function reloadCalendar(old_form, action='rsc_get_calendar'){
+			
+	let new_form = [];
+	
+	let value_arr = {};
+	
+	for(let i=0; i<=old_form.length; i++){
+		let input = old_form[i];
+		
+		if(typeof input != 'undefined'){
+			if(input['name'].match(/\[\]$/)){
+				let new_name = input['name'].replace(/\[\]$/, '');
+				//配列のデータのするのは分けておく
+				if(typeof value_arr[new_name] == 'undefined'){
+					value_arr[new_name] = [];
+				}
+				value_arr[new_name].push(input['value']);
+				
+			}else{
+				new_form.push(input);
+			}
+		}
+	}
+	
+	for(let o in value_arr){
+		new_form.push({name: o, value: value_arr[o]});
+	}
+	let $ = jQuery;
+	$('#rsc-calendar-wrap').css('opacity', .5);
+	$('#rsc-calendar-message').html('');
+	setTimeout(function(){
+			$.ajax({
+				url: ajaxurl,
+				data: {
+					action: action,
+					rsc_data: new_form,
+				},
+				dataType: 'json',
+				type: 'post',
+			}).then(function(res){
+				if(res.success){
+					$('#rsc-calendar-message').html('<div class="updated"><p>'+RSC.CALENDAR_LOAD_SUCCESS+'</p></div>');
+					$('#rsc-calendar-wrap').html(res.data);
+				}else{
+					$('#rsc-calendar-message').html('<div class="error"><p>'+res.data+'</p></div>');
+				}
+				$('#rsc-calendar-wrap').css('opacity', 1);
+				$('.rsc-calendar-event').click(expandEvent);
+			}, function(error){
+				$('#rsc-calendar-message').html('<div class="error"><p>'+RSC.CALENDAR_LOAD_FAILED+'</p></div>');
+			});
+	}, 100);
+
+	
+}
 
 jQuery(function($){
 	
@@ -5,60 +60,8 @@ jQuery(function($){
 		e.preventDefault();
 	});
 	
-	function reloadCalendar(){
-				
-		let old_form = $('.rsc-calendar-form').serializeArray();
-		let new_form = [];
-		
-		let value_arr = {};
-		
-		for(let i=0; i<=old_form.length; i++){
-			let input = old_form[i];
-			
-			if(typeof input != 'undefined'){
-				if(input['name'].match(/\[\]$/)){
-					let new_name = input['name'].replace(/\[\]$/, '');
-					//配列のデータのするのは分けておく
-					if(typeof value_arr[new_name] == 'undefined'){
-						value_arr[new_name] = [];
-					}
-					value_arr[new_name].push(input['value']);
-					
-				}else{
-					new_form.push(input);
-				}
-			}
-		}
-		
-		for(let o in value_arr){
-			new_form.push({name: o, value: value_arr[o]});
-		}
-				
-		$('#rsc-calendar-wrap').css('opacity', .5);
-		$('#rsc-calendar-message').html('');
-		setTimeout(function(){
-				$.ajax({
-					url: ajaxurl,
-					data: {
-						action: 'rsc_get_calendar',
-						rsc_data: new_form,
-					},
-					dataType: 'json',
-					type: 'post',
-				}).then(function(res){
-					$('#rsc-calendar-message').html('<div class="updated"><p>'+RSC.CALENDAR_LOAD_SUCCESS+'</p></div>');
-					$('#rsc-calendar-wrap').html(res.data);
-					$('#rsc-calendar-wrap').css('opacity', 1);
-					$('.rsc-calendar-event').click(expandEvent);
-				}, function(error){
-					$('#rsc-calendar-message').html('<div class="error"><p>'+RSC.CALENDAR_LOAD_FAILED+'</p></div>');
-					// console.log(error);
-				});
-		}, 100);
 	
-		
-	}
-	if($('.rsc-ajax-update').length){
+	if($('.rsc-ajax-update').length && $('.rsc-calendar-form').length){
 		
 		var form_val = $('.rsc-ajax-update').serialize();
 		var $form = $('.rsc-ajax-update');
@@ -67,19 +70,16 @@ jQuery(function($){
 			if($(this).serialize() != form_val){
 				//if changed
 				form_val = $(this).serialize();
-				reloadCalendar(e);
+				
+				let old_form = $('.rsc-calendar-form').serializeArray();
+				reloadCalendar(old_form);
 			}
 		});
-		/*
-		$('input, select', $form).change(function(){
-			$(this).trigger('update');
-		});
 		
-		$('input', $form).blur(function(){
-			$(this).trigger('update');
+		$('.rsc-reload-button').click(function(){
+			let old_form = $('.rsc-calendar-form').serializeArray();
+			reloadCalendar(old_form);
 		});
-		*/
-		$('.rsc-reload-button').click(reloadCalendar);
 	}
 	
 	function toggleReadonly(e){
@@ -171,10 +171,12 @@ jQuery(function($){
 	function addExcludeDate(time, date){
 		// let time = $elm.data('time');
 		let $item = $('<span class="rsc-event-exclude-value"></span>');
+		let $list = $('tr[data-time="'+time+'"] .rsc-event-exclude-list');
+		let attr = $list.attr('disabled') ? 'disabled="disabled"' : '';
 		
-		$item.append('<input type="hidden" name="rs_calendar_event_exclude['+time+'][]" value="'+date+'">');
+		$item.append('<input type="hidden" name="rs_calendar_event_exclude['+time+'][]" value="'+date+'" '+attr+'>');
 		$item.append('<span class="rsc-event-exclude-date-item">'+date+'<button class="rsc-event-exclude-close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M12 13.06l3.712 3.713 1.061-1.06L13.061 12l3.712-3.712-1.06-1.06L12 10.938 8.288 7.227l-1.061 1.06L10.939 12l-3.712 3.712 1.06 1.061L12 13.061z"></path></svg></button></span>');
-		$('tr[data-time="'+time+'"] .rsc-event-exclude-list').append($item);
+		$list.append($item);
 		
 		$('.rsc-event-exclude-close', $item).click(function(e){
 			e.preventDefault();
@@ -238,7 +240,7 @@ jQuery(function($){
 			addExcludeDate($(this).data('time'), $(this).val());
 		});
 		
-		$('.rsc-table-event-wrapper').animate({scrollTop: $('.rsc-table-event').height()});
+		$('.rsc-table-list-wrapper').animate({scrollTop: $('.rsc-table-list').height()});
 	});
 	
 	$('.rsc-col-copy').click(function(e){
@@ -250,10 +252,10 @@ jQuery(function($){
 		let now = Date.now();
 		
 		$new_tr.find('[name]').each(function(i){
-			let name = $(this).attr('name').replace(time, now);
-			$(this).attr('name', name);
-			$tr.attr('data-time', name);
+			let new_name = $(this).attr('name').replace(time, now);
+			$(this).attr('name', new_name);
 		})
+		$new_tr.attr('data-time', now);
 		$tr.after($new_tr);
 		
 		
@@ -343,7 +345,7 @@ jQuery(function($){
 		e.preventDefault();
 		
 		//varidate
-		let $inputs = $('[type="number"], [type="date"]', $('#rsd-shortcode-form')).filter(':visible');
+		let $inputs = $('[type="number"], [type="date"]', $('#rsc-shortcode-panel')).filter(':visible');
 		
 		let error = false;
 		$inputs.each(function(i){
@@ -366,7 +368,7 @@ jQuery(function($){
 		
 		//clean code
 		let reg = new RegExp(' '+key+'=\".+?\"');
-		code = code.replace(reg, '')
+		code = code.replace(reg, '');
 		
 		$('#rsc-shortcode-attr option').each(function(i){
 			if($(this).prop('disabled')){
@@ -387,7 +389,6 @@ jQuery(function($){
 		}
 		
 		code = code.replace(']', ' '+key+'="'+val+'"]');
-		
 		//additional attr
 		$strtof_week = $('#rsc-shortcode-attr [value="start_of_week"]');
 		
@@ -407,10 +408,14 @@ jQuery(function($){
 		
 		
 		$('#rsc-shortcode').val(code);
+		
 		$('#rsc-shortcode').trigger('update');
 		
 		$('.rsc-shortcode-attr').hide();
 		$('#rsc-shortcode-attr, .rsc-shortcode-attr, .rsc-shortcode-attr input').val('');
 	});
 	
+	if(!$('#rsd-shortcode-form').length){
+		$('body').append('<form id="rsd-shortcode-form"></form>');
+	}
 });

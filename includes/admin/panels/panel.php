@@ -21,6 +21,7 @@ abstract class panel{
 	public $is_update = true;
 	public $updated = array();
 	public $use_preview = true;
+	public $use_save = true;
 	
 	function get_name(){
 		return $this->name;
@@ -45,7 +46,7 @@ abstract class panel{
 		
 	}
 	
-	function save($settings){
+	function save($settings, $post_data){
 		$this->settings = $settings;
 		
 		//keys for options
@@ -59,22 +60,45 @@ abstract class panel{
 			}
 		}
 		
+		$this->locked = apply_filters('rsc_locked_fields', $this->locked);
+		
 		foreach($set_options as $key){
 			
-			$post_data = RSC_ADMIN()->get_setting()->get_post_data();
-			
+			// $post_data = RSC_ADMIN()
 			if(isset($post_data[$key])){
+				$basename = rsc_get_basename($key);
 				if(empty($this->locked)){
 					//administrator or full
 					$this->updated[$key] = $this->update($key, $post_data[$key]);
 					
-				}else if(!isset($this->locked[$key.'_lock']) || (isset($this->locked[$key.'_lock']) && !$this->locked[$key.'_lock'])){
+				}else if(!isset($this->locked[$basename.'_lock']) || !$this->locked[$basename.'_lock']){
 					
 					$this->updated[$key] = $this->update($key, $post_data[$key]);
+					
+				}else if(isset($this->locked[$basename.'_lock']) && is_array($this->locked[$basename.'_lock'])){
+					//event update
+					$update_data = array();
+					foreach($post_data[$key] as $k=>$v){
+						if(!isset($this->locked[$basename.'_lock'][$k]) || !$this->locked[$basename.'_lock'][$k]){
+							$update_data[$k] = $v;
+						}
+					}
+					if(!empty($update_data)){
+						$post_data[$key] = $update_data;
+						$this->updated[$key] = $this->update($key, $update_data);
+					}
+				}else{
+					// var_dump($key.'_lock');
 					
 				}
 			}
 			
+		}
+		
+		foreach($this->updated as $k=>$v){
+			if($v){
+				$this->settings[$k] = $post_data[$k];
+			}
 		}
 		
 		return $this->settings;
