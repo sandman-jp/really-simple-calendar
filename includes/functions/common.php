@@ -4,7 +4,7 @@ function RSC(){
 	global $RSC;
 	
 	if(!$RSC){
-		$RSC = new CustomFieldsCalendar();
+		$RSC = new ReallySimpleCalendar();
 	}
 	
 	return $RSC;
@@ -14,7 +14,7 @@ function RSC_ADMIN(){
 	global $RSC;
 	if(is_admin()){
 		if(!$RSC){
-			$RSC = new CustomFieldsCalendar();
+			$RSC = new ReallySimpleCalendar();
 		}
 		return $RSC->get_admin();
 	}
