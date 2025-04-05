@@ -3,7 +3,7 @@
 Plugin Name: Really Simple Calendar
 Plugin URI: 
 Description: Very Simple Single Calendar.
-Version: 0.3.7
+Version: 0.3.8
 Author: sandman.jp
 Author URI: 
 Text Domain: really-simple-calendar
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if (!class_exists('CustomFieldsCalendar')){
+if (!class_exists('ReallySimpleCalendar')){
 
 define('RSC_VIRSION', '0.3.7');
 
@@ -44,7 +44,7 @@ require_once RSC_DIR_INCLUDES.'/admin/admin.php';
 require_once RSC_DIR_INCLUDES.'/shortcode.php';
 require_once RSC_DIR_INCLUDES.'/widget.php';
 
-class CustomFieldsCalendar {
+class ReallySimpleCalendar {
 	private $_shortcode;
 	private $_widget;
 	private $_calendar;
@@ -140,6 +140,6 @@ class CustomFieldsCalendar {
 	
 }
 
-$RSC = new CustomFieldsCalendar;
+$RSC = new ReallySimpleCalendar;
 
 }
