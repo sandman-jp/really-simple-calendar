@@ -38,10 +38,7 @@ class calendar {
 	
 	function enqueue_scripts() {
 		wp_enqueue_style('rsc-css', RSC_ASSETS_URL.'/rsc.css', array(), RSC_VIRSION);
-		$style = get_option(RS_CALENDAR.'_style');
-		if(empty($style)){
-			$style = rsc_get_default_style();
-		}
+		$style = get_option(RS_CALENDAR . '_style', rsc_get_default_style());
 		wp_add_inline_style('rsc-css', $style);
 		wp_enqueue_script('rsc-js', RSC_ASSETS_URL.'/rsc.js', array('jquery', 'jquery-ui-sortable'), RSC_VIRSION, true);
 	}
@@ -66,9 +63,7 @@ class calendar {
 	function get_month_th_value($th='', $day_index=0){
 		global $wp_locale;
 		
-		$th = $wp_locale->get_weekday_abbrev($wp_locale->get_weekday($day_index));
-		
-		return $th;
+		return $wp_locale->get_weekday_abbrev($wp_locale->get_weekday($day_index));
 	}
 	
 	function get_th_value($th='', $time_id=null){
@@ -101,11 +96,7 @@ class calendar {
 	}
 	
 	private function _get_empty_cells($column_num=7){
-		$td = array();
-		for($i=0; $i<$column_num; $i++){
-			$td[] = '<td class="rsc-cell"></td>';
-		}
-		return $td;
+		return array_fill(0, $column_num, '<td class="rsc-cell"></td>');
 	}
 	
 	//for daily tables

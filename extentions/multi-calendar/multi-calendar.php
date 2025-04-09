@@ -14,6 +14,7 @@ if(!class_exists('RSC\Calendar\multi_calendar')):
 
 class multi_calendar {
 	
+	public $admin;
 	public $setting;
 	public $ajax;
 	
@@ -26,8 +27,10 @@ class multi_calendar {
 		
 		add_filter('rsc_locked_fields', array($this, 'get_locked_fields'));
 		if(is_admin()){
+			require_once RSC_MC_DIR.'/admin/multi-calendar.php';
 			require_once RSC_MC_DIR.'/admin/mc-setting.php';
 			require_once RSC_MC_DIR.'/admin/mc-ajax.php';
+			$this->admin = new \RSC\Admin\multi_calendar;
 			$this->setting = new \RSC\Admin\mc_setting;
 			$this->ajax = new \RSC\Admin\mc_ajax;
 		}
@@ -50,6 +53,7 @@ class multi_calendar {
 					'search_items' => __( 'Search Calendars', 'really-simple-calendar'),
 					'not_found' => __( 'No Calendars found', 'really-simple-calendar'),
 					'not_found_in_trash' => __( 'No Calendars found in Trash', 'really-simple-calendar'),
+					'all_items' => __('All Calendars', 'really-simple-calendar'),
 				),
 				'menu_icon' => 'dashicons-calendar-alt',
 				'public' => false,
@@ -126,7 +130,7 @@ class multi_calendar {
 				}
 				
 			}
-			
+			// through if it isn't locked.
 		}else if(strpos($key, RS_CALENDAR.'_event') !== FALSE){
 			
 			if(empty($opt)){
@@ -171,6 +175,8 @@ class multi_calendar {
 					}
 				}
 			}
+			
+			// through if it isn't locked.
 		}
 		
 		return $opt;

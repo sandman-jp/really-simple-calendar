@@ -13,23 +13,25 @@ jQuery(function($){
 	$('[name="save"], #publish').click(function(e){
 		// e.preventDefault();
 		
+		let now = Date.now();
 		let values = $('#post').serializeArray();
-		let calendar_val = [];
+		let calendar_val = {update_time: now, data: []};
 		
 		for(let i=0; i<values.length; i++){
 			if(values[i].name.match(/^rs_calendar/)){
-				calendar_val.push(values[i]);
+				calendar_val.data.push(values[i]);
 				$('[name="'+values[i].name+'"]').prop('disabled', true);
 			}
 		}
 		
 		calendar_val = JSON.stringify(calendar_val);
 		
-		
 		let $elm = $('<input type="hidden" name="post_content">');
 		$elm.val(calendar_val);
 		$('#post').append($elm);
 		
+		let $elm2 = $('<input type="hidden" name="rsc_update_time" value="'+now+'">');
+		$('#post').append($elm2);
 	});
 	
 	$('#rsc-hide-general-events').click(function(e){

@@ -44,6 +44,7 @@ class config extends panel{
 	
 	<h2><?php esc_html_e('Extentions Setting', 'really-simple-calendar'); ?></h2>
 	<table class="form-table rsc-table">
+		<?php $extenstions = get_option(RS_CALENDAR.'_extentions'); ?>
 		<tr>
 			<th><?php esc_html_e('Advanced Event Field', 'really-simple-calendar'); ?></th>
 			<td>
@@ -54,7 +55,6 @@ class config extends panel{
 		<tr>
 			<th><?php esc_html_e('Multi Calendar', 'really-simple-calendar'); ?></th>
 			<td>
-				<?php $extenstions = get_option(RS_CALENDAR.'_extentions'); ?>
 				<input type="hidden" name="<?php echo RS_CALENDAR; ?>_extentions[multi-calendar]" value="">
 				<input type="checkbox" name="<?php echo RS_CALENDAR; ?>_extentions[multi-calendar]" value="1" <?php isset($extenstions['multi-calendar']) ? checked($extenstions['multi-calendar'], '1') : ''; ?>>
 				<small>(<a href="<?php echo get_admin_url().'admin.php?page='.RSC_GENERAL_SETTINGS_PAGE.'&rsc=contact'; ?>"><?php esc_html_e('Donation', 'really-simple-calendar'); ?></a>)</small>

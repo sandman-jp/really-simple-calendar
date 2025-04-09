@@ -62,50 +62,6 @@ class view extends setting {
 			}
 			$this->_params[RS_CALENDAR.'_'.$fld] = $val;
 		}
-		/*
-		$type = $this->get_option(RS_CALENDAR.'_type');
-		if(empty($type)){
-			$type = 'month';
-		}
-		$this->_params[RS_CALENDAR.'_type'] = $type;
-		
-		$from = $this->get_option(RS_CALENDAR.'_from');
-		if(empty($from)){
-			$from = 'current';
-		}
-		$this->_params[RS_CALENDAR.'_from'] = $from;
-		
-		$start_of_week = $this->get_option(RS_CALENDAR.'_start_of_week');
-		$this->_params[RS_CALENDAR.'_start_of_week'] = $start_of_week;
-		
-		$this->_params[RS_CALENDAR.'_align'] = 0;
-		
-		
-		$this->_params['align'] = $this->get_option(RS_CALENDAR.'_align');
-		$this->_params[RS_CALENDAR.'_align'] = $this->_params['align'];
-		
-		$previous_from = $this->get_option(RS_CALENDAR.'_previous_from');
-		$this->_params[RS_CALENDAR.'_previous_from'] = $previous_from;
-		
-		$date_from = $this->get_option(RS_CALENDAR.'_from_date');
-		$this->_params[RS_CALENDAR.'_from_date'] = $date_from;
-				
-		
-		$period = $this->get_option(RS_CALENDAR.'_period');
-		if(empty($period)){
-			$period = 'last';
-		}
-		$this->_params[RS_CALENDAR.'_period'] = $period;
-	
-		$last_period = $this->get_option(RS_CALENDAR.'_period_last');
-		$this->_params[RS_CALENDAR.'_period_last'] = $last_period;
-	
-		$date_period = $this->get_option(RS_CALENDAR.'_period_date');
-		$this->_params[RS_CALENDAR.'_period_date'] = $date_period;
-		*/
-		// $this->_params = apply_filters('rsc_merge_calendar_params', $this->_params);
-		
-		// var_dump($this->_params);
 		
 		$type = $this->_params[RS_CALENDAR.'_type'];
 		$from = $this->_params[RS_CALENDAR.'_from'];

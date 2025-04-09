@@ -69,7 +69,7 @@ class setting{
 		if(in_array('administrator', $current_user->roles)){
 			$this->_panel_classes[] = 'config';
 		}else if(isset($_GET['rsc']) && $_GET['rsc'] == 'config'){
-			wp_die( __( 'Sorry, you are not allowed to access this page.' ), 403 );
+			wp_die( __('Sorry, you are not allowed to access this page.', 'really-simple-calendar'), 403 );
 		}
 		$this->_panel_classes[] = 'contact';
 	}

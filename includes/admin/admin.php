@@ -53,8 +53,9 @@ class admin{
 		//global $post;
 		$screen_id = get_current_screen()->id;
 		
-		wp_register_style('jquery-ui', '//code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css');
-		wp_enqueue_style( 'jquery-ui' );
+		// wp_register_style('jquery-ui', '//code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css');
+		// wp_enqueue_style( 'jquery-ui' );
+		// 
 		wp_enqueue_style('rsc-css', RSC_ASSETS_URL.'/rsc.css', array(), RSC_VIRSION);
 		wp_enqueue_style('rsc-admin', RSC_ASSETS_URL.'/admin/rsc.css', array(), RSC_VIRSION);
 		wp_enqueue_script('rsc-admin', RSC_ASSETS_URL.'/admin/rsc.js', array('jquery'), RSC_VIRSION, true);

@@ -154,6 +154,7 @@ jQuery(function($){
 		let $list = $(this).parents('.rsc-table-list');
 		
 		let $tr = 	$(this).parents('tr:first');
+		
 		if($tr.index()){
 			$tr.remove();
 		}else{
@@ -240,6 +241,11 @@ jQuery(function($){
 			addExcludeDate($(this).data('time'), $(this).val());
 		});
 		
+		//番号振り直し
+		$('tr', $list).each(function(i){
+			$(this).find('.rsc-col-index').text(i);
+		});
+		
 		$('.rsc-table-list-wrapper').animate({scrollTop: $('.rsc-table-list').height()});
 	});
 	
@@ -254,14 +260,15 @@ jQuery(function($){
 		$new_tr.find('[name]').each(function(i){
 			let new_name = $(this).attr('name').replace(time, now);
 			$(this).attr('name', new_name);
-		})
+		});
+		
 		$new_tr.attr('data-time', now);
 		$tr.after($new_tr);
 		
 		
-		let $list = $(this).parents('.rsc-table-list');
+		let $list = $(this).closest('.rsc-table-body');
 		//番号振り直し
-		$list.find('tr').each(function(i){
+		$('tr', $list).each(function(i){
 			$(this).find('.rsc-col-index').text(i);
 		});
 	});
