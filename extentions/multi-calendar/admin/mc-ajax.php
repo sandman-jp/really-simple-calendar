@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if(!class_exists('RSC\Admin\multi_calendar_ajax')):
+if(!class_exists('RSC\Admin\mc_ajax')):
 	
 class mc_ajax{
 	

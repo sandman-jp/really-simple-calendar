@@ -83,7 +83,10 @@ class mc_setting extends setting{
 		return $is_disabled;
 	}
 	
-	function settings(){
+	function settings($post){
+		if(get_post_type() != RS_CALENDAR){
+			return;
+		}
 		$panels = apply_filters('rsc_get_setting_panels', $this->_panel_classes);
 		// var_dump($panels);
 		foreach($panels as $panel){

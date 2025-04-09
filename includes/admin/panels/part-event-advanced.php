@@ -36,7 +36,10 @@
 		<input type="hidden" name="<?php echo RS_CALENDAR; ?>_event_repeat[<?php echo $n; ?>][]" value="" <?php echo $attr; ?>>
 		
 		<?php for($h=0; $h<7; $h++): ?>
-		<label class="rsc-event-repeat-label"><input type="checkbox" name="<?php echo RS_CALENDAR; ?>_event_repeat[<?php echo $n; ?>][]" value="<?php echo $h; ?>" <?php checked(in_array((string)$h, $repeats[$n], true)); ?> <?php echo $attr; ?>><?php esc_html_e($wp_locale->get_weekday_abbrev($wp_locale->get_weekday($h))); ?></label>
+		<label class="rsc-event-repeat-label"><input type="checkbox" name="<?php echo RS_CALENDAR; ?>_event_repeat[<?php echo $n; ?>][]" value="<?php echo $h; ?>" <?php checked(in_array((string)$h, $repeats[$n], true)); ?> <?php echo $attr; ?>><?php 
+							$wd =$wp_locale->get_weekday_abbrev($wp_locale->get_weekday($h));
+						  rsc_echo_esc($wd, 'really-simple-calendar'); 
+						 ?></label>
 
 		<?php endfor; ?>
 	</div>

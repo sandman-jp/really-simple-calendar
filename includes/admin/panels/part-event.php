@@ -26,10 +26,10 @@ $attr = ob_get_clean();
 	
 	<td>
 		
-		<?php do_action('rsc_pre_event_column', $n); ?>
+		<?php do_action('rsc_pre_event_column'); ?>
 		
 		<div class="rsc-event-upper">
-			<?php do_action('rsc_pre_event_label'); ?>
+			<?php do_action('rsc_pre_event_label', $n, $attr); ?>
 			<div class="rsc-event-label rsc-event-inputs">
 				<label><?php esc_html_e('Label', 'really-simple-calendar'); ?><span class="dashicons dashicons-editor-help" title="<?php esc_html_e('This is the name which will appear on pages.', 'really-simple-calendar'); ?>"></span> : </label>
 				<input type="text" name="<?php echo RS_CALENDAR; ?>_event_label[<?php echo $n; ?>]" value="<?php echo $labels[$n]; ?>" class="large-text" <?php echo $attr; ?> required>
@@ -45,7 +45,7 @@ $attr = ob_get_clean();
 			
 		</div>
 		
-		<?php do_action('rsc_after_event_column', $n); ?>
+		<?php do_action('rsc_after_event_column', $n, $attr); ?>
 	</td>
 	<td>
 		<div class="rsv-event-action">

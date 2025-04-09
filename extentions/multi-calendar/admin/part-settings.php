@@ -22,14 +22,22 @@ $settings = rsc_merge_params($settings, $this->lock_fields);
 
 if(rsc_current_user_can('manage') && !isset($_POST['filter_action'])){
 	$post_settings = false;
-	
+	$post_id = get_the_ID();
 	//save settings
-	if(get_the_ID()){
-		$post_settings = json_decode(get_the_content(), true);
+	if($post_id){
+		$post_content = json_decode(get_the_content(), true);
 		
-		if(!empty($post_settings) && is_array($post_settings)){
+		$is_updated = false;
+		$update_time = get_post_meta($post_id, 'rsc_update_time', true);
+		if($update_time && isset($post_content['update_time']) && $update_time == $post_content['update_time']){
+			$is_updated = true;
+			delete_post_meta($post_id, 'rsc_update_time');
+		}
+		
+		if($is_updated && !empty($post_content) && is_array($post_content)){
 			// var_dump($post_settings);
 			$this->post_data = array();
+			$post_settings = $post_content['data'];
 			
 			for($i=0; $i < count($post_settings); $i++){
 				
@@ -64,12 +72,12 @@ if(rsc_current_user_can('manage') && !isset($_POST['filter_action'])){
 				$p->save($settings, $this->post_data);
 			}
 		}
-		
+		/*
 		wp_update_post(array(
 			'ID' => get_the_ID(),
 			'post_content' => '',
 		));
-		
+		*/
 		$settings = $this->get_settings();
 		$settings = rsc_merge_params($settings, $this->lock_fields);
 		

@@ -2,8 +2,8 @@
 /*
 Plugin Name: Really Simple Calendar
 Plugin URI: https://note.com/sandman_jp/m/m0657144dd8fb
-Description: Very Simple Single Calendar.
-Version: 0.4.1-beta
+Description: Very Simple Calendar for multiple purpose.
+Version: 0.5.1-beta
 Author: sandman.jp
 Author URI: 
 Text Domain: really-simple-calendar
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if (!class_exists('ReallySimpleCalendar')):
 
-define('RSC_VIRSION', '0.3.7');
+define('RSC_VIRSION', '0.4.2');
 
 //basename
 define('RS_CALENDAR', 'rs_calendar');
@@ -54,14 +54,15 @@ class ReallySimpleCalendar {
 	function __construct() {
 		
 		add_action('plugins_loaded', array($this, 'init'));
-		
+		add_action('widgets_init', array($this, 'widgets_init'));
+		/*
 		//修正分
 		add_filter('pre_option', array($this, 'get_option'), 10, 3);
+		*/
 	}
 	
 	function init(){
 		$this->_shortcode = new RSC\shortcode;
-		$this->_widget = new RSC\widget;
 		$this->_calendar = new RSC\Calendar\calendar;
 		
 		if(is_admin()){
@@ -69,10 +70,6 @@ class ReallySimpleCalendar {
 		}
 		
 		// import plugins
-		$plugins = get_option(RS_CALENDAR.'_plugins');
-		
-		$plugins = array();
-		
 		$extenstions = get_option(RS_CALENDAR.'_extentions');
 		
 		if($extenstions){
@@ -85,6 +82,10 @@ class ReallySimpleCalendar {
 		}
 	}
 	
+	function widgets_init(){
+		$this->_widget = new RSC\widget;
+	}
+	
 	function get_admin(){
 		return $this->_admin;
 	}
@@ -92,7 +93,8 @@ class ReallySimpleCalendar {
 	function get_panels(){
 		return $this->_panels;
 	}
-	
+	/*
+	//古いoption名を変更
 	function get_option($pre, $option, $default_value){
 		if($pre){
 			return $pre;
@@ -107,6 +109,7 @@ class ReallySimpleCalendar {
 		}
 		return $pre;
 	}
+	*/
 	
 	function set_style($b){
 		return $this->_calendar->has_style = $b;

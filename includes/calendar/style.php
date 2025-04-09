@@ -36,9 +36,7 @@ class style extends setting {
 	?>
 	<style><?php echo rsc_get_style($style); ?></style>
 	<?php
-		$html = ob_get_clean().$html;
-		
-		return $html;
+		return ob_get_clean().$html;
 	}
 	
 }
