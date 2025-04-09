@@ -25,7 +25,13 @@ Really simple calendar is one of most easy managing calendar. This plugin provid
 
 == Changelog ==
 
-= 0.4.1-beta =
+= 0.4.2 =
+- Added Japanese language
+- Fixed a bug that caused it to appear in other custom post types
+- Reorganized functions
+- Fixed other minor bugs
+
+= 0.4.1 =
 - Add extention "Multi Calendars".
 - Fix JS and CSS
 - Change classname.
