@@ -16,17 +16,14 @@ Really simple calendar is one of most easy managing calendar. This plugin provid
 
 ### Changelog
 
-= 0.4.2 =
+= 0.4.2 public beta =
 - Added Japanese language
 - Fixed a bug that caused it to appear in other custom post types
 - Reorganized functions
 - Fixed other minor bugs
 
-= 0.4.1 =
+= 0.4.1 public beta =
 - Add extention "Multi Calendars".
 - Fix JS and CSS
 - Change classname.
 - Review of some codes.
-
-= 0.3.7 =
-Publish on wordpress.org
