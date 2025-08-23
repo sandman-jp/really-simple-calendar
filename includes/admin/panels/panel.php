@@ -1,11 +1,11 @@
 <?php
-namespace RSC\Admin\Panel;
+namespace sandmanjp\ReallySimpleCalendar\Admin\Panel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if(!class_exists('RSC\Admin\panel')):
+if(!class_exists('sandmanjp\ReallySimpleCalendar\Admin\panel')):
 	
 abstract class panel{
 	public $name;
@@ -32,17 +32,17 @@ abstract class panel{
 	}
 	
 	function get_lock_fields(){
-		return apply_filters('rsc_get_panel_lock_fields', $this->lock_fields);
+		return apply_filters('smjp_rsc_get_panel_lock_fields', $this->lock_fields);
 	}
 	
 	function get_fields(){
 		$fields = array_merge($this->lock_fields, $this->fields);
-		return apply_filters('rsc_get_panel_fields', $fields);
+		return apply_filters('smjp_rsc_get_panel_fields', $fields);
 	}
 	
 	function update($key, $post_data){
 		$this->settings[$key] = $post_data;
-		return rsc_update_option($key, $post_data);
+		return smjp_rsc_update_option($key, $post_data);
 		
 	}
 	
@@ -50,23 +50,25 @@ abstract class panel{
 		$this->settings = $settings;
 		
 		//keys for options
-		$set_options = apply_filters('rsc_option_fields', $this->get_fields());
+		$set_options = apply_filters('smjp_rsc_option_fields', $this->get_fields());
 		$this->locked = array();
 		
-		if(!rsc_current_user_can('full')){
+		if(!smjp_rsc_current_user_can('full')){
 			//get locked fields.
 			foreach($this->lock_fields as $key){
 				$this->locked[$key] = get_option($key);
 			}
 		}
 		
-		$this->locked = apply_filters('rsc_locked_fields', $this->locked);
+		$this->locked = apply_filters('smjp_rsc_locked_fields', $this->locked);
 		
 		foreach($set_options as $key){
 			
-			// $post_data = RSC_ADMIN()
+			// $post_data = SMJP_RSC_ADMIN()
 			if(isset($post_data[$key])){
-				$basename = rsc_get_basename($key);
+				$basename = smjp_rsc_get_basename($key);
+				// var_dump($basename);
+				// die();
 				if(empty($this->locked)){
 					//administrator or full
 					$this->updated[$key] = $this->update($key, $post_data[$key]);

@@ -1,18 +1,18 @@
 <?php
 
-namespace RSC\Calendar;
+namespace sandmanjp\ReallySimpleCalendar\Calendar;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
 
-if(!class_exists('RSC\Calendar\calender')):
+if(!class_exists('sandmanjp\ReallySimpleCalendar\Calendar\calender')):
 
-require_once RSC_DIR_INCLUDES.'/calendar/setting.php';
-require_once RSC_DIR_INCLUDES.'/calendar/view.php';
-require_once RSC_DIR_INCLUDES.'/calendar/event.php';
-require_once RSC_DIR_INCLUDES.'/calendar/style.php';
+require_once SMJP_RSC_DIR_INCLUDES.'/calendar/setting.php';
+require_once SMJP_RSC_DIR_INCLUDES.'/calendar/view.php';
+require_once SMJP_RSC_DIR_INCLUDES.'/calendar/event.php';
+require_once SMJP_RSC_DIR_INCLUDES.'/calendar/style.php';
 
 class calendar {
 	
@@ -27,24 +27,25 @@ class calendar {
 		$this->_event = new event();
 		$this->_style = new style();
 		
-		add_filter('rsc_get_month_th_value', array($this, 'get_month_th_value'), 10, 2);
+		add_filter('smjp_rsc_get_month_th_value', array($this, 'get_month_th_value'), 10, 2);
 		
-		add_filter('rsc_get_week_th_value', array($this, 'get_th_value'), 10, 2);
-		add_filter('rsc_get_day_th_value', array($this, 'get_th_value'), 10, 2);
+		add_filter('smjp_rsc_get_week_th_value', array($this, 'get_th_value'), 10, 2);
+		add_filter('smjp_rsc_get_day_th_value', array($this, 'get_th_value'), 10, 2);
 		
 		add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 11);
 		
 	}
 	
 	function enqueue_scripts() {
-		wp_enqueue_style('rsc-css', RSC_ASSETS_URL.'/rsc.css', array(), RSC_VIRSION);
-		$style = get_option(RS_CALENDAR . '_style', rsc_get_default_style());
-		wp_add_inline_style('rsc-css', $style);
-		wp_enqueue_script('rsc-js', RSC_ASSETS_URL.'/rsc.js', array('jquery', 'jquery-ui-sortable'), RSC_VIRSION, true);
+		wp_enqueue_style(SMJP_RSC_.'css', SMJP_RSC_ASSETS_URL.'/rsc.css', array(), SMJP_RSC_VIRSION);
+		
+		$style = smjp_rsc_get_style();
+		wp_add_inline_style(SMJP_RSC_.'css', $style);
+		
+		wp_enqueue_script(SMJP_RSC_.'js', SMJP_RSC_ASSETS_URL.'/rsc.js', array('jquery'), SMJP_RSC_VIRSION, true);
 	}
 	
 	function get_view($args=array()){
-		
 		return $this->_view->get_view($args);
 	}
 	
@@ -55,7 +56,7 @@ class calendar {
 	function set_style($args){
 		$args['has_style'] = $this->has_style;
 		
-		$args = apply_filters('rsc_pre_set_style', $args);
+		$args = apply_filters('smjp_rsc_pre_set_style', $args);
 		$this->_style->set_style($args);
 	}
 	
@@ -78,19 +79,29 @@ class calendar {
 	
 	//render calendar
 	function render($args){
+		
 		$this->set_events($args);
-		$this->set_style($args);
+		
+		if(isset($args['has_style']) && $args['has_style']){
+			//from AJAX
+			$this->set_style($args);
+		}
 		
 		$args = $this->get_view($args);
 		
-		$args = apply_filters('rsc_before_render_calendar_tables', $args);
+		$args = apply_filters('smjp_rsc_before_render_calendar_tables', $args);
 		
 		//カレンダーの取得
-		$table_func = '_get_'.$args[RS_CALENDAR.'_type'].'_tables';
+		$table_func = '_get_'.$args[SMJP_RS_CALENDAR.'_type'].'_tables';
 		
-		$calendar_tables = $this->{$table_func}($args);
+		$allowed = wp_kses_allowed_html('post');
+		$allowed['time'] = array('datetime' => true);
 		
-		$calendar_tables = apply_filters('rsc_after_render_calendar_tables', $calendar_tables);
+		$calendar_tables = '<div id="rsc-calendar-wrap" class="rsc-calendar-wrap">';
+		$calendar_tables .= $this->{$table_func}($args);
+		$calendar_tables .= '</div>';
+		
+		$calendar_tables = apply_filters('smjp_rsc_after_render_calendar_tables', wp_kses($calendar_tables, $allowed));
 		
 		return $calendar_tables;
 	}
@@ -128,7 +139,7 @@ class calendar {
 		while($time_id <= $args['after_end']):
 			
 			//cell number in col
-			$dw = rsc_get_start_week($time_id, $args['start_of_week']);
+			$dw = smjp_rsc_get_start_week($time_id, $args['start_of_week']);
 			
 			//曜日クラス
 			$weekday = 'day';
@@ -174,7 +185,7 @@ class calendar {
 				'values' => $values,
 			);
 			
-			if($args[RS_CALENDAR.'_type'] == 'week' || $args[RS_CALENDAR.'_type'] == 'month'){
+			if($args[SMJP_RS_CALENDAR.'_type'] == 'week' || $args[SMJP_RS_CALENDAR.'_type'] == 'month'){
 				$cell_args['start_of_week'] = $args['start_of_week'];
 			}
 			
@@ -182,7 +193,7 @@ class calendar {
 			ob_start(); //for td
 			$th = wp_date('D', $time_id);
 			
-			rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', 'header', array(
+			smjp_rsc_get_template_part('/'.$args[SMJP_RS_CALENDAR.'_type'].'/table', 'header', array(
 				'th' => $th,
 				'time_id' => $time_id,
 				'is_in_term' => $is_in_term,
@@ -192,7 +203,7 @@ class calendar {
 			
 			//各セル
 			ob_start();
-			rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', 'cell', $cell_args);
+			smjp_rsc_get_template_part('/'.$args[SMJP_RS_CALENDAR.'_type'].'/table', 'cell', $cell_args);
 			
 			$cell = ob_get_clean();
 			
@@ -216,7 +227,7 @@ class calendar {
 					$cal_cells = implode('', $cells);
 				}
 				
-				rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/'.$tablename, array(
+				smjp_rsc_get_template_part('/'.$args[SMJP_RS_CALENDAR.'_type'].'/'.$tablename, array(
 					'th' => $tableheader,
 					'td' => $cal_cells,
 					'monthname' => $wp_locale->get_month($current_m),
@@ -249,8 +260,8 @@ class calendar {
 		
 		//カレンダーの（範囲外）開始日
 		$args = array_merge($args, array(
-			'min_day_of_week' => rsc_get_start_week($args['from'], $args['start_of_week']), //カレンダーを開始する日の曜日
-			'max_day_of_week' => rsc_get_start_week($args['until'], $args['start_of_week']), //カレンダーを終了する日の曜日
+			'min_day_of_week' => smjp_rsc_get_start_week($args['from'], $args['start_of_week']), //カレンダーを開始する日の曜日
+			'max_day_of_week' => smjp_rsc_get_start_week($args['until'], $args['start_of_week']), //カレンダーを終了する日の曜日
 		));
 		
 		$cal_start = $args['from'];
@@ -285,7 +296,7 @@ class calendar {
 		while($time_id <= $args['after_end']):
 			
 			//cell number in col
-			$dw = rsc_get_start_week($time_id, $args['start_of_week']);
+			$dw = smjp_rsc_get_start_week($time_id, $args['start_of_week']);
 			
 			//曜日クラス
 			$weekday = 'day';
@@ -334,7 +345,7 @@ class calendar {
 			$cell_args['start_of_week'] = $args['start_of_week'];
 			
 			ob_start();
-			rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', 'cell', $cell_args);
+			smjp_rsc_get_template_part('/'.$args[SMJP_RS_CALENDAR.'_type'].'/table', 'cell', $cell_args);
 			
 			$cells[$dw] = ob_get_clean();
 			
@@ -343,7 +354,7 @@ class calendar {
 			ob_start(); //for td
 			$th = wp_date('D', $time_id);
 			
-			rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', 'header', array(
+			smjp_rsc_get_template_part('/'.$args[SMJP_RS_CALENDAR.'_type'].'/table', 'header', array(
 				'th' => $th,
 				'time_id' => $time_id,
 				'is_in_term' => $is_in_term,
@@ -359,7 +370,7 @@ class calendar {
 			if($dw ==  6) {
 				$table_class = 'alignwide';
 				$month_cells[] = $column_header.implode('', $cells);
-				rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', array(
+				smjp_rsc_get_template_part('/'.$args[SMJP_RS_CALENDAR.'_type'].'/table', array(
 					'th' => $tableheader,
 					'td' => $month_cells,
 					'monthname' => $wp_locale->get_month($current_m),
@@ -395,8 +406,8 @@ class calendar {
 		//月タイプ用
 		
 		$args = array_merge($args, array(
-			'min_day_of_week' => rsc_get_start_week($args['from'], $args['start_of_week']), //カレンダーを開始する日の曜日
-			'max_day_of_week' => rsc_get_start_week($args['until'], $args['start_of_week']), //カレンダーを終了する日の曜日
+			'min_day_of_week' => smjp_rsc_get_start_week($args['from'], $args['start_of_week']), //カレンダーを開始する日の曜日
+			'max_day_of_week' => smjp_rsc_get_start_week($args['until'], $args['start_of_week']), //カレンダーを終了する日の曜日
 		));
 		
 		$cal_start = $args['from'];
@@ -431,7 +442,7 @@ class calendar {
 				$weekday = 'sun';
 			}
 			
-			rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', 'header', array(
+			smjp_rsc_get_template_part('/'.$args[SMJP_RS_CALENDAR.'_type'].'/table', 'header', array(
 				'day_index' => $day_index,
 				'th_class' => array('rsc-'.$weekday),
 			));
@@ -455,7 +466,7 @@ class calendar {
 		while($time_id <= $args['after_end']):
 			
 			//cell number in col
-			$dw = rsc_get_start_week($time_id, $args['start_of_week']);
+			$dw = smjp_rsc_get_start_week($time_id, $args['start_of_week']);
 			
 			//曜日クラス
 			$weekday = 'day';
@@ -505,7 +516,7 @@ class calendar {
 			$cell_args['start_of_week'] = $args['start_of_week'];
 			
 			ob_start();
-			rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', 'cell', $cell_args);
+			smjp_rsc_get_template_part('/'.$args[SMJP_RS_CALENDAR.'_type'].'/table', 'cell', $cell_args);
 			
 			$cells[$dw] = ob_get_clean();
 			// 
@@ -514,7 +525,7 @@ class calendar {
 			$time_id += $day_length;
 			
 			$week_cells = implode('', $cells);
-			$data = trim(strip_tags($week_cells));
+			$data = trim(wp_strip_all_tags($week_cells));
 			
 			//月が変わったら出力
 			if(wp_date('Ym', $time_id) > $current_ym){
@@ -524,7 +535,7 @@ class calendar {
 					$month_cells[] = $column_header.$week_cells;
 				}
 				
-				rsc_get_template_part('/'.$args[RS_CALENDAR.'_type'].'/table', array(
+				smjp_rsc_get_template_part('/'.$args[SMJP_RS_CALENDAR.'_type'].'/table', array(
 					'th' => $tableheader,
 					'td' => $month_cells,
 					'monthname' => $wp_locale->get_month($current_m),

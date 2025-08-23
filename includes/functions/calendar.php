@@ -1,17 +1,17 @@
 <?php
 
 //get calendar
-function rsc_get_calendar($atts=array()){
-	return RSC()->render_calendar($atts);
+function smjp_rsc_get_calendar($atts=array()){
+	return SMJP_RSC()->render_calendar($atts);
 }
 
 //get calendar params
-function rsc_get_calendar_view(){
-	return RSC()->get_calendar_view();
+function smjp_rsc_get_calendar_view(){
+	return SMJP_RSC()->get_calendar_view();
 }
 
 //get start week
-function rsc_get_start_week($time, $start=0){
+function smjp_rsc_get_start_week($time, $start=0){
 	$w = wp_date('w', $time) - $start;
 	
 	if($w < 0){
@@ -21,19 +21,19 @@ function rsc_get_start_week($time, $start=0){
 	return $w;
 }
 
-function rsc_get_style($style=false){
+function smjp_rsc_get_style($style=false){
 	if(!$style){
-		$style = get_option(RS_CALENDAR.'_style');
+		$style = get_option(SMJP_RS_CALENDAR.'_style', smjp_rsc_get_default_style());
 	}
-	if(empty($style)){
-		$style = rsc_get_default_style();
-	}
-	return rsc_get_esc($style, false);
+	
+	$style = apply_filters('smjp_rsc_get_stylesheet', $style);
+	
+	return sanitize_textarea_field($style, false);
 }
 
-function rsc_get_default_style(){
+function smjp_rsc_get_default_style(){
 	
-	$content = file_get_contents(RSC_ADMIN_DIR_INCLUDES.'/panels/style-default.txt');
+	$content = file_get_contents(SMJP_RSC_ADMIN_DIR_INCLUDES.'/panels/style-default.txt');
 	
-	return rsc_get_esc($content, false);
+	return sanitize_textarea_field($content, false);
 }

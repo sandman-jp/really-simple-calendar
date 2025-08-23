@@ -11,14 +11,14 @@ jQuery(function($){
 	});
 	
 	$('[name="save"], #publish').click(function(e){
-		// e.preventDefault();
+		//e.preventDefault();
 		
 		let now = Date.now();
 		let values = $('#post').serializeArray();
 		let calendar_val = {update_time: now, data: []};
 		
 		for(let i=0; i<values.length; i++){
-			if(values[i].name.match(/^rs_calendar/)){
+			if(values[i].name.match(/^smjp_rs_calendar/)){
 				calendar_val.data.push(values[i]);
 				$('[name="'+values[i].name+'"]').prop('disabled', true);
 			}
@@ -30,7 +30,7 @@ jQuery(function($){
 		$elm.val(calendar_val);
 		$('#post').append($elm);
 		
-		let $elm2 = $('<input type="hidden" name="rsc_update_time" value="'+now+'">');
+		let $elm2 = $('<input type="hidden" name="smjp_rsc_update_time" value="'+now+'">');
 		$('#post').append($elm2);
 	});
 	
@@ -55,7 +55,7 @@ jQuery(function($){
 			}
 		}
 		
-		reloadCalendar(form, 'rsc_mc_get_calendar');
+		reloadCalendar(form, 'smjp_rsc_mc_get_calendar');
 	});
 
 })

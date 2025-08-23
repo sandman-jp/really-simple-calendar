@@ -1,16 +1,21 @@
 <?php
-$panel = new \RSC\Admin\Panel\view();
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+?>
+<?php
+$panel = new \sandmanjp\ReallySimpleCalendar\Admin\Panel\view();
 $lock_fields = $panel->get_lock_fields();
 $locked = array();
 foreach($lock_fields as $key){
 	$locked[$key] = get_option($key);
 }
-$default_value = apply_filters('rsc_get_default_shortcode', '[rsc]');
+$default_value = apply_filters('smjp_rsc_get_default_shortcode', '[rsc]');
 ?>
 <h2><?php esc_html_e('Shortcode', 'really-simple-calendar'); ?></h2>
 <section class="rsc-shortcode-wrapper">
 	<div class="rsc-shortcode-box description">
-		<label class="shortcode"><input type="text" id="rsc-shortcode" name="rsc-shortcode" onfocus="this.select();" class="large-text code" value="<?php rsc_echo_esc($default_value, false); ?>"></label>
+		<label class="shortcode"><input type="text" id="rsc-shortcode" name="rsc-shortcode" onfocus="this.select();" class="large-text code" value="<?php echo esc_attr($default_value, false); ?>"></label>
 		<button id="rsc-copy-button" class="rsc-copy-button" title="Copy this shortcode."><span class="dashicons dashicons-clipboard"></span><span class="rsc-tooltip">Copied!</span></button>
 	</div>
 	
@@ -19,10 +24,34 @@ $default_value = apply_filters('rsc_get_default_shortcode', '[rsc]');
 			<label><?php esc_html_e('Attribute', 'really-simple-calendar'); ?>
 				<select id="rsc-shortcode-attr"  form="rsd-shortcode-form" name="rsc-shortcode-attr">
 					<option value=""><?php esc_html_e('Select', 'really-simple-calendar'); ?></option>
-					<option value="type" data-locked="<?php echo $locked[RS_CALENDAR.'_type_lock']; ?>" <?php disabled($locked[RS_CALENDAR.'_type_lock']); ?>><?php esc_html_e('Calendar Type', 'really-simple-calendar'); ?></option>
-					<option value="from" data-locked="<?php echo $locked[RS_CALENDAR.'_from_lock']; ?>" <?php disabled($locked[RS_CALENDAR.'_from_lock']); ?>><?php esc_html_e('Start From', 'really-simple-calendar'); ?></option>
-					<option value="period" data-locked="<?php echo $locked[RS_CALENDAR.'_period_lock']; ?>" <?php disabled($locked[RS_CALENDAR.'_period_lock']); ?>><?php esc_html_e('Display Period', 'really-simple-calendar'); ?></option>
-					<option value="start_of_week" data-locked="<?php echo $locked[RS_CALENDAR.'_start_of_week_lock']; ?>" <?php disabled($locked[RS_CALENDAR.'_start_of_week_lock']); ?>><?php esc_html_e('Start day of week', 'really-simple-calendar'); ?></option>
+					<option 
+						value="type" 
+						data-locked="<?php echo esc_attr($locked[SMJP_RS_CALENDAR.'_type_lock']); ?>" 
+						<?php disabled(wp_unslash($locked[SMJP_RS_CALENDAR.'_type_lock'])); ?>
+						>
+						<?php esc_html_e('Calendar Type', 'really-simple-calendar'); ?>
+					</option>
+					<option 
+						value="from" 
+						data-locked="<?php echo esc_attr($locked[SMJP_RS_CALENDAR.'_from_lock']); ?>" 
+						<?php disabled(wp_unslash($locked[SMJP_RS_CALENDAR.'_from_lock'])); ?>
+						>
+						<?php esc_html_e('Start From', 'really-simple-calendar'); ?>
+					</option>
+					<option 
+						value="period" 
+						data-locked="<?php echo esc_attr($locked[SMJP_RS_CALENDAR.'_period_lock']); ?>" 
+						<?php disabled(wp_unslash($locked[SMJP_RS_CALENDAR.'_period_lock'])); ?>
+						>
+						<?php esc_html_e('Display Period', 'really-simple-calendar'); ?>
+					</option>
+					<option 
+						value="start_of_week" 
+						data-locked="<?php echo esc_attr($locked[SMJP_RS_CALENDAR.'_start_of_week_lock']); ?>" 
+						<?php disabled(wp_unslash($locked[SMJP_RS_CALENDAR.'_start_of_week_lock'])); ?>
+						>
+						<?php esc_html_e('Start day of week', 'really-simple-calendar'); ?>
+					</option>
 				</select>
 			</label>
 			
@@ -68,14 +97,14 @@ $default_value = apply_filters('rsc_get_default_shortcode', '[rsc]');
 			</label>
 			
 			<select id="rsc-shortcode-attr-start_of_week" class="rsc-shortcode-attr"  form="rsd-shortcode-form" name="rsc-shortcode-attr-start_of_week">
-				<option value="today"><?php _e('Today', 'really-simple-calendar'); ?></option>
-				<option value="0"><?php _e('Sunday'); ?></option>
-				<option value="1"><?php _e('Monday'); ?></option>
-				<option value="2"><?php _e('Tuesday'); ?></option>
-				<option value="3"><?php _e('Wednesday'); ?></option>
-				<option value="4"><?php _e('Thursday'); ?></option>
-				<option value="5"><?php _e('Friday'); ?></option>
-				<option value="6"><?php _e('Saturday'); ?></option>
+				<option value="today"><?php esc_html_e('Today', 'really-simple-calendar'); ?></option>
+				<option value="0"><?php esc_html_e('Sunday', 'really-simple-calendar'); ?></option>
+				<option value="1"><?php esc_html_e('Monday', 'really-simple-calendar'); ?></option>
+				<option value="2"><?php esc_html_e('Tuesday', 'really-simple-calendar'); ?></option>
+				<option value="3"><?php esc_html_e('Wednesday', 'really-simple-calendar'); ?></option>
+				<option value="4"><?php esc_html_e('Thursday', 'really-simple-calendar'); ?></option>
+				<option value="5"><?php esc_html_e('Friday', 'really-simple-calendar'); ?></option>
+				<option value="6"><?php esc_html_e('Saturday', 'really-simple-calendar'); ?></option>
 			</select>
 			
 			<button id="rsc-add-attr-button" class="button"><?php esc_html_e('Add an attribute', 'really-simple-calendar'); ?></button>

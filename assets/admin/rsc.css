@@ -31,7 +31,7 @@
 }
 
 .rsc-table label:has(input:checked) + label.rsc-input-others {
-	display: inline;
+	display: inline-block;
 }
 
 .rsc-table input {
@@ -170,14 +170,24 @@
 .rsc-event-inputs {
 	min-height: 32px;
 	display: flex;
+	flex-wrap: wrap;
 	/* align-items: center; */
+}
+.rsc-event-inputs input {
+	margin-top: -5px;
 }
 .rsc-event-inputs {
 	padding-bottom: 10px;
 }
 
+.rsc-event-inputs label,
+.rsc-event-inputs span {
+	display: flex;
+	align-items: center;
+}
+
 .rsc-table-list tbody label {
-	display: inline-block;
+	/* display: inline-block; */
 	min-width: 4em;
 	min-height: 30px;
 	line-height: 30px;
@@ -216,7 +226,7 @@
 .rsc-table-list .rsc-event-exclude-list {
 	white-space: wrap;
 	padding: 0;
-	margin: 0 10px;
+	margin: 5px 0 10px 0;
 	width: 100%;
 	min-width: 50%;
 	line-height: 2;
@@ -226,6 +236,15 @@
 	border: 1px solid #8c8f94;
 	background-color: #fff;
 	color: #2c3338;
+}
+
+.rsc-table-list .rsc-event-exclude-list span {
+	display: inline-block;
+}
+
+.rsc-event-inputs-nowrap {
+	display: flex;
+	flex-wrap: nowrap;
 }
 
 .rsc-table-list .rsc-event-exclude-list[readonly]{
@@ -289,7 +308,7 @@
 	.rsc-table-list .rsc-event-inputs {
 		margin: 8px 0;
 		line-height: 2em;
-		display: block;
+		/* display: block; */
 	}
 	
 	.rsc-table-list tbody td:first-child {
@@ -306,13 +325,31 @@
 		width: 100%;
 	}
 	.rsc-table-list tbody label {
-		display: block;
-		white-space: inherit;
+		/* display: block;
+		white-space: inherit; */
 	}
 	
 	.rsc-table-list .rsc-event-exclude {
 		display: flex;
 	}
+	
+	.rsc-table-list td, 
+	.rsc-table-list th{
+		display: table-cell;
+	}
+	
+	.rsc-table tbody th {
+		padding-left: 0;
+	}
+	
+	.rsc-setting-lock {
+		margin-bottom: 8px;
+	}
+	
+	.rsc-event-inputs {
+		padding-bottom: 0;
+	}
+
 	
 	.rsv-event-action {
 		display: inline-block;
@@ -340,6 +377,11 @@
 	text-align: center;
 }
 
+.rsc-table .rsc-calendar-style-main[readonly] {
+	pointer-events: auto;
+}
+
+/* shortcode */
 .rsc-shortcode-wrapper {
 	margin: 0 20px 0 0;
 	display: flex;

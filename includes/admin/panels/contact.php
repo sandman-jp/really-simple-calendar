@@ -1,11 +1,11 @@
 <?php
-namespace RSC\Admin\Panel;
+namespace sandmanjp\ReallySimpleCalendar\Admin\Panel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if(!class_exists('RSC\Admin\contact')):
+if(!class_exists('sandmanjp\ReallySimpleCalendar\Admin\contact')):
 	
 class contact extends panel{
 	
@@ -19,7 +19,7 @@ class contact extends panel{
 	public $use_save = false;
 	
 	function get_label(){
-		return __('Contact', 'really-simple-calendar');
+		return esc_html__('Contact', 'really-simple-calendar');
 	}
 	
 	function echo($settings){
