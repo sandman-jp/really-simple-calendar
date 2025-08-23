@@ -1,6 +1,6 @@
 <?php
 
-function rsc_merge_params($params, $lock_fields=array()){
+function smjp_rsc_merge_params($params, $lock_fields=array()){
 	$metas = array();
 	$post_id = get_the_ID();
 	
@@ -16,7 +16,7 @@ function rsc_merge_params($params, $lock_fields=array()){
 					//check bulk lock
 					$locked = false;
 					// $lock_fields = $lock_fields;
-					$base = rsc_get_basename($k);
+					$base = smjp_rsc_get_basename($k);
 					// var_dump($base);
 					foreach($lock_fields as $field){
 						if(strpos($field, $base) === 0){

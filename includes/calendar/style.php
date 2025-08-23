@@ -1,13 +1,13 @@
 <?php
 
-namespace RSC\calendar;
+namespace sandmanjp\ReallySimpleCalendar\calendar;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
 
-if(!class_exists('RSC\Calendar\style')):
+if(!class_exists('sandmanjp\ReallySimpleCalendar\Calendar\style')):
 
 class style extends setting {
 	
@@ -16,6 +16,7 @@ class style extends setting {
 	public $options;
 	
 	function set_style($args){
+		$this->options = array();
 		
 		if(!empty($args)){
 			foreach($args as $k=>$v){
@@ -23,18 +24,16 @@ class style extends setting {
 			}
 		}
 		
-		if(isset($args['has_style'])){
-			add_filter('rsc_after_render_calendar_tables', array($this, 'add_style'));
-		}
+		add_filter('smjp_rsc_after_render_calendar_tables', array($this, 'add_style'));
 	}
 	
 	function add_style($html){
 		
-		$style = $this->get_option(RS_CALENDAR.'_style');
-		
+		$style = $this->get_option(SMJP_RS_CALENDAR.'_style');
+		apply_filters('smjp_rsc_get_stylesheet', $style);
 		ob_start();
 	?>
-	<style><?php echo rsc_get_style($style); ?></style>
+	<style><?php echo esc_textarea(smjp_rsc_get_style($style)); ?></style>
 	<?php
 		return ob_get_clean().$html;
 	}

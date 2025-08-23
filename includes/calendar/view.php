@@ -1,13 +1,13 @@
 <?php
 
-namespace RSC\calendar;
+namespace sandmanjp\ReallySimpleCalendar\calendar;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
 
-if(!class_exists('RSC\Calendar\view')):
+if(!class_exists('sandmanjp\ReallySimpleCalendar\Calendar\view')):
 
 class view extends setting {
 	
@@ -16,6 +16,7 @@ class view extends setting {
 	public $options;
 	
 	function get_view($args){
+		$this->options = array();
 		
 		if(!empty($args)){
 			foreach($args as $k=>$v){
@@ -25,7 +26,7 @@ class view extends setting {
 		$params = $this->_get_view_params();
 		
 		//param for admin or front
-		$params = apply_filters('rsc_get_calendar_view', $params);
+		$params = apply_filters('smjp_rsc_get_calendar_view', $params);
 		
 		return $params;
 		
@@ -52,7 +53,7 @@ class view extends setting {
 		);
 		
 		foreach($fields as $fld){
-			$val = $this->get_option(RS_CALENDAR.'_'.$fld);
+			$val = $this->get_option(SMJP_RS_CALENDAR.'_'.$fld);
 			if($fld == 'type' && empty($val)){
 				$val = 'month';
 			}else if($fld == 'from' && empty($val)){
@@ -60,13 +61,13 @@ class view extends setting {
 			}else if($fld == 'period' && empty($val)){
 				$val = 'last';
 			}
-			$this->_params[RS_CALENDAR.'_'.$fld] = $val;
+			$this->_params[SMJP_RS_CALENDAR.'_'.$fld] = $val;
 		}
 		
-		$type = $this->_params[RS_CALENDAR.'_type'];
-		$from = $this->_params[RS_CALENDAR.'_from'];
+		$type = $this->_params[SMJP_RS_CALENDAR.'_type'];
+		$from = $this->_params[SMJP_RS_CALENDAR.'_from'];
 		
-		$start_of_week = $this->_params[RS_CALENDAR.'_start_of_week'];
+		$start_of_week = $this->_params[SMJP_RS_CALENDAR.'_start_of_week'];
 		if($start_of_week == 'today'){
 			$start_of_week = wp_date('w');
 		}else if(empty($start_of_week)){
@@ -74,18 +75,18 @@ class view extends setting {
 		}
 		
 		if($type == 'week'){
-			$current_day_of_week = rsc_get_start_week($date->format('U'), $start_of_week);
+			$current_day_of_week = smjp_rsc_get_start_week($date->format('U'), $start_of_week);
 		}
 		
 		
-		$this->_params['align'] = $this->_params[RS_CALENDAR.'_align'];
+		$this->_params['align'] = $this->_params[SMJP_RS_CALENDAR.'_align'];
 		
-		$previous_from = $this->_params[RS_CALENDAR.'_previous_from'];
-		$date_from = $this->_params[RS_CALENDAR.'_from_date'];
+		$previous_from = $this->_params[SMJP_RS_CALENDAR.'_previous_from'];
+		$date_from = $this->_params[SMJP_RS_CALENDAR.'_from_date'];
 		
-		$period = $this->_params[RS_CALENDAR.'_period'];
-		$last_period = $this->_params[RS_CALENDAR.'_period_last'];
-		$date_period = $this->_params[RS_CALENDAR.'_period_date'];
+		$period = $this->_params[SMJP_RS_CALENDAR.'_period'];
+		$last_period = $this->_params[SMJP_RS_CALENDAR.'_period_last'];
+		$date_period = $this->_params[SMJP_RS_CALENDAR.'_period_date'];
 		
 		
 		/////////////////////////////
@@ -166,7 +167,7 @@ class view extends setting {
 			}else{
 				$until = $date->format('U');
 			}
-			//$until = $date->modify($this->get_option(RS_CALENDAR.'_period_date'))->format('U');
+			//$until = $date->modify($this->get_option(SMJP_RS_CALENDAR.'_period_date'))->format('U');
 		}
 		
 		$this->_params = array_merge($this->_params, array(

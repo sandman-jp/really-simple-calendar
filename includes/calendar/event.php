@@ -1,13 +1,13 @@
 <?php
 
-namespace RSC\calendar;
+namespace sandmanjp\ReallySimpleCalendar\calendar;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
 
-if(!class_exists('RSC\Calendar\event')):
+if(!class_exists('sandmanjp\ReallySimpleCalendar\Calendar\event')):
 
 class event extends setting{
 	public $options;
@@ -27,13 +27,16 @@ class event extends setting{
 	
 	function get_option($key){
 		$opt = get_option($key);
-		$opt = apply_filters('rsc_get_option', $opt, $key);
-		$opt = apply_filters('rsc_get_option_'.$key, $opt);
+		$opt = apply_filters('smjp_rsc_get_option', $opt, $key);
+		$opt = apply_filters('smjp_rsc_get_option_'.$key, $opt);
 		
 		if(isset($this->options[$key])){
 			
 			if(is_array($this->options[$key])){
 				foreach($this->options[$key] as $k=>$v){
+					if(!is_array($opt)){
+						$opt = array();
+					}
 					$opt[$k] = $v;
 				}
 			}else{
@@ -45,8 +48,8 @@ class event extends setting{
 	}
 	
 	function set_events($args){
-		global $wp_locale;
 		$this->options = array();
+		
 		$this->_nums = array();
 		$this->_labels = array();
 		$this->_classes = array();
@@ -66,23 +69,23 @@ class event extends setting{
 		$this->_weeks = array_fill(0, 7, array());
 		
 		if(empty($this->_nums)){
-			$this->_nums = $this->get_option(RS_CALENDAR.'_event_number');
+			$this->_nums = $this->get_option(SMJP_RS_CALENDAR.'_event_number');
 			if(!$this->_nums){
 				return;
 			}
 		}
 		
 		if(empty($this->_dates)){
-			$this->_dates = $this->get_option(RS_CALENDAR.'_event_date');
+			$this->_dates = $this->get_option(SMJP_RS_CALENDAR.'_event_date');
 		}
 		if(empty($this->_lasts)){
-			$this->_lasts = $this->get_option(RS_CALENDAR.'_event_last');
+			$this->_lasts = $this->get_option(SMJP_RS_CALENDAR.'_event_last');
 		}
 		if(empty($this->_repeats)){
-			$this->_repeats = $this->get_option(RS_CALENDAR.'_event_repeat');
+			$this->_repeats = $this->get_option(SMJP_RS_CALENDAR.'_event_repeat');
 		}
 		if(empty($this->_excludes)){
-			$this->_excludes = $this->get_option(RS_CALENDAR.'_event_exclude');
+			$this->_excludes = $this->get_option(SMJP_RS_CALENDAR.'_event_exclude');
 		}
 		
 		
@@ -107,14 +110,14 @@ class event extends setting{
 					for($i=0; $i<7; $i++){
 						$dw_name = strtolower(jddayofweek($i-1, 2)); //ジュリアン日は月曜日から始まるので
 						$this->_weeks[$i][] = $k;
-						add_filter('rsc_get_td_value_'.$dw_name, array($this, 'add_event'), 10, 2);
+						add_filter('smjp_rsc_get_td_value_'.$dw_name, array($this, 'add_event'), 10, 2);
 					}
 				}else{
 					//single event
 					$dt = new \DateTime($date, wp_timezone());
 					$time_id = $dt->format('U');
 					$this->_days[$time_id][] = $k;
-					add_filter('rsc_get_td_value_'.$time_id, array($this, 'add_event'), 10, 2);
+					add_filter('smjp_rsc_get_td_value_'.(int)$time_id, array($this, 'add_event'), 10, 2);
 				}
 			}
 			
@@ -127,7 +130,7 @@ class event extends setting{
 					$dw_name = strtolower(jddayofweek($i-1, 2)); //ジュリアン日は月曜日から始まるので
 					
 					$this->_weeks[$i][] = $k;
-					add_filter('rsc_get_td_value_'.$dw_name, array($this, 'add_event'), 10, 2);
+					add_filter('smjp_rsc_get_td_value_'.$dw_name, array($this, 'add_event'), 10, 2);
 				}
 			}
 			
@@ -135,7 +138,7 @@ class event extends setting{
 	}
 	
 	function add_event($html, $time_id){
-		return $this->_add_single_event($html, $time_id);
+		return $this->_add_single_event($html, (int)$time_id);
 	}
 	
 	private function _create_event($events, $time_id){
@@ -143,28 +146,28 @@ class event extends setting{
 		
 		foreach($events as $k):
 			//リピート設定チェック
-			if(!empty($this->_dates[$k]) && $this->_dates[$k] > wp_date('Y-m-d', $time_id)){
+			if(!empty($this->_dates[$k]) && $this->_dates[$k] > wp_date('Y-m-d', (int)$time_id)){
 				//繰り返しの開始日
 				continue;
 			};
 			
-			if(!empty($this->_lasts[$k]) && $this->_lasts[$k] < wp_date('Y-m-d', $time_id)){
+			if(!empty($this->_lasts[$k]) && $this->_lasts[$k] < wp_date('Y-m-d', (int)$time_id)){
 				//繰り返しの終了日
 				continue;
 			};
 			
-			if(!empty($this->_excludes[$k]) && in_array(wp_date('Y-m-d', $time_id), $this->_excludes[$k])){
+			if(!empty($this->_excludes[$k]) && in_array(wp_date('Y-m-d', (int)$time_id), $this->_excludes[$k])){
 				//繰り返しの除外終了日
 				continue;
 			};
 			
 			if(empty($this->_labels)){
-				$this->_labels = $this->get_option(RS_CALENDAR.'_event_label');
+				$this->_labels = $this->get_option(SMJP_RS_CALENDAR.'_event_label');
 			}
-			$label = rsc_get_esc($this->_labels[$k]);
+			$label = $this->_labels[$k];
 			
 			if(empty($this->_classes)){
-				$this->_classes = $this->get_option(RS_CALENDAR.'_event_class');
+				$this->_classes = $this->get_option(SMJP_RS_CALENDAR.'_event_class');
 			}
 			
 			//クラスか色指定か
@@ -172,23 +175,23 @@ class event extends setting{
 			$class = '';
 			if(empty($this->_classes[$k])){
 				if(empty($_text_colors)){
-					$this->_text_colors = $this->get_option(RS_CALENDAR.'_event_text_color');
+					$this->_text_colors = $this->get_option(SMJP_RS_CALENDAR.'_event_text_color');
 				}
-				$text_color = rsc_get_esc($this->_text_colors[$k]);
+				$text_color = sanitize_hex_color($this->_text_colors[$k]);
 				
 				if(empty($_bg_colors)){
-					$this->_bg_colors = $this->get_option(RS_CALENDAR.'_event_bg_color');
+					$this->_bg_colors = $this->get_option(SMJP_RS_CALENDAR.'_event_bg_color');
 				}
-				$bg_color = rsc_get_esc($this->_bg_colors[$k]);
+				$bg_color = sanitize_hex_color($this->_bg_colors[$k]);
 				
-				$style = 'style="color:'.$text_color.'; background-color:'.$bg_color.';"';
+				$style = 'style="color:'.$text_color.';background-color:'.$bg_color.';"';
 			}else{
-				$class = rsc_get_esc($this->_classes[$k]);
+				$class = $this->_classes[$k];
 			}
 			
 			ob_start();
 		?>
-		<span class="rsc-calendar-event-wrapper rsc-calendar-event-<?php echo $k; ?>"><span class="rsc-calendar-event <?php echo $class; ?>" title="<?php echo $label; ?>" <?php echo $style; ?>><?php echo $label; ?><span class="rsc-triangle"></span></span></span>
+		<span class="rsc-calendar-event-wrapper rsc-calendar-event-<?php echo esc_attr($k); ?>"><span class="rsc-calendar-event <?php echo esc_attr($class); ?>" title="<?php echo esc_attr($label); ?>" <?php echo esc_attr($style); ?>><?php echo esc_attr($label); ?><span class="rsc-triangle"></span></span></span>
 		<?php
 			$html .= ob_get_clean();
 			
@@ -204,16 +207,16 @@ class event extends setting{
 			$days = $this->_days[$time_id];
 		}
 		
-		$repeats = $this->_weeks[wp_date('w', $time_id)];
+		$repeats = $this->_weeks[wp_date('w', (int)$time_id)];
 		
 		
 		$html = '';
 		
-		$html .= $this->_create_event($repeats, $time_id);
-		$html .= $this->_create_event($days, $time_id);
+		$html .= $this->_create_event($repeats, (int)$time_id);
+		$html .= $this->_create_event($days, (int)$time_id);
 			
 		
-		$html = apply_filters('rsc_add_evet', $html);
+		$html = apply_filters('smjp_rsc_add_evet', $html);
 		
 		return $html;
 		

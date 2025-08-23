@@ -1,28 +1,28 @@
 <?php
 //
-function RSC(){
-	global $RSC;
+function SMJP_RSC(){
+	global $smjp_rsc;
 	
-	if(!$RSC){
-		$RSC = new ReallySimpleCalendar;
+	if(!$smjp_rsc){
+		$smjp_rsc = new ReallySimpleCalendar;
 	}
 	
-	return $RSC;
+	return $smjp_rsc;
 }
 
-function RSC_ADMIN(){
-	global $RSC;
+function SMJP_RSC_ADMIN(){
+	global $smjp_rsc;
 	
 	if(is_admin()){
-		if(!$RSC){
-			$RSC = RSC();
+		if(!$smjp_rsc){
+			$smjp_rsc = SMJP_RSC();
 		}
-		return $RSC->get_admin();
+		return $smjp_rsc->get_admin();
 	}
 	return null;
 }
 
-function rsc_get_default_capabilities(){
+function smjp_rsc_get_default_capabilities(){
 	return array(
 		'editor' => 'manage',
 		'author' => 'edit',
@@ -31,14 +31,14 @@ function rsc_get_default_capabilities(){
 	);
 }
 
-function rsc_current_user_can($cap){
+function smjp_rsc_current_user_can($cap, $section='rsc'){
 	
 	$user_role = wp_get_current_user()->roles[0];
 	if('administrator' == $user_role){
 		return true;
 	}
 	
-	$caps = get_option(RS_CALENDAR.'_capability', rsc_get_default_capabilities());
+	$caps = get_option(SMJP_RS_CALENDAR.'_capability', smjp_rsc_get_default_capabilities());
 	$capabilities = array(
 		'full' => array('full', 'manage', 'edit', 'read'),
 		'manage' => array('manage', 'edit', 'read'),
@@ -46,20 +46,34 @@ function rsc_current_user_can($cap){
 		'read' => array('read'),
 	);
 	
-	$role = $caps[$user_role];
+	$role = $caps[$section][$user_role];
 	
-	if(isset($caps[$user_role]) && in_array($cap, $capabilities[$role])){
+	if(isset($caps[$section][$user_role]) && in_array($cap, $capabilities[$role])){
 		return true;
 	}
 	
 	return false;
 }
 
-function rsc_get_basename($key){
-	return preg_replace('/^('.RS_CALENDAR.'_[a-z]+)?_*.*/', '$1', $key);
+function smjp_rsc_get_basename($key){
+	return preg_replace('/^('.SMJP_RS_CALENDAR.'_[a-z]+)?_*.*/', '$1', $key);
 }
 
-function rsc_update_option($key, $data){
+function smjp_rsc_sanitize_value($key, $val){
+	if(is_array($val)){
+		foreach($val as $k=>$v){
+			$val[$k] = smjp_rsc_sanitize_value($k, $v);
+		}
+	}else if($key == SMJP_RS_CALENDAR.'_style'){
+		$val = sanitize_textarea_field($val);
+	}else{
+		$val = sanitize_text_field($val);
+	}
+	
+	return $val;
+}
+
+function smjp_rsc_update_option($key, $data){
 	$post_id = get_the_ID();
 	
 	if($post_id){
