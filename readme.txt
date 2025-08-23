@@ -68,6 +68,8 @@ Permissions can be set for each extension and user role. Only administrators can
 <dl>
 <dt>Advanced Event Field</dt>
 <dd>Switch fields on the Event Settings screen.</dd>
+<dt>Multi Calendar</dt>
+<dd>Adding "RS Carendar" post type. It provides unlimited indipendent calendars.</dd>
 </dl>
 
 = Manage Capability =
