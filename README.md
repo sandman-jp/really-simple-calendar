@@ -2,24 +2,24 @@
 
 The single calendar for multi purpos with multi users. Unlimited events and responsive display. 
 
-### Description
+== Description ==
 
 Really simple calendar is one of most easy managing calendar. This plugin provide mutil purpos view, unlimited events, customized css, simple managiment of users and more functions by extensions.
 
-### Links
+= Links =
 * [Website](https://note.com/sandman_jp/m/m0657144dd8fb)
 
-### Milestone
+== Milestone ==
 - Custom Label extenshon. (Comming soon)
 - Advanced CSS editor. (Someday)
 - Booking system. (Someday)
 
-### Installation
+== Installation ==
 
 1. Upload the entire `really-simple-calendar` folder to the `/wp-content/plugins/` directory.
 1. Activate the plugin through the **Plugins** screen (**Plugins > Installed Plugins**).
 
-### Changelog
+== Changelog ==
 
 = 0.4.13 =
 - Implement "Multi Calendar" extension.
